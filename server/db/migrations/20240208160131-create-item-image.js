@@ -2,36 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('ItemImages', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      path: {
         allowNull: false,
         type: Sequelize.TEXT
       },
-      email: {
-        unique: true,
+      itemGallery_id: {
         allowNull: false,
-        type: Sequelize.TEXT
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
-      img: {
-        type: Sequelize.TEXT
-      },
-      isMaster: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
-      isAdmin: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'ItemGalleries',
+          key: 'id',
+        }, 
+onDelete: "cascade",
+
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('ItemImages');
   }
 };
