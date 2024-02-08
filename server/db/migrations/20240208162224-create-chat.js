@@ -2,36 +2,25 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('Chats', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      name: {
+      sender_id: {
         allowNull: false,
-        type: Sequelize.TEXT
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        }, 
+onDelete: "cascade",
       },
-      email: {
-        unique: true,
+      receiver_id: {
         allowNull: false,
-        type: Sequelize.TEXT
-      },
-      password: {
-        allowNull: false,
-        type: Sequelize.TEXT
-      },
-      img: {
-        type: Sequelize.TEXT
-      },
-      isMaster: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      },
-      isAdmin: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -44,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('Chats');
   }
 };
