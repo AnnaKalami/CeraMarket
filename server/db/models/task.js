@@ -3,15 +3,14 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
-    
-    static associate({User, ItemGallery, Like}) {
-      this.belongsTo(User, {foreignKey: 'user_id'});
-      this.hasOne(ItemGallery, {foreignKey: 'item_id'});
-      this.hasMany(Like, {foreignKey: 'item_id'});
+  class Task extends Model {
+    static associate({User, TaskAnswer, TaskGallery}) {
+      this.belongsTo(User, {foreignKey: 'user_id'})
+      this.hasMany(TaskAnswer, {foreignKey: 'task_id'})
+      this.hasMany(TaskGallery, {foreignKey: 'task_id'})
     }
   }
-  Item.init({
+  Task.init({
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -31,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'id',
       }, 
-    onDelete: "cascade"
+    onDelete: "cascade", 
     },
     createdAt: {
       allowNull: false,
@@ -43,7 +42,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Item',
+    modelName: 'Task',
   });
-  return Item;
+  return Task;
 };

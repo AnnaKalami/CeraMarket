@@ -3,35 +3,30 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
-    
-    static associate({User, ItemGallery, Like}) {
-      this.belongsTo(User, {foreignKey: 'user_id'});
-      this.hasOne(ItemGallery, {foreignKey: 'item_id'});
-      this.hasMany(Like, {foreignKey: 'item_id'});
+  class TaskImage extends Model {
+    static associate({TaskGallery}) {
+      this.belongsTo(TaskGallery, {foreignKey: 'taskGallery_id'})
     }
   }
-  Item.init({
+  TaskImage.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    description: {
-      type: DataTypes.TEXT
-    },
-    price: {
-      type: DataTypes.INTEGER
-    },
-    user_id: {
+    taskGallery_id: {
       allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
+        model: 'TaskGalleries',
         key: 'id',
       }, 
-    onDelete: "cascade"
+      onDelete: "cascade", 
+    },
+    path: {
+      allowNull: false,
+      type: DataTypes.TEXT
     },
     createdAt: {
       allowNull: false,
@@ -43,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Item',
+    modelName: 'TaskImage',
   });
-  return Item;
+  return TaskImage;
 };

@@ -3,26 +3,27 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Item extends Model {
-    
-    static associate({User, ItemGallery, Like}) {
-      this.belongsTo(User, {foreignKey: 'user_id'});
-      this.hasOne(ItemGallery, {foreignKey: 'item_id'});
-      this.hasMany(Like, {foreignKey: 'item_id'});
+  class TaskAnswer extends Model {
+    static associate({User, Task}) {
+      this.belongsTo(User, {foreignKey: 'user_id'})
+      this.belongsTo(Task, {foreignKey: 'task_id'})
     }
   }
-  Item.init({
+  TaskAnswer.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    description: {
-      type: DataTypes.TEXT
-    },
-    price: {
-      type: DataTypes.INTEGER
+    task_id: {
+      allowNull: false,
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'Tasks',
+        key: 'id',
+      }, 
+    onDelete: "cascade", 
     },
     user_id: {
       allowNull: false,
@@ -31,7 +32,13 @@ module.exports = (sequelize, DataTypes) => {
         model: 'Users',
         key: 'id',
       }, 
-    onDelete: "cascade"
+    onDelete: "cascade", 
+    },
+    text: {
+      type: DataTypes.TEXT
+    },
+    price: {
+      type: DataTypes.INTEGER
     },
     createdAt: {
       allowNull: false,
@@ -43,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Item',
+    modelName: 'TaskAnswer',
   });
-  return Item;
+  return TaskAnswer;
 };
