@@ -69,3 +69,4 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
 }
 
 export default NavBar;
+
