@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import elbrusLogo from './assets/elbrus.svg';
+// import reactLogo from './assets/react.svg';
+// import elbrusLogo from './assets/elbrus.svg';
 import './App.css';
 import { useAppDispatch } from '../redux/store';
 import { Route, Routes } from 'react-router-dom';
+import MainPage from '../features/main/MainPage';
+import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 // import { User } from '../redux/reducers/types';
 
 
@@ -18,15 +20,16 @@ function App(): JSX.Element {
   // };
 
   useEffect(() => {
-   
+    dispatch(loadItems()).catch(console.log);
+    setTimeout(() => dispatch(stopLoading()), 1000)
   }, []);
 
 
   return (
     <div className="App">
       <Routes>
+        <Route index element={<MainPage />} />
         {/* <Route path="/" element={<NavBar />}>
-          <Route index element={<MainPage />} />
           <Route path="/heroes" element={<HeroesListPage />} />
           <Route path="/users" element={<UsersListPage />} />
           <Route path="/sign-up" element={<RegistrationPage />} />
