@@ -1,24 +1,25 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import './styles/navbar.scss';
 
-import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
+import Menu from '../menu/Menu';
+// import {  type Dispatch } from 'redux';
 // import { useSelector } from 'react-redux';
 // import { type RootState, useAppDispatch } from '../../redux/store';
-// import { logOut } from '../auth/authSlice';
 
-function NavBar(): JSX.Element {
+
+function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void }) : JSX.Element {
   const user = { name: 'test' };
   // const user = useSelector((store: RootState) => store.auth.auth);
-  // const navigate = useNavigate();
 
-  // const dispatch = useAppDispatch();
 
   return (
     <>
+      <div className="blur" />
       <ul className="nav__container">
-        {user && <li className='hello'>Hello, {user.name}!</li>}
+        {user && <li className="hello">Hello, {user.name}!</li>}
         <li className="nav__item">
           <NavLink className="nav__link" to="/">
             Main
@@ -44,7 +45,13 @@ function NavBar(): JSX.Element {
             </li>
             <li className="nav__item nav__item--right">
               <div>
-                <button type="button" className="arrow-button">
+                <button
+                  type="button"
+                  className="arrow-button"
+                  onClick={() => {
+                    setMenu(!menu)
+                  }}
+                >
                   <span>〈</span>
                 </button>
                 <img src="123" alt="ava" />
@@ -53,6 +60,9 @@ function NavBar(): JSX.Element {
           </>
         )}
       </ul>
+
+      
+
       <Outlet />
       <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left' }}>Footer</h1>
     </>

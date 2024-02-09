@@ -16,6 +16,7 @@
   font-weight: bolder;
 }
 
+
 .nav__link {
   padding: 10px 25px;
   border-radius: 10px;
@@ -50,12 +51,13 @@
   height: 50px;
 }
 
-.nav__item--right {
-  flex-shrink: 0; /* Запрет на уменьшение размера */
-}
-
 .arrow-button span {
   margin-right: 5px;
+  color: black; /* Добавляем цвет символа */
+}
+
+.nav__item--right {
+  flex-shrink: 0; /* Запрет на уменьшение размера */
 }
 
 .arrow-button:hover {

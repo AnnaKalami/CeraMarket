@@ -1,0 +1,58 @@
+.menu {
+  position: fixed;
+  width: 35vw;
+  height: 100vh;
+  top: 0px;
+  right: 0;
+  
+  background-color: rgb(214, 219, 217); 
+//   transition: all 0.8s;
+}
+
+.blur {
+    width: 100vw;
+    height: 100%;
+    right: 100%;
+    backdrop-filter: blur(2px);
+    position: absolute;
+}
+
+// .menu_content {
+//    padding-top: 0%;
+// }
+
+.menu_header {
+    padding-top: 30px;
+   font-size: 1.5rem;
+   color: black;
+   border-bottom: 1px solid gray;
+}
+
+ul li a {
+    color:dimgrey;
+    text-decoration:underline;
+}
+
+.arrow-button2 {
+    background-color: transparent; /* Прозрачный фон */
+    // background-color: #357a38;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    width: 5px;
+    height: 50px;
+    
+  }
+     
+  .nav__item--right {
+    flex-shrink: 0; /* Запрет на уменьшение размера */
+  }
+  
+  .arrow-button:hover {
+    color: #fafafa; /* Изменение цвета символа при наведении */
+  }
+  
+  .arrow-button:active {
+    color: #e9eee9; /* Изменение цвета символа при активации (нажатии) */
+  }
+  
