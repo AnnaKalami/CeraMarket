@@ -4,7 +4,6 @@ import React, { SetStateAction } from 'react';
 import './styles/navbar.scss';
 
 import { NavLink, Outlet } from 'react-router-dom';
-import Menu from '../menu/Menu';
 // import {  type Dispatch } from 'redux';
 // import { useSelector } from 'react-redux';
 // import { type RootState, useAppDispatch } from '../../redux/store';
@@ -26,7 +25,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
           </NavLink>
         </li>
         <li className="nav__item">
-          <NavLink className="nav__link" to="/auth">
+          <NavLink className="nav__link" to="/sign-up">
             Стать частью проекта
           </NavLink>
         </li>

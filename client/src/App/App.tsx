@@ -28,6 +28,7 @@ const [menu, setMenu] = useState(false);
   useEffect(() => {
     dispatch(loadItems()).catch(console.log);
     setTimeout(() => dispatch(stopLoading()), 1000)
+  })
       
   useEffect(() => {
     loadUsers().catch(console.log);
@@ -41,8 +42,7 @@ const [menu, setMenu] = useState(false);
       <Routes>
          <Route path="/" element={<NavBar menu={menu} setMenu={setMenu} />} >
          <Route index element={<MainPage />} />
-    <!--  <Route path="/users" element={<UsersListPage />} /> -->
-          <Route path="/sign-up" element={<SignUpPage />} />
+         <Route path="/sign-up" element={<SignUpPage />} />
          <Route path="/sign-in" element={<SignInPage />} />
          <Route path="*" element={<h1>404</h1>} />
         </Route>

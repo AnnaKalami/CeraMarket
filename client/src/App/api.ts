@@ -1,6 +1,13 @@
 
 /* eslint-disable import/prefer-default-export */
 import type { User, UserSignIn, UserSignUp } from '../features/auth/types';
+import { type Item } from "../features/item/types";
+
+export const fetchLoadItems = async (): Promise<Item[]> => {
+  const res = await fetch('/api/items');
+  const data: { items: Item[] } = (await res.json()) as { items: Item[] };
+  return data.items;
+}
 
 export const fetchCheckUser = async (): Promise<User> => {
   const res = await fetch('/api/auth/check');
