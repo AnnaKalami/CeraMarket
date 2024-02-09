@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       this.hasMany(TaskImage, { foreignKey: "taskGallery_id" });
     }
   }
+  
   TaskGallery.init(
     {
       id: {
@@ -32,11 +33,14 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.DATE,
       },
+  
     },
     {
       sequelize,
       modelName: "TaskGallery",
     }
+
   );
+
   return TaskGallery;
 };

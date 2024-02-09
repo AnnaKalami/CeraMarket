@@ -1,3 +1,4 @@
+
 /* eslint-disable import/prefer-default-export */
 import type { User, UserSignIn, UserSignUp } from '../features/auth/types';
 
@@ -40,3 +41,4 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
   };
   return data.user;
 };
+

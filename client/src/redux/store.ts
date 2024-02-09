@@ -4,9 +4,10 @@ import authSlice from '../features/auth/authSlice';
 // import heroesSlice from '../features/heroes/heroesSlice';
 // import authSlice from '../features/auth/authSlice';
 
+
 export const store = configureStore({
   reducer: {
-    // users: usersReducer,
+    items: ItemsSlice,
     // heroes: heroesSlice,
     auth: authSlice,
   },
