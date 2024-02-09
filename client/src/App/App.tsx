@@ -3,8 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
 import Menu from '../features/menu/Menu';
+import MainPage from '../features/main/MainPage';
+import { useAppDispatch } from '../redux/store';
+import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 
-// import { useAppDispatch } from '../redux/store';
 // import { User } from '../redux/reducers/types';
 
 
@@ -24,7 +26,8 @@ console.log(menu);
   // };
 
   useEffect(() => {
-   
+    dispatch(loadItems()).catch(console.log);
+    setTimeout(() => dispatch(stopLoading()), 1000)
   }, []);
 
 
@@ -33,7 +36,7 @@ console.log(menu);
        {menu && <Menu menu={menu} setMenu={setMenu} />}
       <Routes>
          <Route path="/" element={<NavBar menu={menu} setMenu={setMenu} />} >
-          {/* <Route index element={<MainPage />} />
+         <Route index element={<MainPage />} />
           <Route path="/heroes" element={<HeroesListPage />} />
           <Route path="/users" element={<UsersListPage />} />
           <Route path="/sign-up" element={<RegistrationPage />} />

@@ -10,8 +10,6 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   TaskGallery.init({
-    task_id: DataTypes.INTEGER
-  }, {
     id: {
       allowNull: false,
       autoIncrement: true,
@@ -35,6 +33,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     }
+  }, {
+    sequelize,
+    modelName: 'TaskGallery',
   });
   return TaskGallery;
 };
