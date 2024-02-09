@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { signUp } from './authSlice';
+import './styles/auth.scss';
+
 
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
@@ -67,6 +70,10 @@ function SignUpPage(): JSX.Element {
         />
         Master
         <button type="submit">Зарегаться</button>
+        <div className='authRedirect'>
+          У меня есть аккаунт
+          <NavLink className="nav__link" to="/sign-in">Войти</NavLink>
+          </div>    
       </form>
     </div>
   );

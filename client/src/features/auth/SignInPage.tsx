@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
+import './styles/auth.scss';
+
 
 function SignInPage(): JSX.Element {
   const [email, setEmail] = useState('');
@@ -32,6 +35,10 @@ function SignInPage(): JSX.Element {
           placeholder="password"
         />
         <button type="submit">login</button>
+        <div className='authRedirect'>
+          Нет аккаунта?
+          <NavLink className="nav__link" to="/sign-up">Регистрация</NavLink>
+          </div>    
       </form>
     </div>
   );

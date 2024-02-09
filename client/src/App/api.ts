@@ -49,3 +49,11 @@ export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
   return data.user;
 };
 
+export const fetchLogOut = async (): Promise<void> => {
+  const res = await fetch('/api/auth/logout');
+  const data: { message: string } = (await res.json()) as { message: string };
+  if (data.message !== 'success') {
+    throw new Error(data.message);
+  }
+};
+

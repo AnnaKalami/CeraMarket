@@ -4,14 +4,18 @@ import React, { SetStateAction } from 'react';
 import './styles/navbar.scss';
 
 import { NavLink, Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { logOut } from '../auth/authSlice';
 // import {  type Dispatch } from 'redux';
-// import { useSelector } from 'react-redux';
-// import { type RootState, useAppDispatch } from '../../redux/store';
+// import { useAppDispatch } from '../../redux/store';
+import { type RootState, useAppDispatch } from '../../redux/store';
 
 
 function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void }) : JSX.Element {
-  const user = { name: 'test' };
-  // const user = useSelector((store: RootState) => store.auth.auth);
+  // const user = { name: 'test' };
+  const user = useSelector((store: RootState) => store.auth.auth);
+  console.log(user);  
+  const dispatch = useAppDispatch();
 
 
   return (
@@ -24,21 +28,20 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
             Main
           </NavLink>
         </li>
-        <li className="nav__item">
-          <NavLink className="nav__link" to="/sign-up">
+        {!user && <li className="nav__item">
+          <NavLink className="nav__link" to="/sign-in">
             Стать частью проекта
           </NavLink>
-        </li>
+        </li> }
         {user && (
           <>
             <li
-            // onClick={() => {
-            //   dispatch(logOut()).catch(console.log);
-            //   navigate('/');
-            // }}
-            // className="nav__item"
+            onClick={() => {
+              dispatch(logOut()).catch(console.log);
+            }}
+            className="nav__item"
             >
-              <NavLink className="nav__item nav__link" to="/logout">
+              <NavLink className="nav__item nav__link" to="">
                 LogOut
               </NavLink>
             </li>
@@ -59,11 +62,9 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
           </>
         )}
       </ul>
-
-      
-
+    
       <Outlet />
-      <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left' }}>Footer</h1>
+      <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left', position: 'fixed',  bottom: 0 }}>Footer</h1>
     </>
   );
 }
