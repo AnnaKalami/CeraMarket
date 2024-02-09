@@ -5,6 +5,7 @@ export type User = {
   password: string;
   rpassword: string;
   img: string;
+  isMaster: boolean;
 };
 
 export type AuthState = {
@@ -12,7 +13,7 @@ export type AuthState = {
   error: string | undefined;
 };
 
-export type UserSignIn = Omit<User, 'id' | 'img' | 'name' | 'rpassword'>;
+export type UserSignIn = Omit<User, 'id' | 'img' | 'name' | 'rpassword' | 'isMaster'>;
 
 export type UserSignUp = Omit<User, 'id'> & { rpassword: string };
 

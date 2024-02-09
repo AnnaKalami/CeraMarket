@@ -8,6 +8,7 @@ function SignUpPage(): JSX.Element {
   const [password, setPasssword] = useState('');
   const [rpassword, setRpasssword] = useState('');
   const [img, setImg] = useState('');
+  const [isMaster, setIsMaster] = useState(false);
   const dispatch = useAppDispatch();
   return (
     <div>
@@ -15,7 +16,7 @@ function SignUpPage(): JSX.Element {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(signUp({ name, email, password, rpassword, img })).catch(console.log);
+          dispatch(signUp({ name, email, password, rpassword, img, isMaster })).catch(console.log);
         }}
       >
         <input
@@ -58,8 +59,13 @@ function SignUpPage(): JSX.Element {
           type="text"
           placeholder="img"
         />
-        {/* <input name="taskStatus" id="taskStatus" type="checkbox" />
-        <input name="taskStatus" id="taskStatus" type="checkbox" /> */}
+        <input
+          name="taskStatus"
+          id="taskStatus"
+          type="checkbox"
+          onChange={() => setIsMaster(true)}
+        />
+        Master
         <button type="submit">Зарегаться</button>
       </form>
     </div>

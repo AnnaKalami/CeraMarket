@@ -40,7 +40,7 @@ router.post("/sign-in", async (req, res) => {
 router.post("/sign-up", async (req, res) => {
   let user;
   try {
-    const { name, email, password, rpassword, img } = req.body;
+    const { name, email, password, rpassword, img, isMaster } = req.body;
     if (password !== rpassword) {
       res.status(400).json({ message: "Пароли не совпадают!" });
       return;
@@ -56,7 +56,7 @@ router.post("/sign-up", async (req, res) => {
       email,
       password: hash,
       img,
-      isMaster: false,
+      isMaster,
       isAdmin: false,
     });
     console.log(user, 456456456);

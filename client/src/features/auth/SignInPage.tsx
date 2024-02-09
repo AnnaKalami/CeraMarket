@@ -32,8 +32,6 @@ function SignInPage(): JSX.Element {
           placeholder="password"
         />
         <button type="submit">login</button>
-        <input type="checkbox" checked={} onChange={} /> Master;
-        <input type="checkbox" checked={} onChange={} /> Guest;
       </form>
     </div>
   );
