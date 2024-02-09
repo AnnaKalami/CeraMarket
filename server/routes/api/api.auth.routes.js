@@ -8,7 +8,6 @@ router.post("/sign-in", async (req, res) => {
   let user;
   try {
     const { email, password } = req.body;
-
     user = await User.findOne({ where: { email } });
     if (!user) {
       res.json({ message: "Такого пользователя нет или пароль неверный" });
@@ -42,7 +41,6 @@ router.post("/sign-up", async (req, res) => {
   let user;
   try {
     const { name, email, password, rpassword, img } = req.body;
-
     if (password !== rpassword) {
       res.status(400).json({ message: "Пароли не совпадают!" });
       return;
@@ -53,7 +51,15 @@ router.post("/sign-up", async (req, res) => {
       return;
     }
     const hash = await bcrypt.hash(password, 10);
-    user = await User.create({ name, email, password: hash, img });
+    user = await User.create({
+      name,
+      email,
+      password: hash,
+      img,
+      isMaster: false,
+      isAdmin: false,
+    });
+    console.log(user, 456456456);
 
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, name: user.name, img: user.img },

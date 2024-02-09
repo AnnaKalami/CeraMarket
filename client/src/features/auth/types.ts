@@ -12,7 +12,7 @@ export type AuthState = {
   error: string | undefined;
 };
 
-export type UserSignIn = Omit<User, 'id' | 'img' | 'name'>;
+export type UserSignIn = Omit<User, 'id' | 'img' | 'name' | 'rpassword'>;
 
 export type UserSignUp = Omit<User, 'id'> & { rpassword: string };
 
