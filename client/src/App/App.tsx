@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import reactLogo from './assets/react.svg';
-import elbrusLogo from './assets/elbrus.svg';
 import './App.css';
-import { useAppDispatch } from '../redux/store';
 import { Route, Routes } from 'react-router-dom';
+import { useAppDispatch } from '../redux/store';
+import SignInPage from '../features/auth/SignInPage';
+import SignUpPage from '../features/auth/SignUpPage';
 // import { User } from '../redux/reducers/types';
-
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,10 +16,7 @@ function App(): JSX.Element {
   //   dispatch({ type: 'users/load', payload: data.users });
   // };
 
-  useEffect(() => {
-   
-  }, []);
-
+  useEffect(() => {}, []);
 
   return (
     <div className="App">
@@ -33,8 +29,10 @@ function App(): JSX.Element {
           <Route path="/sign-in" element={<AuthorizationPage />} />
           <Route path="/heroes/:heroId" element={<HeroItemPage />} />
           <Route path="/memo" element={<Callbek />} /> */}
-          <Route path="*" element={<h1>404</h1>} />
+        <Route path="*" element={<h1>404</h1>} />
         {/* </Route> */}
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
       </Routes>
     </div>
   );
