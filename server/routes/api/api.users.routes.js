@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const { User } = require("../../db/models");
+const { User,Like } = require("../../db/models");
 
 router.get("/", async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({include:Like});
     res.json({ users });
   } catch ({ message }) {
     res.json({ type: "users router", message });

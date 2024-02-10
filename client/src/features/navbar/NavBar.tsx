@@ -14,6 +14,8 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void }) : JSX.Element {
   // const user = { name: 'test' };
   const user = useSelector((store: RootState) => store.auth.auth);
+  console.log(user);
+  
   const dispatch = useAppDispatch();
   
 

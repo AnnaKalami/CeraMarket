@@ -11,6 +11,7 @@ import type { User } from '../features/auth/types';
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 import ProfileItemListPage from '../features/item/ProfileItemsListPage';
+import LikesPage from '../features/profile/LikesPage';
 
 // import { User } from '../redux/reducers/types';
 
@@ -22,7 +23,6 @@ const [menu, setMenu] = useState(false);
  const loadUsers = async (): Promise<void> => {
     const res = await fetch('/api/users');
     const data: { users: User[] } = (await res.json()) as { users: User[] };
-    // dispatch({ type: 'heroes/load', payload: data.heroes });
     dispatch({ type: 'users/load', payload: data.users });
   };
 
@@ -44,6 +44,7 @@ const [menu, setMenu] = useState(false);
          <Route path="/sign-up" element={<SignUpPage />} />
          <Route path="/sign-in" element={<SignInPage />} />
          <Route path="/profile/items" element={<ProfileItemListPage />} />
+         <Route path="/profile/likes" element={<LikesPage />} />
          <Route path="*" element={<h1>404</h1>} />
         </Route>
       </Routes>
