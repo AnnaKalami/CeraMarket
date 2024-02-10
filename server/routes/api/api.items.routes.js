@@ -14,4 +14,35 @@ router.get('/', async (req, res) => {
       res.json({ type: 'item router', message });
     }
   });
+
+  router.post('/', async (req, res) => {
+    try {
+      const {description, price, user_id } = req.body;
+      //тут создание галлереии и картинки
+      const item = await Item.create({description,price,user_id,});
+      const createGallery = await ItemGallery.create({item_id:item.id})
+      const newItem = await Item.findOne({where: { user_id,id:item.id }, include: {
+        model: ItemGallery,
+        include: ItemImage
+      }});
+      res.json({item:newItem});
+    } catch ({ message }) {
+      res.json({ type: 'items router', message });
+    }
+  });
+
+
+  router.delete('/:itemId', async (req, res) => {
+    try {
+      const { itemId } = req.params;
+      const result = await Item.destroy({ where: { id: itemId } });
+      if (result > 0) {
+        res.json({ message: 'success', itemId });
+        return;
+      }
+      res.json({ message: 'Не твоя, вот ты и бесишься' });
+    } catch ({ message }) {
+      res.json({ message });
+    }
+  });
 module.exports = router;

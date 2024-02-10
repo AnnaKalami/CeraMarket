@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { signUp } from './authSlice';
 import './styles/auth.scss';
@@ -13,6 +13,7 @@ function SignUpPage(): JSX.Element {
   const [img, setImg] = useState('');
   const [isMaster, setIsMaster] = useState(false);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <h1>RegPage</h1>
@@ -20,6 +21,7 @@ function SignUpPage(): JSX.Element {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(signUp({ name, email, password, rpassword, img, isMaster })).catch(console.log);
+          navigate('/')
         }}
       >
         <input
