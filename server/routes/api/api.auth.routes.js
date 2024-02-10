@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const { User } = require("../../db/models");
+const { User, Like } = require("../../db/models");
 const generateTokens = require("../../utils/authUtils");
 const configJWT = require("../../middleware/configJWT");
 
@@ -8,7 +8,7 @@ router.post("/sign-in", async (req, res) => {
   let user;
   try {
     const { email, password } = req.body;
-    user = await User.findOne({ where: { email } });
+    user = await User.findOne({ where: { email } ,include:Like});
     if (!user) {
       res.json({ message: "Такого пользователя нет или пароль неверный" });
       return;
@@ -45,7 +45,7 @@ router.post("/sign-up", async (req, res) => {
       res.status(400).json({ message: "Пароли не совпадают!" });
       return;
     }
-    user = await User.findOne({ where: { email } });
+    user = await User.findOne({ where: { email },include:Like });
     if (user) {
       res.status(400).json({ message: "Такой пользователь уже есть!" });
       return;
@@ -84,7 +84,7 @@ router.post("/sign-up", async (req, res) => {
 router.get("/check", async (req, res) => {
   console.log(res.locals.user);
   if (res.locals.user) {
-    const user = await User.findOne({ where: { id: res.locals.user.id } });
+    const user = await User.findOne({ where: { id: res.locals.user.id },include:Like });
     res.json({ user });
     return;
   }

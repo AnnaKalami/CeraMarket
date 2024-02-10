@@ -30,12 +30,18 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
           {header}
         </div>
         <ul>
+        
           <>
           {user?.isMaster&&(
             <li>
-              <a style={{ cursor: 'pointer' }} onClick={()=>{ navigate(`/profile/items`); setMenu(!menu)}}>Мои творения(хз перепишите как хотите)</a>
-
+              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/items`); setMenu(!menu)}}>Мои творения(хз перепишите как хотите) </a>
             </li>
+          )}
+          {user&&(
+             <li>
+             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/likes`); setMenu(!menu)}}>Избранное </a>
+
+           </li>
           )}
           {items.map((item) => (
             <li>

@@ -1,6 +1,6 @@
 
 /* eslint-disable import/prefer-default-export */
-import type { User, UserSignIn, UserSignUp } from '../features/auth/types';
+import type { Like, User, UserSignIn, UserSignUp, likeId, userId } from '../features/auth/types';
 import { ItemId, type Item, ItemWithOutId } from "../features/item/types";
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
@@ -82,3 +82,30 @@ export const fetchLogOut = async (): Promise<void> => {
   }
 };
 
+export const fetchLike = async ({userId, itemId}:{userId: userId, itemId:ItemId}): Promise<Like> => {
+  const res = await fetch('/api/likes', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({userId,itemId}),
+  });
+  const data: { like: Like } = (await res.json()) as { like: Like };
+  return data.like as Like
+};
+
+
+
+export const fetchDisLike = async ({likeId, userId}:{likeId:likeId, userId:userId}): Promise<likeId> => {
+  const res = await fetch(`/api/likes/${likeId}/${userId}`, {
+    method: 'DELETE',
+  });
+  const data: { message: string; likeId: likeId } = (await res.json()) as {
+    message: string;
+    likeId: likeId;
+  };
+  if (data.message !== 'success') {
+    throw new Error(data.message);
+  }
+  return data.likeId;
+};

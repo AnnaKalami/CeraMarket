@@ -1,3 +1,5 @@
+
+
 export type User = {
   id: number;
   name: string;
@@ -6,15 +8,27 @@ export type User = {
   rpassword: string;
   img: string;
   isMaster: boolean;
+  Likes: Like[]|[]
 };
+
+export type Like = {
+  id:number
+  user_id:number
+  item_id:number
+}
+
 
 export type AuthState = {
   auth: User | undefined;
   error: string | undefined;
 };
 
-export type UserSignIn = Omit<User, 'id' | 'img' | 'name' | 'rpassword' | 'isMaster'>;
+export type UserSignIn = Omit<User, 'id' | 'img' | 'name' |'Likes' |'rpassword' | 'isMaster'>;
 
-export type UserSignUp = Omit<User, 'id'> & { rpassword: string };
+export type UserSignUp = Omit<User, 'id'|'Likes'> & { rpassword: string };
+
+export type userId = User['id']
+
+export type likeId = Like['id']
 
 export type UserWithOutId = Omit<User, 'id'>;
