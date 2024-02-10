@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { signIn } from './authSlice';
 import './styles/auth.scss';
@@ -9,6 +9,7 @@ function SignInPage(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPasssword] = useState('');
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   return (
     <div>
       <h1>AuthPage</h1>
@@ -16,6 +17,7 @@ function SignInPage(): JSX.Element {
         onSubmit={(e) => {
           e.preventDefault();
           dispatch(signIn({ email, password })).catch(console.log);
+          navigate('/')
         }}
       >
         <input

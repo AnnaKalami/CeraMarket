@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ItemsState } from './types';
-import { fetchLoadItems } from '../../App/api';
+import { ItemId, ItemWithOutId, ItemsState } from './types';
+import { fetchAddItem, fetchLoadItems, fetchRemoveItem } from '../../App/api';
 
 
 const initialState: ItemsState = {
@@ -10,7 +10,8 @@ const initialState: ItemsState = {
   };
 
   export const loadItems = createAsyncThunk('items/load', ()=> fetchLoadItems())
-
+  export const addItem = createAsyncThunk('items/add', (item: ItemWithOutId) => fetchAddItem(item));
+  export const removeItem = createAsyncThunk('items/remove', (itemId:ItemId)=> fetchRemoveItem(itemId))
   
 const itemsSlice = createSlice({
     name: 'items',
@@ -31,6 +32,18 @@ const itemsSlice = createSlice({
         .addCase(loadItems.rejected, (state, action) => {
             state.error = action.error.message;
         })
+        .addCase(addItem.fulfilled, (state, action) => {
+            state.items.push(action.payload);
+          })
+        .addCase(addItem.rejected, (state, action) => {
+            state.error = action.error.message;
+        })
+        .addCase(removeItem.fulfilled, (state, action) => {
+            state.items = state.items.filter((item) => item.id !== +action.payload);
+          })
+        .addCase(removeItem.rejected, (state, action) => {
+            state.error = action.error.message;
+        });
     }
 })
 

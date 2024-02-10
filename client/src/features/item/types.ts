@@ -9,7 +9,7 @@ export type Item = {
 export type ItemGallery = {
     id: number;
     item_id: number;
-    ItemImages: ItemImage[]
+    ItemImages: ItemImage[]|[]
   };
 export type ItemImage = {
     id: number;
@@ -19,7 +19,7 @@ export type ItemImage = {
   
   export type ItemId = Item['id'];
   
-  export type ItemWithOutId = Omit<Item, 'id'>;
+  export type ItemWithOutId = Omit<Item, 'id'|'ItemGallery'>;
   
   export type ItemsState = {
     items: Item[];

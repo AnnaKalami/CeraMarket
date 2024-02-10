@@ -10,6 +10,7 @@ import SignUpPage from '../features/auth/SignUpPage';
 import type { User } from '../features/auth/types';
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
+import ProfileItemListPage from '../features/item/ProfileItemsListPage';
 
 // import { User } from '../redux/reducers/types';
 
@@ -27,14 +28,12 @@ const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     dispatch(loadItems()).catch(console.log);
-    setTimeout(() => dispatch(stopLoading()), 1000)
-  })
-      
-  useEffect(() => {
     loadUsers().catch(console.log);
     dispatch(checkUser()).catch(console.log);     
-
-  }, []);
+    setTimeout(() => dispatch(stopLoading()), 1000)
+  }, [])
+      
+  
 
   return (
     <div className="App">
@@ -44,6 +43,7 @@ const [menu, setMenu] = useState(false);
          <Route index element={<MainPage />} />
          <Route path="/sign-up" element={<SignUpPage />} />
          <Route path="/sign-in" element={<SignInPage />} />
+         <Route path="/profile/items" element={<ProfileItemListPage />} />
          <Route path="*" element={<h1>404</h1>} />
         </Route>
       </Routes>
