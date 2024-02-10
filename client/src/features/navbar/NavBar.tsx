@@ -47,7 +47,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
               </NavLink>
             </li>
             <li className="nav__item nav__item--right">
-              <div>
+              <div className='userDiv'>
                 <button
                   type="button"
                   className="arrow-button"
@@ -57,7 +57,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
                 >
                   <span>〈</span>
                 </button>
-                <img src="123" alt="ava" />
+                <img className='avatar' src={user.img} alt="ava" />
               </div>
             </li>
           </>
