@@ -3,25 +3,25 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import load from '../../assets/Spinner-1s-200px.svg'
-import ItemItem from './ItemItem';
-import FormAddItem from './FormAddItem';
 import { type RootState } from '../../redux/store';
-import './styles/items.scss';
+import './styles/tasks.scss';
+import FormAddTask from './FormTaskAdd';
+import TaskItem from './TaskItem';
 
-const ProfileItemListPage = (): JSX.Element => {
+const TasksListPage = (): JSX.Element => {
   const [addPage, setAddPage] = useState(false)
   const user = useSelector((store: RootState) => store.auth.auth);
-  const items = useSelector((store: RootState) => store.items.items);
-  const itemFilter = [...items].filter((item)=> item.user_id===user?.id)
+  const tasks = useSelector((store: RootState) => store.tasks.tasks);
+  console.log(tasks,123231);
   
-  const loading = useSelector((store: RootState) => store.items.loading);
+  const loading = useSelector((store: RootState) => store.tasks.loading);
   const navigate = useNavigate();
 
   const content = (
     <>
     {!addPage?(
       <button onClick={() => setAddPage(true)} type="button">
-      Добавить Товар
+      Добавить Задачу
     </button>
     ):(
       <button onClick={() => setAddPage(false)} type="button">
@@ -29,12 +29,12 @@ const ProfileItemListPage = (): JSX.Element => {
       </button>
     )}
       {addPage&&(
-        <FormAddItem  setAddPage={setAddPage}/>
+        <FormAddTask  setAddPage={setAddPage}/>
       )}
-      <h1 className="item-page__title">ItemsListPage</h1>
+      <h1 className="item-page__title">TasksListPage</h1>
       <div className="item-page__container">
-        {itemFilter.map((item) => (
-          <ItemItem key={item.id} item={item} />
+        {tasks.map((task) => (
+          <TaskItem key={task.id} task={task} />
         ))}
       </div>
       <button onClick={() => navigate('/')} type="button">
@@ -46,4 +46,4 @@ const ProfileItemListPage = (): JSX.Element => {
   return <>{loading ? <img src={load} /> : content}</>;
 };
 
-export default ProfileItemListPage;
+export default TasksListPage;

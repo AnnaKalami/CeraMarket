@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({User, TaskAnswer, TaskGallery}) {
       this.belongsTo(User, {foreignKey: 'user_id'})
       this.hasMany(TaskAnswer, {foreignKey: 'task_id'})
-      this.hasMany(TaskGallery, {foreignKey: 'task_id'})
+      this.hasOne(TaskGallery, {foreignKey: 'task_id'})
     }
   }
   Task.init({

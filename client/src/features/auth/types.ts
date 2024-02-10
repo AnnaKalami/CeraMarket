@@ -9,6 +9,7 @@ export type User = {
   img: string;
   isMaster: boolean;
   Likes: Like[]|[]
+  isAdmin:boolean
 };
 
 export type Like = {
@@ -23,7 +24,7 @@ export type AuthState = {
   error: string | undefined;
 };
 
-export type UserSignIn = Omit<User, 'id' | 'img' | 'name' |'Likes' |'rpassword' | 'isMaster'>;
+export type UserSignIn = Omit<User, 'id' | 'img' | 'name' |'Likes' |'rpassword' | 'isMaster'| 'isAdmin'>;
 
 export type UserSignUp = Omit<User, 'id'|'Likes'> & { rpassword: string };
 

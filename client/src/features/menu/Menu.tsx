@@ -38,16 +38,18 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
             </li>
           )}
           {user&&(
+            <>
              <li>
              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/likes`); setMenu(!menu)}}>Избранное </a>
 
            </li>
+             <li>
+             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/tasks`); setMenu(!menu)}}>Задачи </a>
+
+           </li>
+           </>
           )}
-          {items.map((item) => (
-            <li>
-              <a href={item.href}>{item.value}</a>
-            </li>
-          ))}
+          
           </>
         </ul>
       </div>

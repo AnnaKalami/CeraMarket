@@ -1,39 +1,37 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
-import { addItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
+import { addTaskAnswer, loadTasks } from './TasksSlise';
+import { useParams } from 'react-router-dom';
+import './styles/tasks.scss';
 
-interface FormAddItemProps {
-  setAddPage: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
-  const [description, setDescription] = useState('');
+const FormTaskAddAnswer = ():JSX.Element => {
+  const [text, setText] = useState('');
   const [price, setPrice] = useState(0);
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
-  
+  const { taskId } = useParams();
   return (
     <form
       className="form-add"
       onSubmit={(e) => {
         if (user?.id){
           e.preventDefault();
-          dispatch(addItem({  description, price })).catch(console.log);
-          setDescription('')
+          dispatch(addTaskAnswer({  text, price, task_id: +taskId})).catch(console.log);
+          setText('')
           setPrice(0)
-          setAddPage(false);
         }
       }}
     >
       <label className="form-add__label">
-        Description
+        Text
         <input
           className="form-add__input"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
           type="text"
         />
       </label>
@@ -49,11 +47,9 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
       <button className="form-add__submit" type="submit">
         Добавить Штуку Дрюку
       </button>
-      <button className="form-add__close" onClick={()=> setAddPage(false)}>
-        Закрыть окно(можно потом крестик нарисовать)
-      </button>
+      
     </form>
   );
 };
 
-export default FormAddItem;
+export default FormTaskAddAnswer;

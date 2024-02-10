@@ -2,6 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import type { Like, User, UserSignIn, UserSignUp, likeId, userId } from '../features/auth/types';
 import { ItemId, type Item, ItemWithOutId } from "../features/item/types";
+import { Answer, AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
   const res = await fetch('/api/items');
@@ -96,8 +97,8 @@ export const fetchLike = async ({userId, itemId}:{userId: userId, itemId:ItemId}
 
 
 
-export const fetchDisLike = async ({likeId, userId}:{likeId:likeId, userId:userId}): Promise<likeId> => {
-  const res = await fetch(`/api/likes/${likeId}/${userId}`, {
+export const fetchDisLike = async ({likeId}:{likeId:likeId}): Promise<likeId> => {
+  const res = await fetch(`/api/likes/${likeId}`, {
     method: 'DELETE',
   });
   const data: { message: string; likeId: likeId } = (await res.json()) as {
@@ -108,4 +109,58 @@ export const fetchDisLike = async ({likeId, userId}:{likeId:likeId, userId:userI
     throw new Error(data.message);
   }
   return data.likeId;
+};
+
+export const fetchLoadTasks = async (): Promise<Task[]> => {
+  const res = await fetch('/api/tasks');
+  const data: { tasks: Task[] } = (await res.json()) as { tasks: Task[] };
+  return data.tasks;
+}
+
+export const fetchAddTask = async (task: TaskWithOutId): Promise<Task> => {
+  const res = await fetch('/api/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  });
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};
+
+
+export const fetchRemoveTask = async (id: TaskId): Promise<TaskId> => {
+  const res = await fetch(`/api/tasks/${id}`, {
+    method: 'DELETE',
+  });
+  const data: { message: string; taskId: TaskId } = (await res.json()) as {
+    message: string;
+    taskId: TaskId;
+  };
+  if (data.message !== 'success') {
+    throw new Error(data.message);
+  }
+  return data.taskId;
+};
+
+export const fetchAddAnswer = async (answer: AnswerWithOutId): Promise<Task> => {
+  const res = await fetch('/api/answers', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(answer),
+  });
+  
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};
+
+
+export const fetchLoadUsers = async (): Promise<User[]> => {
+  const res = await fetch('/api/users');
+  const data: { users: User[] } = (await res.json()) as { users: User[] };
+  return data.users
+  
 };

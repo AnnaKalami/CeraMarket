@@ -59,7 +59,6 @@ router.post("/sign-up", async (req, res) => {
       isMaster,
       isAdmin: false,
     });
-    console.log(user, 456456456);
 
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, name: user.name, img: user.img },
@@ -82,7 +81,6 @@ router.post("/sign-up", async (req, res) => {
 });
 
 router.get("/check", async (req, res) => {
-  console.log(res.locals.user);
   if (res.locals.user) {
     const user = await User.findOne({ where: { id: res.locals.user.id },include:Like });
     res.json({ user });

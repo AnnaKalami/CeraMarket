@@ -5,6 +5,5 @@ async function base () {
     model: Question,
     attributes: ['point']
   }});
-  console.log(res[0].Question.point);
   return
 }
