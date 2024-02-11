@@ -20,6 +20,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
 
   return (
     <>
+    
       <div className="blur" />
       <ul className="nav__container">
         {user && <li className="hello">Hello, {user.name}!</li>}
