@@ -11,10 +11,10 @@ router.post('/', async (req, res) => {
   });
 
   
-  router.delete('/:likeId/:userId', async (req, res) => {
+  router.delete('/:likeId', async (req, res) => {
     try {
-      const { likeId , userId} = req.params;
-      const result = await Like.destroy({ where: { id: likeId, user_id: userId } });
+      const { likeId } = req.params;
+      const result = await Like.destroy({ where: { id: likeId, user_id: res.locals.user.id } });
       if (result > 0) {
         res.json({ message: 'success', likeId });
         return;

@@ -6,13 +6,11 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { removeItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
 import { disLike, like } from '../auth/authSlice';
-import { Like } from '../auth/types';
 
 const ItemItem = ({ item }: { item: Item }): JSX.Element => {
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.auth);
     const itemLike = user?.Likes.filter((like)=> like.item_id===item.id)
-  
   return (
     <div className="item-page__item">
       <h2 className="item-page__item--name">{item.description}</h2>
@@ -22,20 +20,20 @@ const ItemItem = ({ item }: { item: Item }): JSX.Element => {
       )}
       <Link to={`/itemes/${item.id}`}>More information</Link>
       {user &&(
-        user?.id===item.user_id? (
+        user?.id===item.user_id || user.isAdmin ? (
           <button
           className="item-page__btn--remove"
           onClick={() => dispatch(removeItem(item.id))}
           type="button"
         >
-          Remove
+          Удалить
         </button>
         ):(
           user?.Likes.some((like)=> like.item_id===item.id) ? (
           
             <button
             className="item-page__btn--remove" /*нужно сменить стиль */
-            onClick={() => dispatch(disLike({likeId:itemLike[0].id, userId:user.id}))}
+            onClick={() => dispatch(disLike({likeId:itemLike[0].id}))}
             type="button"
           >
             Удалить из избранного

@@ -14,7 +14,7 @@ export const signIn = createAsyncThunk('auth/signIn', (user: UserSignIn) => fetc
 export const signUp = createAsyncThunk('auth/signUp', (user: UserSignUp) => fetchSignUp(user));
 export const logOut = createAsyncThunk('auth/logOut', () => fetchLogOut());
 export const like = createAsyncThunk('auth/like', ({userId, itemId}:{userId: userId, itemId:ItemId}) => fetchLike({userId, itemId}));
-export const disLike = createAsyncThunk('auth/disLike', ({likeId, userId}:{likeId:likeId, userId: userId}) => fetchDisLike({likeId,userId}));
+export const disLike = createAsyncThunk('auth/disLike', ({likeId}:{likeId:likeId}) => fetchDisLike({likeId}));
 
 const authSlice = createSlice({
   name: 'auth',

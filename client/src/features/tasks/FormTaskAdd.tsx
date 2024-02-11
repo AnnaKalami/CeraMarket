@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React, { useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
-import { addItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
+import { addTask } from './TasksSlise';
 
 interface FormAddItemProps {
   setAddPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
+const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -21,7 +21,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
       onSubmit={(e) => {
         if (user?.id){
           e.preventDefault();
-          dispatch(addItem({  description, price })).catch(console.log);
+          dispatch(addTask({  description, price })).catch(console.log);
           setDescription('')
           setPrice(0)
           setAddPage(false);
@@ -47,13 +47,13 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         />
       </label>
       <button className="form-add__submit" type="submit">
-        Добавить Штуку Дрюку
+        Добавить Задание Свинание
       </button>
       <button className="form-add__close" onClick={()=> setAddPage(false)}>
-        Закрыть окно(можно потом крестик нарисовать)
+        Закрыть окно(будет крестик но это не точно)
       </button>
     </form>
   );
 };
 
-export default FormAddItem;
+export default FormAddTask;
