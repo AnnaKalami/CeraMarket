@@ -44,9 +44,19 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
 
            </li>
              <li>
-             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/tasks`); setMenu(!menu)}}>Задачи </a>
+             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/tasks`); setMenu(!menu)}}>Все задачи </a>
 
            </li>
+             <li>
+             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/tasks`); setMenu(!menu)}}>Мои задачи </a>
+
+           </li>
+             {user.isAdmin&&(
+              <li>
+              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/users`); setMenu(!menu)}}>Все пользователи </a>
+ 
+            </li>
+             )}
            </>
           )}
           

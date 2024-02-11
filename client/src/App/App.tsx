@@ -17,6 +17,8 @@ import { loadTasks } from '../features/tasks/TasksSlise';
 import TaskItemPage from '../features/tasks/TaskItemPage';
 import { loadUsers } from '../features/users/UsersSlise';
 import { useSelector } from 'react-redux';
+import UsersListPage from '../features/users/UsersListPage';
+import ItemItemPage from '../features/item/ItemItemPage';
 
 // import { User } from '../redux/reducers/types';
 
@@ -49,7 +51,10 @@ const [menu, setMenu] = useState(false);
          <Route path="/profile/items" element={<ProfileItemListPage />} />
          <Route path="/profile/likes" element={<LikesPage />} />
          <Route path="/tasks" element={<TasksListPage />} />
+         <Route path="/profile/tasks" element={<TasksListPage />} />
          <Route path="/tasks/:taskId" element={<TaskItemPage />} />
+         <Route path="/items/:itemId" element={<ItemItemPage />} />
+         <Route path="/users" element={<UsersListPage />} />
          <Route path="*" element={<h1>404</h1>} />
         </Route>
       </Routes>

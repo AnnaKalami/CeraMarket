@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import load from '../../assets/Spinner-1s-200px.svg'
 import { type RootState } from '../../redux/store';
 import './styles/tasks.scss';
@@ -10,13 +10,18 @@ import TaskItem from './TaskItem';
 
 const TasksListPage = (): JSX.Element => {
   const [addPage, setAddPage] = useState(false)
-  const user = useSelector((store: RootState) => store.auth.auth);
-  const tasks = useSelector((store: RootState) => store.tasks.tasks);
-  console.log(tasks,123231);
   
+  let tasks = useSelector((store: RootState) => store.tasks.tasks);
+  const user = useSelector((store: RootState) => store.auth.auth);
   const loading = useSelector((store: RootState) => store.tasks.loading);
   const navigate = useNavigate();
-
+  const location = useLocation()
+  const isProfileTasks = location.pathname === '/profile/tasks';
+  
+  
+  if (isProfileTasks) {
+    tasks = tasks.filter((task)=>task.user_id===user?.id)
+  }
   const content = (
     <>
     {!addPage?(

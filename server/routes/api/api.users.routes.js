@@ -10,4 +10,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.delete('/:userId', async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (res.locals.user.isAdmin){
+      const result = await User.destroy({ where: { id: userId} });
+      if (result > 0) {
+        res.json({ message: 'success', userId });
+        return;
+      }
+    }
+    res.json({ message: 'Не твоя, вот ты и бесишься' });
+  } catch ({ message }) {
+    res.json({ message });
+  }
+});
+
+
 module.exports = router;

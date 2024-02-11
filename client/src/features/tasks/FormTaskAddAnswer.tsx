@@ -16,9 +16,9 @@ const FormTaskAddAnswer = ():JSX.Element => {
   const { taskId } = useParams();
   return (
     <form
-      className="form-add"
+      className="form-add-answer"
       onSubmit={(e) => {
-        if (user?.id){
+        if (user?.id && taskId ){
           e.preventDefault();
           dispatch(addTaskAnswer({  text, price, task_id: +taskId})).catch(console.log);
           setText('')

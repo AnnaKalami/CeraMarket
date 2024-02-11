@@ -1,7 +1,7 @@
 
 /* eslint-disable import/prefer-default-export */
 import type { Like, User, UserSignIn, UserSignUp, likeId, userId } from '../features/auth/types';
-import { ItemId, type Item, ItemWithOutId } from "../features/item/types";
+import { ItemId, type Item, ItemWithOutId, ItemWithOutIncludes } from "../features/item/types";
 import { Answer, AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
@@ -13,6 +13,18 @@ export const fetchLoadItems = async (): Promise<Item[]> => {
 export const fetchAddItem = async (item: ItemWithOutId): Promise<Item> => {
   const res = await fetch('/api/items', {
     method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify(item),
+  });
+  const data: { item: Item } = (await res.json()) as { item: Item };
+  return data.item;
+};
+
+export const fetchUpdateItem = async (item: ItemWithOutIncludes): Promise<Item> => {
+  const res = await fetch(`/api/items/${item.id}`, {
+    method: 'PUT',
     headers: {
       'Content-type': 'application/json',
     },
@@ -163,4 +175,17 @@ export const fetchLoadUsers = async (): Promise<User[]> => {
   const data: { users: User[] } = (await res.json()) as { users: User[] };
   return data.users
   
+};
+export const fetchDeleteUser = async (id: userId): Promise<userId> => {
+  const res = await fetch(`/api/users/${id}`, {
+    method: 'DELETE',
+  });
+  const data: { message: string; userId: userId } = (await res.json()) as {
+    message: string;
+    userId: userId;
+  };
+  if (data.message !== 'success') {
+    throw new Error(data.message);
+  }
+  return data.userId;
 };

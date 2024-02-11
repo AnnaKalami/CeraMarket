@@ -18,7 +18,7 @@ const ItemItem = ({ item }: { item: Item }): JSX.Element => {
       {item.ItemGallery.ItemImages.length>0 &&(
         <img className="item-page__item--img" src={item.ItemGallery.ItemImages[0].path} alt="item" />
       )}
-      <Link to={`/itemes/${item.id}`}>More information</Link>
+      <Link to={`/items/${item.id}`}>Подробнее</Link>
       {user &&(
         user?.id===item.user_id || user.isAdmin ? (
           <button
@@ -29,7 +29,7 @@ const ItemItem = ({ item }: { item: Item }): JSX.Element => {
           Удалить
         </button>
         ):(
-          user?.Likes.some((like)=> like.item_id===item.id) ? (
+          user?.Likes.some((like)=> like.item_id===item.id) && itemLike ? (
           
             <button
             className="item-page__btn--remove" /*нужно сменить стиль */

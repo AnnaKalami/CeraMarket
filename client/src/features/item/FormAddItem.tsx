@@ -14,9 +14,37 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [price, setPrice] = useState(0);
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
+
+  const [position, setPosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
+
+  const handleMouseDown = (e) => {
+    const startX = e.pageX - position.x;
+    const startY = e.pageY - position.y;
   
+    const handleMouseMove = (e) => {
+      setPosition({
+        x: e.pageX - startX,
+        y: e.pageY - startY,
+      });
+    };
+  
+    const handleMouseUp = () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', handleMouseUp);
+  };
+  
+  const modalStyle = {
+    position: 'absolute',
+    top: position.y + 'px',
+    left: position.x + 'px',
+  };
+
   return (
-    <form
+    <form style={modalStyle} onMouseDown={handleMouseDown}
       className="form-add"
       onSubmit={(e) => {
         if (user?.id){

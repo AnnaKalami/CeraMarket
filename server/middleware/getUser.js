@@ -4,7 +4,7 @@ async function getUser(req, res, next) {
   if (res.locals.user) {
     const user = await User.findOne({
       where: { id: res.locals.user.id },
-      attributes: ["name", "email", "id"],
+      attributes: ["name", "email", "id", "isAdmin", "isMaster"],
     });
     res.locals.user = user;
   }

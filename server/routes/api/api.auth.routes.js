@@ -19,7 +19,7 @@ router.post("/sign-in", async (req, res) => {
       return;
     }
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, img: user.img },
+      user: { id: user.id, name: user.name, img: user.img, isAdmin:user.isAdmin, isMaster:user.isMaster },
     });
 
     // устанавливаем куки
@@ -45,7 +45,7 @@ router.post("/sign-up", async (req, res) => {
       res.status(400).json({ message: "Пароли не совпадают!" });
       return;
     }
-    user = await User.findOne({ where: { email },include:Like });
+    user = await User.findOne({ where: { email } });
     if (user) {
       res.status(400).json({ message: "Такой пользователь уже есть!" });
       return;
@@ -61,7 +61,7 @@ router.post("/sign-up", async (req, res) => {
     });
 
     const { accessToken, refreshToken } = generateTokens({
-      user: { id: user.id, name: user.name, img: user.img },
+      user: { id: user.id, name: user.name, img: user.img, isAdmin:user.isAdmin, isMaster:user.isMaster },
     });
 
     // устанавливаем куки
@@ -73,7 +73,7 @@ router.post("/sign-up", async (req, res) => {
       maxAge: 1000 * 60 * 60 * 12,
       httpOnly: true,
     });
-
+    user = await User.findOne({ where: { email } ,include:Like})
     res.status(200).json({ message: "success", user });
   } catch ({ message }) {
     res.status(500).json({ message });

@@ -20,6 +20,7 @@ export type ItemImage = {
   export type ItemId = Item['id'];
   
   export type ItemWithOutId = Omit<Item, 'id'|'ItemGallery'| 'user_id'>;
+  export type ItemWithOutIncludes = Omit<Item, 'ItemGallery'>;
   
   export type ItemsState = {
     items: Item[];
