@@ -5,6 +5,8 @@ export type Task = {
     user_id: number;
     TaskGallery: TaskGallery
     TaskAnswers: Answer[]|[]
+    atWork:false
+    TaskAtWork: null| TaskAtWork
   };
   export type Answer = {
     id:number
@@ -25,10 +27,14 @@ export type TaskImage = {
     path: string;
     taskGallery_id: number;
   };
-  
+  export type TaskAtWork = {
+    id: number;
+    task_id: number;
+    user_id: number;
+  }
   export type TaskId = Task['id'];
   
-  export type TaskWithOutId = Omit<Task, 'id'|'TaskGallery'| 'user_id'| 'TaskAnswers'>;
+  export type TaskWithOutId = Omit<Task, 'id'|'TaskGallery'| 'user_id'| 'TaskAnswers'| 'atWork'>;
   export type AnswerWithOutId = Omit<Answer, 'id'|'TaskGallery'| 'user_id'| 'createdAt'>;
 
   

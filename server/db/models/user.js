@@ -4,13 +4,14 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-        static associate({Like, Item, TaskAnswer, Task, ChatMessage, Chat}) {
+        static associate({Like, Item, TaskAnswer, Task, ChatMessage, Chat, TaskAtWork}) {
           this.hasMany(Like, {foreignKey: 'user_id'}),
           this.hasMany(Item, {foreignKey: 'user_id'}),
           this.hasMany(TaskAnswer, {foreignKey: 'user_id'}),
           this.hasMany(Task, {foreignKey: 'user_id'}),
           this.hasMany(ChatMessage, {foreignKey: 'user_id'}),
           this.hasMany(Chat, {foreignKey: 'user_id'})
+          this.hasMany(TaskAtWork, {foreignKey: 'user_id'})
     }
   }
   User.init({

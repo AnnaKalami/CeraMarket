@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { TaskGallery,TaskImage, TaskAnswer, Task } = require('../../db/models');
+const { TaskGallery,TaskImage, TaskAnswer, Task, TaskAtWork } = require('../../db/models');
 
 router.post('/', async (req, res) => {
     try {
@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
              model: TaskGallery,
               include: TaskImage
             },
-          TaskAnswer
+          TaskAnswer,
+          TaskAtWork
         ]
       })
       res.json({task});

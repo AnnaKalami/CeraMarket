@@ -33,9 +33,14 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
         
           <>
           {user?.isMaster&&(
+            <>
             <li>
               <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/items`); setMenu(!menu)}}>Мои творения(хз перепишите как хотите) </a>
             </li>
+            <li>
+              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/tasks/at-work`); setMenu(!menu)}}>Мои активные заказы </a>
+            </li>
+            </>
           )}
           {user&&(
             <>
