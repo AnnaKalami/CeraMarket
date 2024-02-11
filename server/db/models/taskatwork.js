@@ -3,39 +3,36 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class Task extends Model {
-    static associate({User, TaskAnswer, TaskGallery, TaskAtWork}) {
+  class TaskAtWork extends Model {
+    static associate({User,Task}) {
       this.belongsTo(User, {foreignKey: 'user_id'})
-      this.hasMany(TaskAnswer, {foreignKey: 'task_id'})
-      this.hasOne(TaskGallery, {foreignKey: 'task_id'})
-      this.hasOne(TaskAtWork, {foreignKey: 'task_id'})
+      this.belongsTo(Task, {foreignKey: 'task_id'})
     }
   }
-  Task.init({
+  TaskAtWork.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    description: {
-      type: DataTypes.TEXT
-    },
-    price: {
-      type: DataTypes.INTEGER
-    },
     user_id: {
       allowNull: false,
       type: DataTypes.INTEGER,
       references: {
-        model: 'Users',
-        key: 'id',
-      }, 
-    onDelete: "cascade", 
+        model:'Users',
+        key: 'id'
+      },
+      onDelete: 'cascade'
     },
-    atWork: {
+    task_id: {
       allowNull: false,
-      type: DataTypes.BOOLEAN
+      type: DataTypes.INTEGER,
+      references: {
+        model:'Tasks',
+        key: 'id'
+      },
+      onDelete: 'cascade'
     },
     createdAt: {
       allowNull: false,
@@ -47,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Task',
+    modelName: 'TaskAtWork',
   });
-  return Task;
+  return TaskAtWork;
 };

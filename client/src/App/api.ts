@@ -189,3 +189,26 @@ export const fetchDeleteUser = async (id: userId): Promise<userId> => {
   }
   return data.userId;
 };
+export const fetchAddMasterInTask = async ({userId,taskId}:{userId:userId,taskId:TaskId}): Promise<Task> => {
+  const res = await fetch('/api/tasks/atWork', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({userId,taskId}),
+  })
+  
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};
+export const fetchAddTaskWork = async (taskId:TaskId): Promise<Task> => {
+  const res = await fetch(`/api/tasks/atWork/${taskId}`, {
+    method: 'put',
+    headers: {
+      'Content-type': 'application/json',
+    }
+  })
+  
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};

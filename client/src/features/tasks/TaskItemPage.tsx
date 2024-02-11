@@ -4,18 +4,22 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from '../../redux/store';
 import FormTaskAddAnswer from './FormTaskAddAnswer';
-import { loadTasks } from './TasksSlise';
+import { addMasterInTask } from './TasksSlise';
 
 const TaskItemPage = (): JSX.Element => {
   const { taskId } = useParams();
   const tasks = useSelector((store: RootState) => store.tasks.tasks);
-
+  const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.auth);
   const currentTask = taskId && tasks.find((task) => task.id === +taskId);
   
   const users = useSelector((store: RootState) => store.users.users);
-
-
+  let masterAnswer 
+  if (currentTask && user){
+    masterAnswer =  currentTask.TaskAnswers.some(answer => answer.user_id===user.id)
+  }
+  console.log(masterAnswer);
+  
   return currentTask ? (
     <>
     <div className="hero-item-page__item">
@@ -24,18 +28,26 @@ const TaskItemPage = (): JSX.Element => {
       {currentTask.TaskGallery.TaskImages.map((image)=> {
         return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
       })}
-      {currentTask.TaskAnswers.map((answer)=> 
-      <div key={answer.id} >
-        <h4>{`${[...users].filter((user)=>user.id===answer.user_id).map((user)=> user.name)} написал: ${answer.text} и готов взяться за работу за ${answer.price}`}</h4>
-        {user?.id===currentTask.user_id&&(
-          <button className="form-add__submit" type="submit">
-          Написать мастеру(кнопка затычка)
-        </button>
-        )}
-      </div>
-      )}
+      {currentTask.TaskAnswers.map((answer) => {
+          const userAnswer = [...users].find((user) => user.id === answer.user_id);
+            return (
+                 <div key={answer.id}>
+                    {userAnswer && (
+                      <>
+                      <h4>{`${userAnswer.name} написал: ${answer.text} и готов взяться за работу за ${answer.price}`}</h4>
+                        {user?.id === currentTask.user_id && !currentTask.TaskAtWork&& (
+                             <button className="form-add__submit" type="submit" onClick={() => dispatch(addMasterInTask({userId:userAnswer.id,taskId:currentTask.id})).catch(console.log)}>
+                                 Выбрать мастера
+                              </button>
+                        )}
+                        </>
+                    )}
+                </div>
+                    );
+})}
+
     </div>
-      {user?.isMaster&& currentTask.user_id !==user.id &&(
+      {user?.isMaster&& currentTask.user_id !==user.id && !masterAnswer&&(
         <FormTaskAddAnswer/>
       )}
       </>

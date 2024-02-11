@@ -27,7 +27,6 @@ const itemsSlice = createSlice({
         .addCase(loadItems.fulfilled, (state,action) => {
           
           state.items = action.payload
-          console.log(state.items);
         })
         .addCase(loadItems.pending, (state) => {
             state.loading = true;
