@@ -24,10 +24,12 @@ router.get('/', async (req, res) => {
       //тут создание галлереии и картинки
       const task = await Task.create({description,price,user_id:res.locals.user.id,});
       const createGallery = await TaskGallery.create({task_id:task.id})
-      const newTask = await Task.findOne({where: { user_id:res.locals.user.id,id:task.id }, include: {
-        model: TaskGallery,
-        include: TaskImage
-      }});
+      const newTask = await Task.findOne({where: { user_id:res.locals.user.id,id:task.id }, include: [
+        {
+          model: TaskGallery,
+          include: TaskImage
+        },
+        TaskAnswer]});
       res.json({task:newTask});
     } catch ({ message }) {
       res.json({ type: 'tasks router', message });
@@ -38,6 +40,13 @@ router.get('/', async (req, res) => {
   router.delete('/:taskId', async (req, res) => {
     try {
       const { taskId } = req.params;
+      if (res.locals.user.isAdmin){
+        const result = await Task.destroy({ where: { id: taskId} });
+        if (result > 0) {
+          res.json({ message: 'success', taskId });
+          return;
+        }
+      }
       const result = await Task.destroy({ where: { id: taskId , user_id:res.locals.user.id} });
       if (result > 0) {
         res.json({ message: 'success', taskId });

@@ -19,7 +19,7 @@ const TaskTask = ({ task }: { task: Task }): JSX.Element => {
       {task.TaskGallery.TaskImages.length>0 &&(
         <img className="task-page__task--img" src={task.TaskGallery.TaskImages[0].path} alt="task" />
       )}
-      <Link to={`/tasks/${task.id}`}>More information</Link>
+      <Link to={`/tasks/${task.id}`}>Подробнее</Link>
       {user &&(user.id===task.user_id || user.isAdmin)&& (
           <button
           className="task-page__btn--remove"

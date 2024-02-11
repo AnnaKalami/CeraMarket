@@ -9,7 +9,8 @@ import { loadTasks } from './TasksSlise';
 const TaskItemPage = (): JSX.Element => {
   const { taskId } = useParams();
   const tasks = useSelector((store: RootState) => store.tasks.tasks);
-  
+
+  const user = useSelector((store: RootState) => store.auth.auth);
   const currentTask = taskId && tasks.find((task) => task.id === +taskId);
   
   const users = useSelector((store: RootState) => store.users.users);
@@ -25,11 +26,18 @@ const TaskItemPage = (): JSX.Element => {
       })}
       {currentTask.TaskAnswers.map((answer)=> 
       <div key={answer.id} >
-        <h4>{`${[...users].filter((user)=>user.id===answer.user_id).map((user)=> user.name)} написал: ${answer.text}`}</h4>
+        <h4>{`${[...users].filter((user)=>user.id===answer.user_id).map((user)=> user.name)} написал: ${answer.text} и готов взяться за работу за ${answer.price}`}</h4>
+        {user?.id===currentTask.user_id&&(
+          <button className="form-add__submit" type="submit">
+          Написать мастеру(кнопка затычка)
+        </button>
+        )}
       </div>
       )}
     </div>
-      <FormTaskAddAnswer/>
+      {user?.isMaster&& currentTask.user_id !==user.id &&(
+        <FormTaskAddAnswer/>
+      )}
       </>
   ) : (
     <h1>Такой таски нету ОЛО!!!!</h1>

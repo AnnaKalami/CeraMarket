@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { UsersState } from "./types";
-import { fetchLoadUsers } from "../../App/api";
+import { fetchDeleteUser, fetchLoadUsers } from "../../App/api";
+import { userId } from "../auth/types";
 
 const initialState: UsersState = {
     users: [],
@@ -9,7 +10,7 @@ const initialState: UsersState = {
   };
 
 export const loadUsers = createAsyncThunk('users/load', ()=> fetchLoadUsers())
-
+export const deleteUser = createAsyncThunk('users/delete', (id:userId)=> fetchDeleteUser(id))
 const usersSlice = createSlice({
     name: 'users',
     initialState,
@@ -22,6 +23,12 @@ const usersSlice = createSlice({
         .addCase(loadUsers.rejected, (state, action) => {
             state.error = action.error.message;
         })  
+        .addCase(deleteUser.fulfilled, (state, action) => {
+            state.users = state.users.filter((user) => user.id !== +action.payload);
+          })
+        .addCase(deleteUser.rejected, (state, action) => {
+            state.error = action.error.message;
+        })
     }
 })
 // dispatch({ type: 'users/load', payload: data.users });
