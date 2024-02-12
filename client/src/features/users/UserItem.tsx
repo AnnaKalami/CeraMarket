@@ -15,7 +15,8 @@ const UserItem = ({ user }: { user: User }): JSX.Element => {
     <div className="task-page__task">
       <h2 className="task-page__task--name">Имя: {user.name}</h2>
       <h3 className="task-page__task--description">Мастер: {user.isMaster}</h3>
-        <img className="task-page__task--img" src={user.img} alt="task" />
+        {/* <img className="task-page__task--img" src={user.img} alt="task" /> */}
+        <div className='user_image' style={{backgroundImage:`url(${user.img})`, backgroundRepeat:"no-repeat", backgroundSize: 'cover' ,height: "150px", width: '200px '}}/>
       <Link to={`/users/${user.id}`}>Затычка</Link>
       {userInSistem  &&  userInSistem.isAdmin && (
           <button

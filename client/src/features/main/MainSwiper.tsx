@@ -6,7 +6,9 @@ import { ItemImage } from '../item/types';
 
 const MainSwiper = ({ allImages}:{allImages:ItemImage[]}) => {
 
-
+//
+// const allImagesDouble = [...allImages,...allImages]
+// console.log(allImagesDouble);
 
   return (
     <Swiper
@@ -15,8 +17,9 @@ const MainSwiper = ({ allImages}:{allImages:ItemImage[]}) => {
         effect='coverflow'
         grabCursor = {true}
         centeredSlides = {true}
-        slidesPerView={2}
+        slidesPerView={3}
         loop={true} 
+        spaceBetween={0}
         coverflowEffect={{
             rotate:0,
             stretch: 0,
@@ -32,7 +35,8 @@ const MainSwiper = ({ allImages}:{allImages:ItemImage[]}) => {
     >
       {allImages.map((image:ItemImage) => (
         <SwiperSlide key={image.id}>
-          <img className='main-slider-image' src={image.path} alt={`Image ${image.id}`} />
+          {/* <img className='main-slider-image' src={image.path} alt={`Image ${image.id}`} /> */}
+          <div style={{backgroundImage:`url(${image.path})`, backgroundRepeat:"no-repeat", backgroundSize: 'cover' ,height: "300px", width: '300px '}} />
         </SwiperSlide>
       ))}
     </Swiper>

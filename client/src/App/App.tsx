@@ -47,8 +47,8 @@ const [menu, setMenu] = useState(false);
   let cursor2: CursorElement | null = document.querySelector('.cursor2');
   
   document.addEventListener('mousemove', function(e: MouseEvent) {
-    if (cursor && cursor2) {
-      cursor.style.left = cursor2.style.left = e.clientX + 'px';
+    if (cursor && cursor2 ) {
+      cursor.style.left = cursor2.style.left= e.clientX + 'px';
       cursor.style.top = cursor2.style.top = e.clientY + 'px';
     }
   });
@@ -59,7 +59,7 @@ const [menu, setMenu] = useState(false);
   return (
     <div className="App">
       <div className='cursor'></div>
-    <div className='cursor2'></div>
+       <div className='cursor2'></div>
        {menu && <Menu menu={menu} setMenu={setMenu} />}
       <Routes>
          <Route path="/" element={<NavBar menu={menu} setMenu={setMenu} />} >

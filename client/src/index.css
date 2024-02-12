@@ -70,11 +70,3 @@ button:focus-visible {
   }
 }
 
-.main-slider-image{
-  height: 400px;
-}
-
-
-.sample-slider .swiper-wrapper{
-  transition-timing-function: linear;
-}

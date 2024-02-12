@@ -55,7 +55,10 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
         <input
           className="form-add__input"
           value={price}
-          onChange={(e) => setPrice(+e.target.value)}
+          onChange={(e) => { const inputValue = +e.target.value;
+            if (inputValue >= 0) {
+              setPrice(inputValue);
+            }}}
           type="number"
         />
       </label>
