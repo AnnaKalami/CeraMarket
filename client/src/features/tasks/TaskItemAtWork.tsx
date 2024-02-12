@@ -37,10 +37,10 @@ const TaskItemAtWork = ({ task }: { task: Task }): JSX.Element => {
          ):(
             <button
              className="task-page__btn--remove"
-             
+             onClick={() => dispatch(addTaskWork(task.id))}
              type="button"
            >
-             В работе(можно будет добавить)
+             В работе(Отменить)
            </button>
          )}
         

@@ -44,18 +44,24 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
           )}
           {user&&(
             <>
-             <li>
-             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/likes`); setMenu(!menu)}}>Избранное </a>
-
-           </li>
-             <li>
+            <li>
              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/tasks`); setMenu(!menu)}}>Все задачи </a>
 
            </li>
+
+            {!user.isAdmin &&(
+              <>
+               <li>
+             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/likes`); setMenu(!menu)}}>Избранное </a>
+
+           </li>
+             
              <li>
              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/tasks`); setMenu(!menu)}}>Мои задачи </a>
 
            </li>
+           </>
+            )}
              {user.isAdmin&&(
               <li>
               <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/users`); setMenu(!menu)}}>Все пользователи </a>
