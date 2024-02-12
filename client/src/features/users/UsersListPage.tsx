@@ -14,7 +14,7 @@ const UsersListPage = (): JSX.Element => {
     <div className='container-images'>
     </div>
     <div className="item-page__container">
-    {users.map((user) => (
+    {users.filter((userFilter)=> !userFilter.isAdmin).map((user) => (
       <UserItem key={user.id} user={user} />
     ))}
   </div>

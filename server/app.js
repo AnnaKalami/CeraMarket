@@ -18,8 +18,10 @@ const { verifyAccessToken } = require("./middleware/verifyJWT");
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
-// app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, "../client/dist")));
+
+app.use(express.static(path.join(__dirname, 'public')));7
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);

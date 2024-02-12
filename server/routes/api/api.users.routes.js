@@ -14,7 +14,7 @@ router.delete('/:userId', async (req, res) => {
   try {
     const { userId } = req.params;
     if (res.locals.user.isAdmin){
-      const result = await User.destroy({ where: { id: userId} });
+      const result = await User.destroy({ where: { id: userId, isAdmin:false} });
       if (result > 0) {
         res.json({ message: 'success', userId });
         return;

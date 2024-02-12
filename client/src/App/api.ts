@@ -11,13 +11,13 @@ export const fetchLoadItems = async (): Promise<Item[]> => {
   return data.items;
 }
 
-export const fetchAddItem = async (item: ItemWithOutId): Promise<Item> => {
+export const fetchAddItem = async (formData): Promise<Item> => {
   const res = await fetch('/api/items', {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(item),
+    // headers: {
+    //   'Content-type': 'application/json',
+    // },
+    body: formData,
   });
   const data: { item: Item } = (await res.json()) as { item: Item };
   return data.item;

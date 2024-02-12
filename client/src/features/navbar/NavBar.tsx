@@ -18,6 +18,9 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
   const dispatch = useAppDispatch();
   
 
+  let tasks = useSelector((store: RootState) => store.tasks.tasks);
+  tasks = tasks.filter((task)=>task.TaskAtWork?.user_id===user?.id&&!task.atWork)
+
   return (
     <>
     
@@ -62,6 +65,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
                     setMenu(!menu)
                   }}
                 >
+                  {tasks.length>0 &&(<>{tasks.length}</>)}
                   <span>〈</span>
                 </button>
                 <img className='avatar' src={user.img} alt="ava" />

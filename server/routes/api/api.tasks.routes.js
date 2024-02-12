@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
           return;
         }
       }
-      const result = await Task.destroy({ where: { id: taskId , user_id:res.locals.user.id} });
+      const result = await Task.destroy({ where: { id: taskId , atWork:false, user_id:res.locals.user.id} });
       if (result > 0) {
         res.json({ message: 'success', taskId });
         return;
@@ -95,20 +95,41 @@ router.get('/', async (req, res) => {
         TaskAnswer,
         TaskAtWork]})
       if (task.TaskAtWork.user_id===res.locals.user.id) {
-        const [result] = await Task.update(
-          {atWork:true},{where:{id:taskId}});
-          if (result>0){
-            const newTask = await Task.findOne({where: {id:taskId }, include: [
-              {
-                model: TaskGallery,
-                include: TaskImage
-              },
-              TaskAnswer,
-            TaskAtWork]
-          })
-            res.json({task:newTask});
-            return
-          }
+        if (!task.atWork) {
+          const [result] = await Task.update(
+            {atWork:true},{where:{id:taskId}});
+            if (result>0){
+              const newTask = await Task.findOne({where: {id:taskId }, include: [
+                {
+                  model: TaskGallery,
+                  include: TaskImage
+                },
+                TaskAnswer,
+              TaskAtWork]
+            })
+              res.json({task:newTask});
+              return
+            }
+        }
+        if (task.atWork) {
+          const [result] = await Task.update(
+            {atWork:false},{where:{id:taskId}});
+            if (result>0){
+              const resultDestroy =  await TaskAtWork.destroy({ where: { task_id: task.id, user_id:res.locals.user.id} });
+              if (resultDestroy>0){
+                const newTask = await Task.findOne({where: {id:taskId }, include: [
+                  {
+                    model: TaskGallery,
+                    include: TaskImage
+                  },
+                  TaskAnswer,
+                TaskAtWork]
+              })
+                res.json({task:newTask});
+                return
+              }
+            }
+        }
       }
     } catch ({ message }) {
       res.json({ type: 'tasks router', message });
