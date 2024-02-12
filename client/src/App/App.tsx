@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import Menu from '../features/menu/Menu';
+import { Route, Routes } from 'react-router-dom';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import { RootState, useAppDispatch } from '../redux/store';
+import {useAppDispatch } from '../redux/store';
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
-import type { User } from '../features/auth/types';
+// import type { User } from '../features/auth/types';
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
+import Menu from '../features/menu/Menu';
 import ProfileItemListPage from '../features/item/ProfileItemsListPage';
 import LikesPage from '../features/profile/LikesPage';
 import TasksListPage from '../features/tasks/TasksPage';
 import { loadTasks } from '../features/tasks/TasksSlise';
 import TaskItemPage from '../features/tasks/TaskItemPage';
 import { loadUsers } from '../features/users/UsersSlise';
-import { useSelector } from 'react-redux';
 import UsersListPage from '../features/users/UsersListPage';
 import ItemItemPage from '../features/item/ItemItemPage';
 import TasksPageAtWork from '../features/tasks/TasksPageAtWork';
+import ChatPage from '../features/chats/chat';
+import ChatListPage from '../features/chats/chatList';
+import {loadChats}from '../features/chats/ChatsSlice';
+import {loadMessages}from '../features/chats/MessagesSlice'
 
-// import { User } from '../redux/reducers/types';
 
 function App(): JSX.Element {
 
@@ -34,7 +36,9 @@ const [menu, setMenu] = useState(false);
     dispatch(loadUsers()).catch(console.log);
     dispatch(checkUser()).catch(console.log);     
     dispatch(loadTasks()).catch(console.log);
-    setTimeout(() => dispatch(stopLoading()), 1000)
+    dispatch(loadChats()).catch(console.log);
+    dispatch(loadMessages()).catch(console.log);
+    setTimeout(() => dispatch(stopLoading()), 2000)
   
   
   //раскоменти чтобы включить курсор
@@ -43,8 +47,8 @@ const [menu, setMenu] = useState(false);
     style: CSSStyleDeclaration;
   }
   
-  let cursor: CursorElement | null = document.querySelector('.cursor');
-  let cursor2: CursorElement | null = document.querySelector('.cursor2');
+  const cursor: CursorElement | null = document.querySelector('.cursor');
+  const cursor2: CursorElement | null = document.querySelector('.cursor2');
   
   document.addEventListener('mousemove', function(e: MouseEvent) {
     if (cursor && cursor2 ) {
@@ -68,6 +72,8 @@ const [menu, setMenu] = useState(false);
          <Route path="/sign-in" element={<SignInPage />} />
          <Route path="/profile/items" element={<ProfileItemListPage />} />
          <Route path="/profile/likes" element={<LikesPage />} />
+         <Route path="/chats" element={<ChatListPage />} />
+         <Route path="/chats/:itemId" element={<ChatPage />} />
          <Route path="/tasks" element={<TasksListPage />} />
          <Route path="/profile/tasks" element={<TasksListPage />} />
          <Route path="/profile/tasks/at-work" element={<TasksPageAtWork />} />

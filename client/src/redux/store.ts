@@ -4,6 +4,8 @@ import authSlice from '../features/auth/authSlice';
 import ItemsSlice from '../features/item/ItemsSlice';
 import TasksSlise from '../features/tasks/TasksSlise';
 import UsersSlise from '../features/users/UsersSlise';
+import ChatsSlice from '../features/chats/ChatsSlice';
+import MessagesSlice from '../features/chats/MessagesSlice'
 
 
 export const store = configureStore({
@@ -11,7 +13,9 @@ export const store = configureStore({
     items: ItemsSlice,
     auth: authSlice,
     tasks: TasksSlise,
-    users: UsersSlise
+    users: UsersSlise,
+    chats: ChatsSlice,
+    messages: MessagesSlice
   },
 });
 
