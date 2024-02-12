@@ -3,11 +3,12 @@
   width: 35vw;
   height: 100vh;
   top: 0px;
-  right: 10.35%;
+  right: 0%;
   z-index: 100;
   
-  background-color: rgb(214, 219, 217); 
+  background-color: rgb(215, 215, 215); 
 //   transition: all 0.8s;
+  box-shadow: 3px 3px 10px 7px rgba($color: rgb(59, 59, 59), $alpha: 1);
 }
 
 .blur {

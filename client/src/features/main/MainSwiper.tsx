@@ -28,7 +28,7 @@ const MainSwiper = ({ allImages}:{allImages:ItemImage[]}) => {
             pauseOnMouseEnter: true,    
             disableOnInteraction: false, 
         }} 
-      speed={3000}
+      speed={7000}
     >
       {allImages.map((image:ItemImage) => (
         <SwiperSlide key={image.id}>

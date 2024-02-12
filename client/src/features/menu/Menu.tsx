@@ -68,7 +68,7 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
           </>
         </ul>
       </div>
-      <div className="blur" />
+      <div className="blur" onClick={()=> {setMenu(!menu)}}/>
     </div>
   );
 }
