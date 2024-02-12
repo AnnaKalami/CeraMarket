@@ -1,6 +1,19 @@
 const router = require('express').Router();
 const { Item, ItemGallery, ItemImage } = require('../../db/models');
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img');
+  },
+  filename: function (req, file, cb) {
+    const millDate = new Date().getMilliseconds();
+    const uniqueFilename = `${millDate}-${file.originalname}`;
+    cb(null, uniqueFilename);
+  },
+});
+const upload = multer({ storage });
+
 router.get('/', async (req, res) => {
     try {
       const items = await Item.findAll({
@@ -15,13 +28,24 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/', upload.any('img'), async (req, res) => {
     try {
       const {description, price } = req.body;
+      
+      // const newFileUrl = `/img/${req.files.originalname}`;
       //тут создание галлереии и картинки
+      // console.log(res.locals.user.isMaster);
       if(res.locals.user.isMaster) {
-        const item = await Item.create({description,price,user_id:res.locals.user.id,});
+        const item = await Item.create({description,price,user_id:res.locals.user.id,})
+        
       const createGallery = await ItemGallery.create({item_id:item.id})
+
+      // const millDate = new Date().getMilliseconds();
+      // let newImage
+    //  await req.files.map(async (img) =>   await ItemImage.create({path:`/img/${img.filename}`,itemGallery_id:createGallery.id}))
+    await Promise.all(req.files.map(async (img) => {
+      await ItemImage.create({ path: `/img/${img.filename}`, itemGallery_id: createGallery.id });
+    }));
       const newItem = await Item.findOne({where: { user_id:res.locals.user.id,id:item.id }, include: {
         model: ItemGallery,
         include: ItemImage
