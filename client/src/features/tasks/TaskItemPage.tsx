@@ -2,13 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import './styles/tasks.scss';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { type RootState, useAppDispatch } from '../../redux/store';
 import FormTaskAddAnswer from './FormTaskAddAnswer';
 import { addMasterInTask } from './TasksSlise';
 
-const TaskItemPage = (): JSX.Element => {
-  const { taskId } = useParams();
-  const tasks = useSelector((store: RootState) => store.tasks.tasks);
+const ChatPage = (): JSX.Element => {
+  const { chatId } = useParams();
+  const messages = useSelector((store: RootState) => store.tasks.tasks);
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.auth);
   const currentTask = taskId && tasks.find((task) => task.id === +taskId);
@@ -56,4 +56,4 @@ const TaskItemPage = (): JSX.Element => {
   );
 };
 
-export default TaskItemPage;
+export default ChatPage;

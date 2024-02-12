@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
           this.hasMany(TaskAnswer, {foreignKey: 'user_id'}),
           this.hasMany(Task, {foreignKey: 'user_id'}),
           this.hasMany(ChatMessage, {foreignKey: 'user_id'}),
-          this.hasMany(Chat, {foreignKey: 'user_id'})
+          this.hasMany(Chat, {foreignKey: 'sender_id'})
           this.hasMany(TaskAtWork, {foreignKey: 'user_id'})
     }
   }

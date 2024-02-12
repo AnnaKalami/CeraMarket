@@ -46,6 +46,13 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
                 LogOut
               </NavLink>
             </li>
+            <li
+            className="nav__item"
+            >
+              <NavLink className="nav__item nav__link" to="/chats">
+              ✉️
+              </NavLink>
+            </li>
             <li className="nav__item nav__item--right">
               <div className='userDiv'>
                 <button

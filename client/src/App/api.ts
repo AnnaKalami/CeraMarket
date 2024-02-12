@@ -3,6 +3,7 @@
 import type { Like, User, UserSignIn, UserSignUp, likeId, userId } from '../features/auth/types';
 import { ItemId, type Item, ItemWithOutId, ItemWithOutIncludes } from "../features/item/types";
 import { Answer, AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
+import {type Chat, type Message} from '../features/chats/types'
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
   const res = await fetch('/api/items');
@@ -212,3 +213,21 @@ export const fetchAddTaskWork = async (taskId:TaskId): Promise<Task> => {
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
 };
+
+export const fetchLoadChats = async (): Promise<Chat[]> => {
+  const res = await fetch('/api/chats');
+
+  
+  const data: { chats: Chat[] } = (await res.json()) as { chats: Chat[] };  
+  console.log(data);
+  return data.chats;
+}
+
+export const fetchLoadMessages = async (): Promise<Message[]> => {
+  const res = await fetch('/api/chats/messages');
+
+  
+  const data: { messages: Message[] } = (await res.json()) as { messages: Message[] };  
+  console.log(data);
+  return data.messages;
+}
