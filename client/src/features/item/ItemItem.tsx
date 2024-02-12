@@ -10,6 +10,7 @@ import { disLike, like } from '../auth/authSlice';
 const ItemItem = ({ item }: { item: Item }): JSX.Element => {
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.auth);
+  
     const itemLike = user?.Likes.filter((like)=> like.item_id===item.id)
   return (
     <div className="item-page__item">

@@ -10,7 +10,7 @@ const initialState: ItemsState = {
   };
 
   export const loadItems = createAsyncThunk('items/load', ()=> fetchLoadItems())
-  export const addItem = createAsyncThunk('items/add', (item: ItemWithOutId) => fetchAddItem(item));
+  export const addItem = createAsyncThunk('items/add', (formData) => fetchAddItem(formData));
   export const removeItem = createAsyncThunk('items/remove', (itemId:ItemId)=> fetchRemoveItem(itemId))
   export const updateItem = createAsyncThunk('items/update', (item: ItemWithOutIncludes) => fetchUpdateItem(item));
   

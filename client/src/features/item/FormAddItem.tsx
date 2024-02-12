@@ -12,46 +12,66 @@ interface FormAddItemProps {
 const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
+  const [images, setImages] = useState<FileList | null>(null); // Состояние для отслеживания выбранных файлов
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
 
   const [position, setPosition] = useState({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: React.MouseEvent<HTMLFormElement, MouseEvent>) => {
     const startX = e.pageX - position.x;
     const startY = e.pageY - position.y;
-  
-    const handleMouseMove = (e) => {
+
+    const handleMouseMove = (e: MouseEvent) => {
       setPosition({
         x: e.pageX - startX,
         y: e.pageY - startY,
       });
     };
-  
+
     const handleMouseUp = () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseup', handleMouseUp);
     };
-  
+
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseup', handleMouseUp);
   };
-  
+
   const modalStyle = {
     position: 'absolute',
     top: position.y + 'px',
     left: position.x + 'px',
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setImages(files);
+    }
+  };
+
   return (
-    <form style={modalStyle} onMouseDown={handleMouseDown}
+    <form
+      style={modalStyle}
+      onMouseDown={handleMouseDown}
       className="form-add"
       onSubmit={(e) => {
-        if (user?.id){
+        if (user?.id) {
           e.preventDefault();
-          dispatch(addItem({  description, price })).catch(console.log);
-          setDescription('')
-          setPrice(0)
+          const formData = new FormData();
+          formData.append('description', description);
+          formData.append('price', String(price));
+          if (images) {
+            Array.from(images).forEach((image) => {
+              formData.append('images', image);
+            });
+          }
+          dispatch(addItem(formData)).catch(console.log)
+          
+          setDescription('');
+          setPrice(0);
+          setImages(null);
           setAddPage(false);
         }
       }}
@@ -70,17 +90,28 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         <input
           className="form-add__input"
           value={price}
-          onChange={(e) => { const inputValue = +e.target.value;
+          onChange={(e) => {
+            const inputValue = +e.target.value;
             if (inputValue >= 0) {
               setPrice(inputValue);
-            }}}
+            }
+          }}
           type="number"
+        />
+      </label>
+      <label className="form-add__label">
+        Images
+        <input
+          className="form-add__input"
+          onChange={(e) => handleFileChange(e)}
+          type="file"
+          multiple
         />
       </label>
       <button className="form-add__submit" type="submit">
         Добавить Штуку Дрюку
       </button>
-      <button className="form-add__close" onClick={()=> setAddPage(false)}>
+      <button className="form-add__close" onClick={() => setAddPage(false)}>
         Закрыть окно(можно потом крестик нарисовать)
       </button>
     </form>
