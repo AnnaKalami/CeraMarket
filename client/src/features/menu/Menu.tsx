@@ -8,10 +8,7 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
   const user = useSelector((store: RootState) => store.auth.auth);
   const navigate = useNavigate()
   const header = 'Крутая менюшка';
-  const items = [
-    { href: '/', value: 'блабла' },
-    { href: '/', value: 'блабла' },
-  ];
+
 
 
   return (

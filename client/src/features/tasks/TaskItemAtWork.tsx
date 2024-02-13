@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import type { Task } from './types';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import { addTaskWork, removeTask } from './TasksSlise';
+import { addTaskWork} from './TasksSlise';
 
 const TaskItemAtWork = ({ task }: { task: Task }): JSX.Element => {
   

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React  from 'react';
 import './styles/tasks.scss';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
