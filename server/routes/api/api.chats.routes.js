@@ -1,9 +1,17 @@
 const router = require('express').Router();
-const { Chat, ChatMessage } = require('../../db/models');
+const { Chat, ChatMessage, User } = require('../../db/models');
 
 router.get('/', async (req, res) => {
     try {
-      const chats = await Chat.findAll();
+      let chats = await Chat.findAll({raw: true});
+      // let users []
+      //  chats.map(async(el) => {
+      //   const user = await User.findOne({where: {id: el.receiver_id}, raw: true});
+      //   // console.log(user);
+
+      //   // return{... el, receiver: user}
+      //   // chats[i].receiver_id = user.name
+      // } )
       console.log(chats);
       res.json({ chats });
     } catch ({ message }) {
@@ -21,9 +29,17 @@ router.get('/', async (req, res) => {
     }
   });
 
+  router.post('/createChat', async (req, res) => {
+    const {senderId, receiverId} = req.body;
+    try {
+      const chat = await Chat.create({
+        sender_id: senderId, receiver_id: receiverId
+    });
+      console.log(chat, 'NEWCHAT');
+      res.json(chat);
+    } catch ({ message }) {
+      res.json({ type: 'createChat router error', message});
+    }
+  });
+
   module.exports = router;
-
-
-  // {
-  //   attributes: { exclude: ['user_id'] }
-  // }

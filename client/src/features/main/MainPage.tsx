@@ -8,7 +8,6 @@ import ItemItem from '../item/ItemItem';
 const MainPage = (): JSX.Element => {
   const [priceSort, setPriceSort] = useState(0)
   const [tag,setTag] = useState('')
-  console.log(priceSort);
   
   const allItems = useSelector((store: RootState) => store.items.items)
   const allImages = [...allItems].map((item)=> item.ItemGallery.ItemImages).flat()

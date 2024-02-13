@@ -28,8 +28,8 @@ export type UserSignIn = Omit<User, 'id' | 'img' | 'name' |'Likes' |'rpassword' 
 
 export type UserSignUp = Omit<User, 'id'|'Likes'| 'isAdmin'> & { rpassword: string };
 
-export type userId = User['id']
+export type UserId = User['id']
 
-export type likeId = Like['id']
+export type LikeId = Like['id']
 
 export type UserWithOutId = Omit<User, 'id'>;
