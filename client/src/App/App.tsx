@@ -5,7 +5,7 @@ import NavBar from '../features/navbar/NavBar';
 import './App.css';
 
 
-import { Route, Routes } from 'react-router-dom';
+
 import {  useAppDispatch } from '../redux/store';
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';

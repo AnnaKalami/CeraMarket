@@ -7,10 +7,11 @@ import FormTaskAddAnswer from './FormTaskAddAnswer';
 import { addMasterInTask } from './TasksSlise';
 
 const ChatPage = (): JSX.Element => {
-  const { chatId } = useParams();
-  const messages = useSelector((store: RootState) => store.tasks.tasks);
+  
+  const tasks = useSelector((store: RootState) => store.tasks.tasks);
   const dispatch = useAppDispatch();
   const user = useSelector((store: RootState) => store.auth.auth);
+  const {taskId} = useParams()
   const currentTask = taskId && tasks.find((task) => task.id === +taskId);
   
   const users = useSelector((store: RootState) => store.users.users);
