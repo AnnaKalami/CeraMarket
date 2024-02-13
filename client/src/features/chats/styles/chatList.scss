@@ -1,0 +1,58 @@
+.chat-list-container {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+  
+    .chat-list-header {
+      background-color: #4267B2; /* Цвет Facebook */
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      h2 {
+        margin: 0;
+      }
+  
+      button {
+        background-color: #4267B2; /* Цвет Facebook */
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+    }
+  
+    .chat-list {
+      list-style-type: none;
+      padding: 0;
+  
+      .chat-item {
+        display: flex;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+  
+        .chat-avatar {
+          width: 40px;
+          height: 40px;
+          background-color: #ccc;
+          border-radius: 50%;
+          margin-right: 10px;
+        }
+  
+        .chat-details {
+          h3 {
+            margin: 0;
+          }
+  
+          p {
+            margin: 5px 0 0;
+            color: #555;
+          }
+        }
+      }
+    }
+  }
+  
