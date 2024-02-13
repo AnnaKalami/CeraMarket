@@ -94,3 +94,10 @@
 .content:hover ~ .cursor2{
   opacity: 0;
 } */
+
+/**/
+.selected-image{
+  background-color: rgba(165, 165, 165, 0.856);
+  z-index: 200 !important;
+  filter: blur(3px);
+}

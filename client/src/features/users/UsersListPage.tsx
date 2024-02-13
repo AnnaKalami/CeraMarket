@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { type RootState } from '../../redux/store';
 import 'swiper/css'
 import 'swiper/css/autoplay'
-import ItemItem from '../item/ItemItem';
 import UserItem from './UserItem';
 const UsersListPage = (): JSX.Element => {
     

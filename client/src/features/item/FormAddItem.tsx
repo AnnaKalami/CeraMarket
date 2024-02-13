@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { addItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
@@ -38,7 +38,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
     window.addEventListener('mouseup', handleMouseUp);
   };
 
-  const modalStyle = {
+  const modalStyle: CSSProperties = {
     position: 'absolute',
     top: position.y + 'px',
     left: position.x + 'px',

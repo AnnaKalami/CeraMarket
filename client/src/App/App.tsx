@@ -4,10 +4,12 @@ import { useSelector } from 'react-redux';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
+
 import { type RootState, useAppDispatch } from '../redux/store';
+
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
-// import type { User } from '../features/auth/types';
+
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 import Menu from '../features/menu/Menu';
@@ -41,6 +43,7 @@ function App(): JSX.Element {
     dispatch(loadTasks()).catch(console.log);
     dispatch(loadChats()).catch(console.log);
     dispatch(loadMessages()).catch(console.log);
+
     setTimeout(() => dispatch(stopLoading()), 2000);
 
     //раскоменти чтобы включить курсор
@@ -59,6 +62,7 @@ function App(): JSX.Element {
       }
     });
   }, []);
+
 
   //два дива внизу тоже часть курсора  (cursor, cursor2)
 

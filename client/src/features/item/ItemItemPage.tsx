@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import './styles/items.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { type RootState, useAppDispatch } from '../../redux/store';
+
 import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
@@ -14,6 +16,7 @@ function ItemItemPage(): JSX.Element {
   const [addPage, setAddPage] = useState(false);
   const user = useSelector((store: RootState) => store.auth.auth);
   const currentItem = itemId && items.find((item) => item.id === +itemId);
+
   const users = useSelector((store: RootState) => store.users.users);
   const chats = useSelector((store: RootState) => store.chats.chats);
   const navigate = useNavigate();
@@ -59,6 +62,7 @@ function ItemItemPage(): JSX.Element {
           )}
         </>
       )}
+
       {addPage && <FormUpdateItem setAddPage={setAddPage} />}
 
       <div className="hero-item-page__item">
@@ -88,6 +92,25 @@ function ItemItemPage(): JSX.Element {
         })}
       </div>
     </>
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+<!--     <div className="hero-item-page__item">
+      <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
+      <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
+      <button className='button' onClick={()=> {
+        // if (currentArr>0) {
+        //   Navigat(/chats/${currentArr.id})
+        // } else {
+        //   (fetch)
+        // }
+      }}>Написать чёрту</button>
+      
+      {currentItem.ItemGallery.ItemImages.map((image)=> {
+        return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
+      })}
+    </div>
+     
+      </> -->
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   ) : (
     <h1>Такого товара еще нет</h1>
   );
