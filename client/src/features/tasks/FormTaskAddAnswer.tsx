@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import { addTaskAnswer, loadTasks } from './TasksSlise';
+import { addTaskAnswer } from './TasksSlise';
 import { useParams } from 'react-router-dom';
 import './styles/tasks.scss';
 

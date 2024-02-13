@@ -1,9 +1,11 @@
 
 /* eslint-disable import/prefer-default-export */
 import type { Like, User, UserSignIn, UserSignUp, likeId, userId } from '../features/auth/types';
+
 import { ItemId, type Item, ItemWithOutId, ItemWithOutIncludes } from "../features/item/types";
 import { Answer, AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
 import {type Chat, type Message} from '../features/chats/types'
+
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
   const res = await fetch('/api/items');
@@ -11,7 +13,7 @@ export const fetchLoadItems = async (): Promise<Item[]> => {
   return data.items;
 }
 
-export const fetchAddItem = async (formData): Promise<Item> => {
+export const fetchAddItem = async (formData:FormData): Promise<Item> => {
   const res = await fetch('/api/items', {
     method: 'POST',
     // headers: {
@@ -23,15 +25,15 @@ export const fetchAddItem = async (formData): Promise<Item> => {
   return data.item;
 };
 
-export const fetchUpdateItem = async (item: ItemWithOutIncludes): Promise<Item> => {
-  const res = await fetch(`/api/items/${item.id}`, {
+export const fetchUpdateItem = async (formData:FormData): Promise<Item> => {
+  const itemId = formData.get('itemId')
+  const res = await fetch(`/api/items/${itemId}`, {
     method: 'PUT',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(item),
+    body: formData,
   });
   const data: { item: Item } = (await res.json()) as { item: Item };
+  console.log(data);
+  
   return data.item;
 };
 

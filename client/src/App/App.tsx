@@ -3,10 +3,13 @@ import { Route, Routes } from 'react-router-dom';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
-import {useAppDispatch } from '../redux/store';
+
+
+import { Route, Routes } from 'react-router-dom';
+import {  useAppDispatch } from '../redux/store';
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
-// import type { User } from '../features/auth/types';
+
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 import Menu from '../features/menu/Menu';
@@ -40,7 +43,8 @@ const [menu, setMenu] = useState(false);
     dispatch(loadMessages()).catch(console.log);
     setTimeout(() => dispatch(stopLoading()), 2000)
   
-  
+    
+
   //раскоменти чтобы включить курсор
   
   interface CursorElement extends HTMLElement {
@@ -49,15 +53,15 @@ const [menu, setMenu] = useState(false);
   
   const cursor: CursorElement | null = document.querySelector('.cursor');
   const cursor2: CursorElement | null = document.querySelector('.cursor2');
+
   
-  document.addEventListener('mousemove', function(e: MouseEvent) {
-    if (cursor && cursor2 ) {
+    document.addEventListener('mousemove', function(e: MouseEvent) {
+      if (cursor && cursor2 ) {
       cursor.style.left = cursor2.style.left= e.clientX + 'px';
       cursor.style.top = cursor2.style.top = e.clientY + 'px';
     }
   });
 }, [])
-
   //два дива внизу тоже часть курсора  (cursor, cursor2)
 
   return (

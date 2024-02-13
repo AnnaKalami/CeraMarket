@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
   router.post('/', upload.any('img'), async (req, res) => {
     try {
       const {description, price } = req.body;
-      
+      console.log(req.files);
       // const newFileUrl = `/img/${req.files.originalname}`;
       //тут создание галлереии и картинки
       // console.log(res.locals.user.isMaster);
@@ -57,14 +57,29 @@ router.get('/', async (req, res) => {
     }
   });
   
-  router.put('/:itemId', async (req, res) => {
+  router.put('/:itemId',upload.any('img'), async (req, res) => {
     try {
-      const {itemId}= req.params
-      const {description, price } = req.body;
+      // const {itemId}= req.params
+      // console.log(req.body);
+      // console.log(req.files);
+      const {description, price, itemId, imgIds } = req.body;
       //тут создание галлереии и картинки
       const [result] = await Item.update(
         {description, price},{where:{user_id:res.locals.user.id, id:itemId}});
         if (result>0){
+          const currentGallery = await ItemGallery.findOne({where: {item_id:itemId}})
+
+          await Promise.all(req.files.map(async (img) => {
+            await ItemImage.create({ path: `/img/${img.filename}`, itemGallery_id: currentGallery.id });
+          }))
+          if (Array.isArray(imgIds)&&imgIds) {
+            await Promise.all(imgIds.map(async (imgId) => {
+              await ItemImage.destroy({ where: { id: +imgId, itemGallery_id: currentGallery.id } });
+            }));
+          } else if (!Array.isArray(imgIds)&&imgIds) {
+            await ItemImage.destroy({ where: { id: +imgIds, itemGallery_id: currentGallery.id } });
+          }
+
           const newItem = await Item.findOne({where: { user_id:res.locals.user.id,id:itemId }, include: {
             model: ItemGallery,
             include: ItemImage

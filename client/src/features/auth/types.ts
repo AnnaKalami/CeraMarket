@@ -26,7 +26,7 @@ export type AuthState = {
 
 export type UserSignIn = Omit<User, 'id' | 'img' | 'name' |'Likes' |'rpassword' | 'isMaster'| 'isAdmin'>;
 
-export type UserSignUp = Omit<User, 'id'|'Likes'> & { rpassword: string };
+export type UserSignUp = Omit<User, 'id'|'Likes'| 'isAdmin'> & { rpassword: string };
 
 export type userId = User['id']
 

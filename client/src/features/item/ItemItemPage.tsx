@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import './styles/items.scss';
-import { Navigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from '../../redux/store';
+import { RootState } from '../../redux/store';
 import FormUpdateItem from './FormUpdateItem';
 
 const ItemItemPage = (): JSX.Element => {
@@ -12,12 +12,7 @@ const ItemItemPage = (): JSX.Element => {
   const [addPage, setAddPage] = useState(false)
   const user = useSelector((store: RootState) => store.auth.auth);
   const currentItem = itemId && items.find((item) => item.id === +itemId);
-  const users = useSelector((store: RootState) => store.users.users);
-  let currentUser
-  if (currentItem) {
-    [currentUser] = [...users].filter((user)=> currentItem.user_id===user.id)
-  }
-  const currentArr = [].find((el)=> (el.user_id===user.id&&resiver_id===currentUser.id)||(el.user_id===currentUser.id&&resiver_id===user.id))
+  // const users = useSelector((store: RootState) => store.users.users);
   return currentItem ? (
     <>
     {user&&user.id===currentItem.user_id&&(
@@ -39,7 +34,6 @@ const ItemItemPage = (): JSX.Element => {
     <div className="hero-item-page__item">
       <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
       <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
-      <h4>Эту хрень сделал {currentUser?.name}
       <button className='button' onClick={()=> {
         // if (currentArr>0) {
         //   Navigat(/chats/${currentArr.id})
@@ -47,7 +41,7 @@ const ItemItemPage = (): JSX.Element => {
         //   (fetch)
         // }
       }}>Написать чёрту</button>
-      </h4>
+      
       {currentItem.ItemGallery.ItemImages.map((image)=> {
         return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
       })}

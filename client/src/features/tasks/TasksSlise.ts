@@ -7,7 +7,7 @@ import { userId } from '../auth/types';
 const initialState: TasksState = {
     tasks: [],
     error: undefined,
-    // loading: true,
+    loading: true,
   };
 
   export const loadTasks = createAsyncThunk('tasks/load', ()=> fetchLoadTasks())
@@ -21,18 +21,18 @@ const tasksSlice = createSlice({
     name: 'tasks',
     initialState,
     reducers: {
-        // stopLoading: (state) => {
-        //     state.loading = true;
-        //   },
+        stopLoading: (state) => {
+            state.loading = true;
+          },
     },
     extraReducers: (builder)=> {
         builder
         .addCase(loadTasks.fulfilled, (state,action) => {
             state.tasks = action.payload
         })
-        // .addCase(loadTasks.pending, (state) => {
-        //     state.loading = true;
-        //   })
+        .addCase(loadTasks.pending, (state) => {
+            state.loading = false;
+          })
         .addCase(loadTasks.rejected, (state, action) => {
             state.error = action.error.message;
         })
