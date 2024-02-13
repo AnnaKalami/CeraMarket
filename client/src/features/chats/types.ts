@@ -10,6 +10,8 @@ export type Chat = {
     // loading: boolean
   }
 
+  export type CurrentChat = Chat | undefined
+
   export type Message = {
     id:number
     user_id:number

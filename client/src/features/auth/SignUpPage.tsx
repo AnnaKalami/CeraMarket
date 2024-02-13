@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../redux/store';
 import { signUp } from './authSlice';
 import './styles/auth.scss';
+import { loadUsers } from '../users/UsersSlise';
 
 
 function SignUpPage(): JSX.Element {
@@ -22,6 +23,7 @@ function SignUpPage(): JSX.Element {
           e.preventDefault();
           dispatch(signUp({ name, email, password, rpassword, img, isMaster })).catch(console.log);
           navigate('/')
+          
         }}
       >
         <input
