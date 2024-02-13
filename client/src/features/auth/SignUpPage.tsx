@@ -1,163 +1,121 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../redux/store';
-import { signUp } from './authSlice';
+import { useSelector } from 'react-redux';
+import {
+  setEmailError,
+  setPasswordErrorLength,
+  setPasswordMatchError,
+  signUp,
+  validateEmailFormat,
+  validatePassword,
+  validatePasswordsMatch,
+} from './authSlice';
 import './styles/auth.scss';
+import { type RootState, useAppDispatch } from '../../redux/store';
 
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
-  const [nameDirty, setNameDirty] = useState(false);
   const [email, setEmail] = useState('');
-  const [emailDirty, setEmailDirty] = useState(false);
   const [password, setPasssword] = useState('');
-  const [passwordDirty, setPasswordDirty] = useState(false);
   const [rpassword, setRpassword] = useState('');
-  // const [rpasswordDirty, setRpasswordDirty] = useState(false);
-  const [nameError, setNameError] = useState('Поле имя не может быть пустым');
-  const [emailError, setEmailError] = useState('Поле почты обязательно');
-  const [passwordError, setPasswordError] = useState('Пароль не может быть пустым');
-  const [rpasswordError, setRpasswordError] = useState('Пароли не совпадают');
-  const [img, setImg] = useState('');
+  const [img, setImg] = useState<FileList | null>(null);
   const [isMaster, setIsMaster] = useState(false);
-  const [formValid, setFormValid] = useState(false);
+
+  const error = useSelector((store: RootState) => store.auth.error);
+  const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (nameError || emailError || passwordError) {
-      setFormValid(false);
-    } else {
-      setFormValid(true);
-    }
-  }, [nameError, emailError, passwordError]);
-
-  const nameHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
-    setName(e.target.value);
-    if (e.target.value[0] === e.target.value[0].toLowerCase()) {
-      setNameError('Имя должно начинаться с заглавной буквы');
-    } else {
-      setNameError('');
-    }
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPasssword(newPassword);
+    const passwordErrorNew = validatePassword(newPassword);
+    dispatch(setPasswordErrorLength(passwordErrorNew));
   };
 
-  const emailHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
-    setEmail(e.target.value);
-    const regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (!regex.test(String(e.target.value).toLowerCase())) {
-      setEmailError('некорректный емейл');
-    } else {
-      setEmailError('');
-    }
+  const handleConfirmPasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newRpassword = e.target.value;
+    setRpassword(newRpassword);
+    const passwordsMatchError = validatePasswordsMatch(password, newRpassword);
+    setPasswordMatchError(passwordsMatchError);
   };
 
-  const passwordHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
-    setPassword(e.target.value);
-    if (e.target.value.length < 4) {
-      setPasswordError('Пароль не может быть короче 4 символов');
-      if (!e.target.value) {
-        setPasswordError('Пароль не может быть пустым');
-      }
-    } else {
-      setPasswordError('');
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    const emailError = validateEmailFormat(newEmail);
+    dispatch(setEmailError(emailError));
+  };
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setImg(files);
     }
   };
-
-  const blurHandler: React.FormEventHandler<HTMLFormElement> = (e): void => {
-    switch (e.target.name) {
-      case 'name':
-        setNameDirty(true);
-        break;
-      case 'email':
-        setEmailDirty(true);
-        break;
-      case 'password':
-        setPasswordDirty(true);
-        break;
-      default:
-        break;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData();
+    console.log(formData);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    formData.append('rpassword', rpassword);
+    if (img) {
+      Array.from(img).forEach((image) => {
+        formData.append('img', image);
+      });
     }
+    formData.append('isMaster', isMaster);
+    console.log(formData);
+    dispatch(signUp(formData)).catch(console.log);
   };
 
   return (
-    <div>
+    <div className="reg-container">
       <h1>RegPage</h1>
-      <form
-        className="reg-box"
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(signUp({ name, email, password, rpassword, img, isMaster })).catch(console.log);
-          navigate('/');
-        }}
-      >
-        {nameDirty && nameError && <div>{nameError}</div>}
+      {/* <div className="errorForm">{error && <h6>{error}</h6>}</div> */}
+      <form className="sign-up-form" onSubmit={handleSubmit}>
         <input
           name="name"
           value={name}
-          onBlur={(e) => {
-            blurHandler(e);
-          }}
           onChange={(e) => {
             setName(e.target.value);
-            nameHandler(e);
           }}
           type="text"
           placeholder="name"
         />
-        {emailDirty && emailError && <div>{emailError}</div>}
         <input
           name="email"
           value={email}
-          onBlur={(e) => {
-            blurHandler(e);
-          }}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            emailHandler(e);
-          }}
+          onChange={handleEmailChange}
           type="text"
           placeholder="email"
         />
-        {passwordDirty && passwordError && <div>{passwordError}</div>}
+
         <input
           name="password"
           value={password}
-          onBlur={(e) => {
-            blurHandler(e);
-          }}
-          onChange={(e) => {
-            setPasssword(e.target.value);
-            passwordHandler(e);
-          }}
-          type="text"
+          onChange={handlePasswordChange}
+          type="password"
           placeholder="password"
         />
+        {passwordError && (
+          <span className="errorPassword" style={{ color: 'red' }}>
+            {passwordError}
+          </span>
+        )}
         <input
           name="rpassword"
           value={rpassword}
-          onBlur={(e) => {
-            blurHandler(e);
-          }}
-          onChange={(e) => {
-            setRpassword(e.target.value);
-            rpasswordHandler(e);
-          }}
-          type="text"
+          onChange={handleConfirmPasswordChange}
+          type="password"
           placeholder="repeat password"
         />
         <input
           name="img"
-          value={img}
-          onBlur={(e) => {
-            blurHandler(e);
-          }}
           onChange={(e) => {
-            setImg(e.target.value);
+            handleFileChange(e);
           }}
-          type="text"
-          placeholder="img"
+          type="file"
         />
         <div className="checkbox-master">
           {' '}
@@ -165,13 +123,12 @@ function SignUpPage(): JSX.Element {
             name="taskStatus"
             id="taskStatus"
             type="checkbox"
+            value={isMaster}
             onChange={() => setIsMaster(true)}
           />
           Master
         </div>
-        <button disabled={!formValid} type="submit">
-          Зарегаться
-        </button>
+        <button type="submit">Зарегаться</button>
         <div className="authRedirect">
           У меня есть аккаунт
           <NavLink className="nav__link" to="/sign-in">

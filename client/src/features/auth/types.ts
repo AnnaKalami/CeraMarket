@@ -3,7 +3,6 @@ export type User = {
   name: string;
   email: string;
   password: string;
-  rpassword: string;
   img: string;
   isMaster: boolean;
   Likes: Like[] | [];
@@ -19,6 +18,13 @@ export type Like = {
 export type AuthState = {
   auth: User | undefined;
   error: string | undefined;
+  name: string;
+  password: string;
+  rpassword: string;
+  email: string;
+  nameError: string | undefined;
+  passwordError: string | undefined;
+  emailError: string | undefined;
 };
 
 export type UserSignIn = Omit<
