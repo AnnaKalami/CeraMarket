@@ -33,6 +33,7 @@ export type UserSignIn = Omit<
 >;
 
 
+
 export type UserSignUp = Omit<User, 'id'|'Likes'| 'isAdmin'> & { rpassword: string };
 
 export type UserId = User['id']

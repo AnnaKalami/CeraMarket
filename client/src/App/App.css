@@ -100,9 +100,10 @@
   background-color: rgba(165, 165, 165, 0.856);
   z-index: 200 !important;
   filter: blur(3px);
-}
 
+}
 .blur-from-comlited-task{
   background-color: #979696a8;
   
 }
+

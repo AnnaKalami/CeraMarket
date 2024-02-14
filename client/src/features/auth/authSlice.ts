@@ -3,6 +3,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { AuthState,  UserSignIn, LikeId, UserId, Like } from './types';
+
 import {
   fetchCheckUser,
   fetchSignIn,
@@ -80,7 +81,6 @@ const authSlice = createSlice({
     },
     setPasswordMatchError(state, action: PayloadAction<string | undefined>) {
       const rpassword = action.payload || '';
-      // console.log(state.password, rpassword);
       const passwordError = validatePasswordsMatch(state.password, rpassword);
       state.passwordError = passwordError;
     },
@@ -118,6 +118,7 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(like.fulfilled, (state, action) => {
+
 
         // state.auth?.Likes.push(action.payload);
 

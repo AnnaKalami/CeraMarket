@@ -10,7 +10,6 @@ import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
 import { Chat, type CurrentChat } from '../chats/types';
 
-
 function ItemItemPage(): JSX.Element {
   const { itemId } = useParams();
   const items = useSelector((store: RootState) => store.items.items);
@@ -76,6 +75,7 @@ function ItemItemPage(): JSX.Element {
         <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
         <h4>
           Эту хрень сделал {currentUser?.name}
+
           <button
               type="button"
               className="button"
@@ -83,6 +83,7 @@ function ItemItemPage(): JSX.Element {
             >
               Посмотреть все работы {currentUser?.name}
             </button>
+
           {user && (
             <button
               type="button"

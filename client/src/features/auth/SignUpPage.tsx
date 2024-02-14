@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+
+import React, { useEffect, useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import {
   setEmailError,
@@ -19,18 +21,27 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPasssword] = useState('');
+  const [password, setPassword] = useState('');
   const [rpassword, setRpassword] = useState('');
   const [img, setImg] = useState<FileList | null>(null);
   const [isMaster, setIsMaster] = useState(false);
 
-  // const error = useSelector((store: RootState) => store.auth.error);
+  const error = useSelector((store: RootState) => store.auth.error);
+  const user = useSelector((store: RootState) => store.auth.auth);
+
   const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
-    setPasssword(newPassword);
+    setPassword(newPassword);
     const passwordErrorNew = validatePassword(newPassword);
     dispatch(setPasswordErrorLength(passwordErrorNew));
   };
@@ -49,7 +60,7 @@ function SignUpPage(): JSX.Element {
     dispatch(setEmailError(emailError));
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const { files } = e.target;
     if (files) {
       setImg(files);
     }
@@ -76,7 +87,8 @@ function SignUpPage(): JSX.Element {
     <div className="reg-container">
       <h1>RegPage</h1>
 
-      {/* <div className="errorForm">{error && <h6>{error}</h6>}</div> */}
+      <div className="errorForm">{error && <h6>{error}</h6>}</div>
+
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <input
           name="name"

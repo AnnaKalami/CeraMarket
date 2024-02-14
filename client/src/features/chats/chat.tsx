@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+
 import socket from './socket';
 import './styles/chat.scss';
 import type { RootState } from '../../redux/store';
@@ -10,9 +11,9 @@ function ChatPage(): JSX.Element {
   const userId = useSelector((store: RootState) => store.auth.auth?.id);
   const AllMessages = useSelector((store: RootState) => store.messages.messages);
   const currentMessages = AllMessages.filter((el) => el.chat_id === +chatId);
-
   const [message, setMessage] = useState('');
   const messagesRef = useRef<HTMLUListElement>(null);
+
 
   useEffect(() => {
     socket.connect();
@@ -31,6 +32,8 @@ function ChatPage(): JSX.Element {
     };
   }, []);
 
+ 
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (message.trim() !== '') {
@@ -40,6 +43,7 @@ function ChatPage(): JSX.Element {
   };
 
   return (
+
     <div className="chatdiv">
       <ul id="messages" ref={messagesRef}>
         {currentMessages.map((message2) => (

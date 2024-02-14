@@ -66,8 +66,6 @@ router.post("/sign-up", upload.any("img"), async (req, res) => {
   let user;
   try {
     const { name, email, password, rpassword, isMaster } = req.body;
-    console.log(req.body, 456456);
-    console.log(req.files, 123123);
     // const newFileUrl = `/img/${req.file.originalname}`;
     let pathImg
     await Promise.all(req.files.map(async (i) => {
