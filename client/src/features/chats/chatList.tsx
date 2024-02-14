@@ -28,7 +28,7 @@ function ChatListPage(): JSX.Element {
     </div>
     <ul className="chat-list">
     {chats.map(chat => {
-                    const interlocutorId = chat.sender_id === user.id ? chat.receiver_id : chat.sender_id;
+                    const interlocutorId = chat.sender_id === user?.id ? chat.receiver_id : chat.sender_id;
                     const interlocutor = users.find(u => u.id === interlocutorId);
                     return (
                         <li className="chat-item" key={chat.id}>

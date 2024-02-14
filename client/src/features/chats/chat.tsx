@@ -12,10 +12,10 @@ import socket from './socket';
 //   });
 
 function ChatPage(): JSX.Element {
-    const {chatId} = useParams();
+    const {chatId} =  useParams() as {chatId: string};
     const userId = useSelector((store: RootState) => store.auth.auth?.id);
     const AllMessages = useSelector((store: RootState) => store.messages.messages);
-    const currentMessages = AllMessages.filter((el)=>el.chat_id === +chatId)
+    const currentMessages = AllMessages.filter((el)=>el.chat_id === +chatId )
   //  console.log(currentMessages);
    
 

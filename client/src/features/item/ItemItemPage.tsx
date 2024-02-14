@@ -8,7 +8,8 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
-import { type CurrentChat, type Chat } from '../chats/types';
+import { type CurrentChat } from '../chats/types';
+
 
 function ItemItemPage(): JSX.Element {
   const { itemId } = useParams();
@@ -41,8 +42,12 @@ function ItemItemPage(): JSX.Element {
       if (currentChat) {
         navigate(`/chats/${currentChat.id}`);
       } else {
-        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((chat)=>navigate(`/chats/${chat.payload.id}`)).catch(console.log);
+      
+        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((chat)=>{
+           navigate(`/chats/${chat.payload.id}`)
 
+        }).catch(console.log);
+  
       }
     }
   }
@@ -92,25 +97,25 @@ function ItemItemPage(): JSX.Element {
         })}
       </div>
     </>
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-<!--     <div className="hero-item-page__item">
-      <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
-      <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
-      <button className='button' onClick={()=> {
-        // if (currentArr>0) {
-        //   Navigat(/chats/${currentArr.id})
-        // } else {
-        //   (fetch)
-        // }
-      }}>Написать чёрту</button>
+
+  // <div className="hero-item-page__item">
+  //     <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
+  //     <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
+  //     <button className='button' onClick={()=> {
+  //       // if (currentArr>0) {
+  //       //   Navigat(/chats/${currentArr.id})
+  //       // } else {
+  //       //   (fetch)
+  //       // }
+  //     }}>Написать чёрту</button>
       
-      {currentItem.ItemGallery.ItemImages.map((image)=> {
-        return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
-      })}
-    </div>
+  //     {currentItem.ItemGallery.ItemImages.map((image)=> {
+  //       return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
+  //     })}
+  //   </div>
      
-      </> -->
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  //     </> 
+
   ) : (
     <h1>Такого товара еще нет</h1>
   );

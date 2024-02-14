@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {
   setEmailError,
@@ -16,7 +16,6 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 
 //import { loadUsers } from '../users/UsersSlise';
 
-
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,7 +24,7 @@ function SignUpPage(): JSX.Element {
   const [img, setImg] = useState<FileList | null>(null);
   const [isMaster, setIsMaster] = useState(false);
 
-  const error = useSelector((store: RootState) => store.auth.error);
+  // const error = useSelector((store: RootState) => store.auth.error);
   const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
 
@@ -68,7 +67,7 @@ function SignUpPage(): JSX.Element {
         formData.append('img', image);
       });
     }
-    formData.append('isMaster', isMaster);
+    formData.append('isMaster', String(isMaster));
     console.log(formData);
     dispatch(signUp(formData)).catch(console.log);
   };
@@ -79,7 +78,6 @@ function SignUpPage(): JSX.Element {
 
       {/* <div className="errorForm">{error && <h6>{error}</h6>}</div> */}
       <form className="sign-up-form" onSubmit={handleSubmit}>
-
         <input
           name="name"
           value={name}
@@ -129,7 +127,7 @@ function SignUpPage(): JSX.Element {
             name="taskStatus"
             id="taskStatus"
             type="checkbox"
-            value={isMaster}
+            value={String(isMaster)}
             onChange={() => setIsMaster(true)}
           />
           Master
