@@ -8,8 +8,7 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
-import { type CurrentChat } from '../chats/types';
-
+import { Chat, type CurrentChat } from '../chats/types';
 
 function ItemItemPage(): JSX.Element {
   const { itemId } = useParams();
@@ -43,9 +42,10 @@ function ItemItemPage(): JSX.Element {
         navigate(`/chats/${currentChat.id}`);
       } else {
       
-        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((chat)=>{
-           navigate(`/chats/${chat.payload.id}`)
-
+        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((value)=>{
+          const data = value.payload as Chat
+           navigate(`/chats/${data.id}`)
+          
         }).catch(console.log);
   
       }
@@ -75,6 +75,15 @@ function ItemItemPage(): JSX.Element {
         <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
         <h4>
           Эту хрень сделал {currentUser?.name}
+
+          <button
+              type="button"
+              className="button"
+              onClick={()=>navigate(`/items/from/${currentUser.id}`)}
+            >
+              Посмотреть все работы {currentUser?.name}
+            </button>
+
           {user && (
             <button
               type="button"

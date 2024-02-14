@@ -24,6 +24,7 @@ import ChatPage from '../features/chats/chat';
 import ChatListPage from '../features/chats/chatList';
 import { loadChats } from '../features/chats/ChatsSlice';
 import { loadMessages } from '../features/chats/MessagesSlice';
+import ItemsFromOneMasterListPage from '../features/item/ItemsFromOneMasterListPage';
 
 function App(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -62,6 +63,7 @@ function App(): JSX.Element {
     // });
   }, []);
 
+
   //два дива внизу тоже часть курсора  (cursor, cursor2)
 
   return (
@@ -84,6 +86,7 @@ function App(): JSX.Element {
           <Route path="/profile/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks/at-work" element={<TasksPageAtWork />} />
           <Route path="/tasks/:taskId" element={<TaskItemPage />} />
+          <Route path="/items/from/:masterId" element={<ItemsFromOneMasterListPage />} />
           <Route path="/items/:itemId" element={<ItemItemPage />} />
           <Route path="/users" element={<UsersListPage />} />
           <Route path="*" element={<h1>404</h1>} />

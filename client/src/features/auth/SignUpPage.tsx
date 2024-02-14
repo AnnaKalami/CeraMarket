@@ -1,5 +1,7 @@
+
 import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import {
   setEmailError,
@@ -14,6 +16,8 @@ import './styles/auth.scss';
 
 import { type RootState, useAppDispatch } from '../../redux/store';
 
+// import { loadUsers } from '../users/UsersSlise';
+
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,6 +28,7 @@ function SignUpPage(): JSX.Element {
 
   const error = useSelector((store: RootState) => store.auth.error);
   const user = useSelector((store: RootState) => store.auth.auth);
+
   const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -81,7 +86,9 @@ function SignUpPage(): JSX.Element {
   return (
     <div className="reg-container">
       <h1>RegPage</h1>
+
       <div className="errorForm">{error && <h6>{error}</h6>}</div>
+
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <input
           name="name"

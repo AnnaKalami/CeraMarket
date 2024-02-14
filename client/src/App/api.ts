@@ -3,7 +3,8 @@
 
 import type { Like, LikeId, User, UserId, UserSignIn } from '../features/auth/types';
 import type { ItemId, Item } from "../features/item/types";
-import type { AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
+import type { AnswerWithOutId, Task, TaskId } from '../features/tasks/types';
+
 import {type Chat, type Message} from '../features/chats/types'
 
 
@@ -107,7 +108,7 @@ export const fetchLike = async ({userId, itemId}:{userId: UserId, itemId:ItemId}
     body: JSON.stringify({ userId, itemId }),
   });
   const data: { like: Like } = (await res.json()) as { like: Like };
-  return data.like as Like;
+  return data.like;
 };
 
 export const fetchDisLike = async ({likeId}:{likeId:LikeId}): Promise<LikeId> => {
@@ -131,13 +132,13 @@ export const fetchLoadTasks = async (): Promise<Task[]> => {
   return data.tasks;
 };
 
-export const fetchAddTask = async (task: TaskWithOutId): Promise<Task> => {
+export const fetchAddTask = async (formData: FormData): Promise<Task> => {
   const res = await fetch('/api/tasks', {
     method: 'POST',
-    headers: {
-      'Content-type': 'application/json',
-    },
-    body: JSON.stringify(task),
+    // headers: {
+    //   'Content-type': 'application/json',
+    // },
+    body: formData,
   });
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
@@ -204,6 +205,28 @@ export const fetchAddMasterInTask = async ({userId,taskId}:{userId:UserId,taskId
 };
 export const fetchAddTaskWork = async (taskId: TaskId): Promise<Task> => {
   const res = await fetch(`/api/tasks/atWork/${taskId}`, {
+    method: 'put',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};
+export const fetchFinishedTask = async (taskId: TaskId): Promise<Task> => {
+  const res = await fetch(`/api/tasks/atWork/finished/${taskId}`, {
+    method: 'put',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
+  const data: { task: Task } = (await res.json()) as { task: Task };
+  return data.task;
+};
+export const fetchConfirmFinishedTask = async (taskId: TaskId): Promise<Task> => {
+  const res = await fetch(`/api/tasks/atWork/confirmFinished/${taskId}`, {
     method: 'put',
     headers: {
       'Content-type': 'application/json',

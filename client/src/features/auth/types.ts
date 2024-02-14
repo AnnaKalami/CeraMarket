@@ -5,7 +5,7 @@ export type User = {
   password: string;
   img: string;
   isMaster: boolean;
-  Likes: Like[] | [];
+  Likes: Like[];
   isAdmin: boolean;
 };
 
@@ -32,10 +32,13 @@ export type UserSignIn = Omit<
   'id' | 'img' | 'name' | 'Likes' | 'rpassword' | 'isMaster' | 'isAdmin'
 >;
 
-export type UserSignUp = Omit<User, 'id' | 'Likes' | 'isAdmin'> & { rpassword: string };
 
-export type UserId = User['id'];
 
-export type LikeId = Like['id'];
+export type UserSignUp = Omit<User, 'id'|'Likes'| 'isAdmin'> & { rpassword: string };
+
+export type UserId = User['id']
+
+export type LikeId = Like['id']
+
 
 export type UserWithOutId = Omit<User, 'id'>;

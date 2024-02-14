@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchAddAnswer, fetchAddMasterInTask, fetchAddTask, fetchAddTaskWork, fetchLoadTasks, fetchRemoveTask } from '../../App/api';
-import type { AnswerWithOutId, TaskId, TaskWithOutId, TasksState } from './types';
+import { fetchAddAnswer, fetchAddMasterInTask, fetchAddTask, fetchAddTaskWork, fetchConfirmFinishedTask, fetchFinishedTask, fetchLoadTasks, fetchRemoveTask } from '../../App/api';
+import type { AnswerWithOutId, TaskId,  TasksState } from './types';
 import type { UserId } from '../auth/types';
 
 
@@ -12,11 +12,13 @@ const initialState: TasksState = {
   };
 
   export const loadTasks = createAsyncThunk('tasks/load', ()=> fetchLoadTasks())
-  export const addTask = createAsyncThunk('tasks/add', (task: TaskWithOutId) => fetchAddTask(task));
+  export const addTask = createAsyncThunk('tasks/add', (formData: FormData) => fetchAddTask(formData));
   export const removeTask = createAsyncThunk('tasks/remove', (taskId:TaskId)=> fetchRemoveTask(taskId))
   export const addTaskAnswer = createAsyncThunk('tasks/addAnswer', (answer: AnswerWithOutId) => fetchAddAnswer(answer));
   export const addMasterInTask = createAsyncThunk('tasks/addMasterInTask', ({userId,taskId}:{userId:UserId,taskId:TaskId}) => fetchAddMasterInTask({userId,taskId}));
   export const addTaskWork = createAsyncThunk('tasks/addWorkTask', (taskId:TaskId) => fetchAddTaskWork(taskId));
+  export const finishedTask = createAsyncThunk('tasks/finishedTask', (taskId:TaskId) => fetchFinishedTask(taskId));
+  export const confirmFinishedTask = createAsyncThunk('tasks/confirmFinishedTask', (taskId:TaskId) => fetchConfirmFinishedTask(taskId));
   
 const tasksSlice = createSlice({
     name: 'tasks',
@@ -66,6 +68,18 @@ const tasksSlice = createSlice({
             state.tasks = state.tasks.map((task)=> task.id === action.payload.id? action.payload: task)
           })
         .addCase(addTaskWork.rejected, (state, action) => {
+            state.error = action.error.message;
+        })
+        .addCase(finishedTask.fulfilled, (state, action) => {
+            state.tasks = state.tasks.map((task)=> task.id === action.payload.id? action.payload: task)
+          })
+        .addCase(finishedTask.rejected, (state, action) => {
+            state.error = action.error.message;
+        })
+        .addCase(confirmFinishedTask.fulfilled, (state, action) => {
+            state.tasks = state.tasks.map((task)=> task.id === action.payload.id? action.payload: task)
+          })
+        .addCase(confirmFinishedTask.rejected, (state, action) => {
             state.error = action.error.message;
         })
     }
