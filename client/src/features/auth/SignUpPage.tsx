@@ -14,6 +14,7 @@ import './styles/auth.scss';
 import { type RootState, useAppDispatch } from '../../redux/store';
 
 function SignUpPage(): JSX.Element {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPasssword] = useState('');
@@ -46,7 +47,7 @@ function SignUpPage(): JSX.Element {
     dispatch(setEmailError(emailError));
   };
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
+    const { files } = e.target;
     if (files) {
       setImg(files);
     }
@@ -65,14 +66,18 @@ function SignUpPage(): JSX.Element {
       });
     }
     formData.append('isMaster', isMaster);
-    console.log(formData);
     dispatch(signUp(formData)).catch(console.log);
+    if (error) {
+      navigate('/sign-up');
+    } else {
+      navigate('/');
+    }
   };
 
   return (
     <div className="reg-container">
       <h1>RegPage</h1>
-      {/* <div className="errorForm">{error && <h6>{error}</h6>}</div> */}
+      <div className="errorForm">{error && <h6>{error}</h6>}</div>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <input
           name="name"
