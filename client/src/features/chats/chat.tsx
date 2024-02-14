@@ -1,73 +1,56 @@
-import './styles/chat.scss';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect, useRef  } from 'react';
-import { type RootState } from '../../redux/store';
 import socket from './socket';
-// import { type userId } from "../auth/types";
-
-
-// export const socket = io(URL, {
-//     autoConnect: false
-//   });
+import './styles/chat.scss';
+import type { RootState } from '../../redux/store';
 
 function ChatPage(): JSX.Element {
-    const {chatId} =  useParams() as {chatId: string};
-    const userId = useSelector((store: RootState) => store.auth.auth?.id);
-    const AllMessages = useSelector((store: RootState) => store.messages.messages);
-    const currentMessages = AllMessages.filter((el)=>el.chat_id === +chatId )
-  //  console.log(currentMessages);
-   
-
-    
-
-
-  // const [isConnected, setIsConnected] = useState(socket.connected);
-  // const [fooEvents, setFooEvents] = useState([]);
+  const { chatId } = useParams() as { chatId: string };
+  const userId = useSelector((store: RootState) => store.auth.auth?.id);
+  const AllMessages = useSelector((store: RootState) => store.messages.messages);
+  const currentMessages = AllMessages.filter((el) => el.chat_id === +chatId);
 
   const [message, setMessage] = useState('');
   const messagesRef = useRef<HTMLUListElement>(null);
-  
-
 
   useEffect(() => {
     socket.connect();
-   
 
-    socket.on('message', (msg: string)=>{console.log(msg);
-        if (messagesRef.current) {
-            const item = document.createElement('li');
-            item.textContent = msg;
-            messagesRef.current.appendChild(item);
-    // window.scrollTo(0, document.body.scrollHeight);
-        }
+    socket.on('message', (msg: string) => {
+      if (messagesRef.current) {
+        const item = document.createElement('li');
+        item.textContent = msg;
+        messagesRef.current.appendChild(item);
+      }
     });
 
     return () => {
-    
       socket.disconnect();
-    
+      console.log("Close connection");
     };
   }, []);
-
- 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (message.trim() !== '') {
       socket.emit('message', message, userId, chatId);
-      
-      
       setMessage('');
     }
   };
 
   return (
-    <div className="=chatdiv">
-      <ul id="messages" ref={messagesRef}/>
-      {currentMessages.map((message2)=>
-          <div key={message2.id}>{message2.message}</div>
-      )}
+    <div className="chatdiv">
+      <ul id="messages" ref={messagesRef}>
+        {currentMessages.map((message2) => (
+          <li
+            key={message2.id}
+            className={message2.user_id === userId ? 'currentUserMessage' : 'oppositeUserMessage'}
+          >
+            {message2.message}
+          </li>
+        ))}
+      </ul>
       <form id="form" onSubmit={handleSubmit}>
         <input
           id="input"
