@@ -4,9 +4,7 @@ import { useSelector } from 'react-redux';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
-
 import { type RootState, useAppDispatch } from '../redux/store';
-
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
 
@@ -32,6 +30,7 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(loadUsers()).catch(console.log);
   }, [user]);
+
   const [menu, setMenu] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -79,7 +78,9 @@ function App(): JSX.Element {
           <Route path="/profile/items" element={<ProfileItemListPage />} />
           <Route path="/profile/likes" element={<LikesPage />} />
           <Route path="/chats" element={<ChatListPage />} />
+
           <Route path="/chats/:chatId" element={<ChatPage />} />
+
           <Route path="/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks/at-work" element={<TasksPageAtWork />} />

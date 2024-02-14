@@ -1,10 +1,9 @@
-
 /* eslint-disable import/prefer-default-export */
+
 
 import type { Like, LikeId, User, UserId, UserSignIn, UserSignUp} from '../features/auth/types';
 import type { ItemId, Item, ItemWithOutIncludes } from "../features/item/types";
 import type { AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
-
 import {type Chat, type Message} from '../features/chats/types'
 
 
@@ -12,7 +11,7 @@ export const fetchLoadItems = async (): Promise<Item[]> => {
   const res = await fetch('/api/items');
   const data: { items: Item[] } = (await res.json()) as { items: Item[] };
   return data.items;
-}
+};
 
 export const fetchAddItem = async (formData:FormData): Promise<Item> => {
   const res = await fetch('/api/items', {
@@ -72,13 +71,11 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
   return data.user;
 };
 
-export const fetchSignUp = async (user: UserSignUp): Promise<User> => {
+export const fetchSignUp = async (formData: FormData): Promise<User> => {
+  console.log(formData);
   const res = await fetch('/api/auth/sign-up', {
     method: 'post',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(user),
+    body: formData,
   });
   if (res.status >= 400) {
     const data: { message: string } = (await res.json()) as { message: string };
@@ -99,21 +96,22 @@ export const fetchLogOut = async (): Promise<void> => {
   }
 };
 
+
 export const fetchLike = async ({userId, itemId}:{userId: UserId, itemId:ItemId}): Promise<Like> => {
+
   const res = await fetch('/api/likes', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify({userId,itemId}),
+    body: JSON.stringify({ userId, itemId }),
   });
   const data: { like: Like } = (await res.json()) as { like: Like };
-  return data.like as Like
+  return data.like as Like;
 };
 
-
-
 export const fetchDisLike = async ({likeId}:{likeId:LikeId}): Promise<LikeId> => {
+
   const res = await fetch(`/api/likes/${likeId}`, {
     method: 'DELETE',
   });
@@ -131,7 +129,7 @@ export const fetchLoadTasks = async (): Promise<Task[]> => {
   const res = await fetch('/api/tasks');
   const data: { tasks: Task[] } = (await res.json()) as { tasks: Task[] };
   return data.tasks;
-}
+};
 
 export const fetchAddTask = async (task: TaskWithOutId): Promise<Task> => {
   const res = await fetch('/api/tasks', {
@@ -144,7 +142,6 @@ export const fetchAddTask = async (task: TaskWithOutId): Promise<Task> => {
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
 };
-
 
 export const fetchRemoveTask = async (id: TaskId): Promise<TaskId> => {
   const res = await fetch(`/api/tasks/${id}`, {
@@ -168,17 +165,15 @@ export const fetchAddAnswer = async (answer: AnswerWithOutId): Promise<Task> => 
     },
     body: JSON.stringify(answer),
   });
-  
+
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
 };
 
-
 export const fetchLoadUsers = async (): Promise<User[]> => {
   const res = await fetch('/api/users');
   const data: { users: User[] } = (await res.json()) as { users: User[] };
-  return data.users
-  
+  return data.users;
 };
 export const fetchDeleteUser = async (id: UserId): Promise<UserId> => {
   const res = await fetch(`/api/users/${id}`, {
@@ -193,26 +188,28 @@ export const fetchDeleteUser = async (id: UserId): Promise<UserId> => {
   }
   return data.userId;
 };
+
 export const fetchAddMasterInTask = async ({userId,taskId}:{userId:UserId,taskId:TaskId}): Promise<Task> => {
+
   const res = await fetch('/api/tasks/atWork', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
     },
-    body: JSON.stringify({userId,taskId}),
-  })
-  
+    body: JSON.stringify({ userId, taskId }),
+  });
+
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
 };
-export const fetchAddTaskWork = async (taskId:TaskId): Promise<Task> => {
+export const fetchAddTaskWork = async (taskId: TaskId): Promise<Task> => {
   const res = await fetch(`/api/tasks/atWork/${taskId}`, {
     method: 'put',
     headers: {
       'Content-type': 'application/json',
-    }
-  })
-  
+    },
+  });
+
   const data: { task: Task } = (await res.json()) as { task: Task };
   return data.task;
 };
@@ -220,10 +217,10 @@ export const fetchAddTaskWork = async (taskId:TaskId): Promise<Task> => {
 export const fetchLoadChats = async (): Promise<Chat[]> => {
   const res = await fetch('/api/chats');
 
-  
   const data: { chats: Chat[] } = (await res.json()) as { chats: Chat[] };  
+
   return data.chats;
-}
+};
 
 export const fetchLoadMessages = async (): Promise<Message[]> => {
   const res = await fetch('/api/chats/messages');
@@ -248,3 +245,4 @@ export const fetchCreateChat = async ({senderId, receiverId}:{senderId: number, 
   return data;
   
 }
+
