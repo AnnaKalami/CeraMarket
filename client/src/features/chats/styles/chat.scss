@@ -15,8 +15,8 @@
       height: 3rem;
       box-sizing: border-box;
       backdrop-filter: blur(10px);
-      width: 70%; // Ширина формы
-      margin: 0 auto; // Центрирование формы
+      width: 70%; 
+      margin: 0 auto;
     }
   
     #input {
@@ -51,19 +51,19 @@
   
     #messages > li {
         padding: 0.5rem 1rem;
-        max-width: 70%; // Ширина сообщения
-        border-radius: 1rem; // Скругление углов сообщения
-        margin-bottom: 0.5rem; // Расстояние между сообщениями
-        word-wrap: break-word; // Перенос строки
+        max-width: 70%; 
+        border-radius: 1rem; 
+        margin-bottom: 0.5rem; 
+        word-wrap: break-word; 
       
         &.currentUserMessage {
-          background: #ced2d5; // Цвет сообщения текущего пользователя
-          align-self: flex-end; // Выравнивание справа для текущего пользователя
+          background: #ced2d5; 
+          align-self: flex-end; 
         }
       
         &.oppositeUserMessage {
-          background: #b6d7e3; // Цвет сообщения противоположного пользователя
-          align-self: flex-start; // Выравнивание слева для противоположного пользователя
+          background: #b6d7e3; 
+          align-self: flex-start;
         }
       }
       
