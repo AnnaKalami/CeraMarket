@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { fetchAddAnswer, fetchAddMasterInTask, fetchAddTask, fetchAddTaskWork, fetchLoadTasks, fetchRemoveTask } from '../../App/api';
-import { AnswerWithOutId, TaskId, TaskWithOutId, TasksState } from './types';
-import { userId } from '../auth/types';
+import type { AnswerWithOutId, TaskId, TaskWithOutId, TasksState } from './types';
+import type { UserId } from '../auth/types';
+
 
 
 const initialState: TasksState = {
@@ -14,7 +15,7 @@ const initialState: TasksState = {
   export const addTask = createAsyncThunk('tasks/add', (task: TaskWithOutId) => fetchAddTask(task));
   export const removeTask = createAsyncThunk('tasks/remove', (taskId:TaskId)=> fetchRemoveTask(taskId))
   export const addTaskAnswer = createAsyncThunk('tasks/addAnswer', (answer: AnswerWithOutId) => fetchAddAnswer(answer));
-  export const addMasterInTask = createAsyncThunk('tasks/addMasterInTask', ({userId,taskId}:{userId:userId,taskId:TaskId}) => fetchAddMasterInTask({userId,taskId}));
+  export const addMasterInTask = createAsyncThunk('tasks/addMasterInTask', ({userId,taskId}:{userId:UserId,taskId:TaskId}) => fetchAddMasterInTask({userId,taskId}));
   export const addTaskWork = createAsyncThunk('tasks/addWorkTask', (taskId:TaskId) => fetchAddTaskWork(taskId));
   
 const tasksSlice = createSlice({

@@ -1,8 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
 
-import type { Like, LikeId, User, UserId, UserSignIn, UserSignUp} from '../features/auth/types';
-import type { ItemId, Item, ItemWithOutIncludes } from "../features/item/types";
+import type { Like, LikeId, User, UserId, UserSignIn } from '../features/auth/types';
+import type { ItemId, Item } from "../features/item/types";
 import type { AnswerWithOutId, Task, TaskId, TaskWithOutId } from '../features/tasks/types';
 import {type Chat, type Message} from '../features/chats/types'
 
