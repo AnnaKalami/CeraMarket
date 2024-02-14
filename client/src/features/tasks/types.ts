@@ -7,6 +7,8 @@ export type Task = {
     TaskAnswers: Answer[]|[]
     atWork:false
     TaskAtWork: null| TaskAtWork
+    finished:boolean
+    confirmFinished:boolean
   };
   export type Answer = {
     id:number

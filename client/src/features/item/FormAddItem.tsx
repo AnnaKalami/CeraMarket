@@ -12,7 +12,7 @@ interface FormAddItemProps {
 const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
-  const [images, setImages] = useState<FileList | null>(null); // Состояние для отслеживания выбранных файлов
+  const [images, setImages] = useState<FileList | null>(null); 
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
 

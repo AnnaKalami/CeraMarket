@@ -1,6 +1,20 @@
 const router = require('express').Router();
 const { Task, TaskGallery, TaskImage, TaskAnswer, TaskAtWork } = require('../../db/models');
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/img');
+  },
+  filename: function (req, file, cb) {
+    const millDate = new Date().getMilliseconds();
+    const uniqueFilename = `${millDate}-${file.originalname}`;
+    cb(null, uniqueFilename);
+  },
+});
+const upload = multer({ storage });
+
+
 router.get('/', async (req, res) => {
     try {
       const tasks = await Task.findAll({
@@ -19,12 +33,16 @@ router.get('/', async (req, res) => {
     }
   });
 
-  router.post('/', async (req, res) => {
+  router.post('/', upload.any('img'), async (req, res) => {
     try {
       const {description, price} = req.body;
       //тут создание галлереии и картинки
-      const task = await Task.create({description,price,user_id:res.locals.user.id, atWork:false});
+      const task = await Task.create({description,price,user_id:res.locals.user.id, atWork:false, finished:false,confirmFinished:false});
       const createGallery = await TaskGallery.create({task_id:task.id})
+      await Promise.all(req.files.map(async (img) => {
+        await TaskImage.create({ path: `/img/${img.filename}`, taskGallery_id: createGallery.id });
+      }));
+
       const newTask = await Task.findOne({where: { user_id:res.locals.user.id,id:task.id }, include: [
         {
           model: TaskGallery,
@@ -84,6 +102,10 @@ router.get('/', async (req, res) => {
     }
   });
   
+
+  
+  
+  
   router.put('/atWork/:taskId', async (req, res) => {
     try {
       const {taskId} = req.params;
@@ -128,6 +150,108 @@ router.get('/', async (req, res) => {
                 res.json({task:newTask});
                 return
               }
+            }
+        }
+      }
+    } catch ({ message }) {
+      res.json({ type: 'tasks router', message });
+    }
+  });
+
+
+  router.put('/atWork/finished/:taskId', async (req, res) => {
+    try {
+      const {taskId} = req.params;
+      const task = await Task.findOne({where: {id: taskId}, include: [
+        {
+          model: TaskGallery,
+          include: TaskImage
+        },
+        TaskAnswer,
+        TaskAtWork]})
+      if (task.TaskAtWork.user_id===res.locals.user.id) {
+        if (!task.finished) {
+          const [result] = await Task.update(
+            {finished:true},{where:{id:taskId}});
+            if (result>0){
+              const newTask = await Task.findOne({where: {id:taskId }, include: [
+                {
+                  model: TaskGallery,
+                  include: TaskImage
+                },
+                TaskAnswer,
+              TaskAtWork]
+            })
+              res.json({task:newTask});
+              return
+            }
+        }
+        if (task.finished) {
+          const [result] = await Task.update(
+            {finished:false},{where:{id:taskId}});
+            if (result>0){
+                const newTask = await Task.findOne({where: {id:taskId }, include: [
+                  {
+                    model: TaskGallery,
+                    include: TaskImage
+                  },
+                  TaskAnswer,
+                TaskAtWork]
+              })
+                res.json({task:newTask});
+                return
+              
+            }
+        }
+      }
+    } catch ({ message }) {
+      res.json({ type: 'tasks router', message });
+    }
+  });
+  
+  router.put('/atWork/confirmFinished/:taskId', async (req, res) => {
+    try {
+      const {taskId} = req.params;
+      const task = await Task.findOne({where: {id: taskId}, include: [
+        {
+          model: TaskGallery,
+          include: TaskImage
+        },
+        TaskAnswer,
+        TaskAtWork]})
+        console.log(task.confirmFinished);
+      if (task.user_id===res.locals.user.id) {
+        if (!task.confirmFinished) {
+          const [result] = await Task.update(
+            {confirmFinished:true},{where:{id:taskId}});
+            if (result>0){
+              const newTask = await Task.findOne({where: {id:taskId }, include: [
+                {
+                  model: TaskGallery,
+                  include: TaskImage
+                },
+                TaskAnswer,
+              TaskAtWork]
+            })
+              res.json({task:newTask});
+              return
+            }
+        }
+        if (task.confirmFinished) {
+          const [result] = await Task.update(
+            {confirmFinished:false},{where:{id:taskId}});
+            if (result>0){
+                const newTask = await Task.findOne({where: {id:taskId }, include: [
+                  {
+                    model: TaskGallery,
+                    include: TaskImage
+                  },
+                  TaskAnswer,
+                TaskAtWork]
+              })
+                res.json({task:newTask});
+                return
+              
             }
         }
       }

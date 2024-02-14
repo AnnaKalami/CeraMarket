@@ -12,18 +12,36 @@ interface FormAddItemProps {
 const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
+  const [images, setImages] = useState<FileList | null>(null); 
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
   
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      setImages(files);
+    }
+  };
+
   return (
     <form
       className="form-add"
       onSubmit={(e) => {
-        if (user?.id){
+        if (user?.id) {
           e.preventDefault();
-          dispatch(addTask({  description, price })).catch(console.log);
-          setDescription('')
-          setPrice(0)
+          const formData = new FormData();
+          formData.append('description', description);
+          formData.append('price', String(price));
+          if (images) {
+            Array.from(images).forEach((image) => {
+              formData.append('images', image);
+            });
+          }
+          dispatch(addTask(formData)).catch(console.log)
+          
+          setDescription('');
+          setPrice(0);
+          setImages(null);
           setAddPage(false);
         }
       }}
@@ -47,6 +65,15 @@ const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
               setPrice(inputValue);
             }}}
           type="number"
+        />
+      </label>
+      <label className="form-add__label">
+        Images
+        <input
+          className="form-add__input"
+          onChange={(e) => handleFileChange(e)}
+          type="file"
+          multiple
         />
       </label>
       <button className="form-add__submit" type="submit">

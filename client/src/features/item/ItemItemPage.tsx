@@ -75,6 +75,13 @@ function ItemItemPage(): JSX.Element {
         <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
         <h4>
           Эту хрень сделал {currentUser?.name}
+          <button
+              type="button"
+              className="button"
+              onClick={()=>navigate(`/items/from/${currentUser.id}`)}
+            >
+              Посмотреть все работы {currentUser?.name}
+            </button>
           {user && (
             <button
               type="button"
