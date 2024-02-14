@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { Item, ItemId, ItemWithOutId, ItemWithOutIncludes, ItemsState } from './types';
+import { ItemId,  ItemsState } from './types';
 import { fetchAddItem, fetchLoadItems, fetchRemoveItem, fetchUpdateItem } from '../../App/api';
 
 
@@ -10,9 +10,9 @@ const initialState: ItemsState = {
   };
 
   export const loadItems = createAsyncThunk('items/load', ()=> fetchLoadItems())
-  export const addItem = createAsyncThunk('items/add', (formData) => fetchAddItem(formData));
+  export const addItem = createAsyncThunk('items/add', (formData:FormData) => fetchAddItem(formData));
   export const removeItem = createAsyncThunk('items/remove', (itemId:ItemId)=> fetchRemoveItem(itemId))
-  export const updateItem = createAsyncThunk('items/update', (item: ItemWithOutIncludes) => fetchUpdateItem(item));
+  export const updateItem = createAsyncThunk('items/update', (formData:FormData) => fetchUpdateItem(formData));
   
 const itemsSlice = createSlice({
     name: 'items',

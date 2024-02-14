@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { type UsersState } from "./types";
 import { fetchDeleteUser, fetchLoadUsers } from "../../App/api";
-import { type userId } from "../auth/types";
+import { type UserId } from "../auth/types";
 
 const initialState: UsersState = {
     users: [],
@@ -10,7 +10,8 @@ const initialState: UsersState = {
   };
 
 export const loadUsers = createAsyncThunk('users/load', ()=> fetchLoadUsers())
-export const deleteUser = createAsyncThunk('users/delete', (id:userId)=> fetchDeleteUser(id))
+export const deleteUser = createAsyncThunk('users/delete', (id:UserId)=> fetchDeleteUser(id))
+
 const usersSlice = createSlice({
     name: 'users',
     initialState,

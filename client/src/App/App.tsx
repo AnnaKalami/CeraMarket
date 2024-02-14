@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import MainPage from '../features/main/MainPage';
 import NavBar from '../features/navbar/NavBar';
 import './App.css';
-import { useAppDispatch } from '../redux/store';
+import { type RootState, useAppDispatch } from '../redux/store';
 import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
-// import type { User } from '../features/auth/types';
+
 import { checkUser } from '../features/auth/authSlice';
 import { loadItems, stopLoading } from '../features/item/ItemsSlice';
 import Menu from '../features/menu/Menu';
@@ -25,6 +26,11 @@ import { loadChats } from '../features/chats/ChatsSlice';
 import { loadMessages } from '../features/chats/MessagesSlice';
 
 function App(): JSX.Element {
+  const user = useSelector((store: RootState) => store.auth.auth);
+  useEffect(() => {
+    dispatch(loadUsers()).catch(console.log);
+  }, [user]);
+
   const [menu, setMenu] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -36,6 +42,7 @@ function App(): JSX.Element {
     dispatch(loadTasks()).catch(console.log);
     dispatch(loadChats()).catch(console.log);
     dispatch(loadMessages()).catch(console.log);
+
     setTimeout(() => dispatch(stopLoading()), 2000);
 
     //раскоменти чтобы включить курсор
@@ -55,6 +62,7 @@ function App(): JSX.Element {
     });
   }, []);
 
+
   //два дива внизу тоже часть курсора  (cursor, cursor2)
 
   return (
@@ -70,7 +78,9 @@ function App(): JSX.Element {
           <Route path="/profile/items" element={<ProfileItemListPage />} />
           <Route path="/profile/likes" element={<LikesPage />} />
           <Route path="/chats" element={<ChatListPage />} />
-          <Route path="/chats/:itemId" element={<ChatPage />} />
+
+          <Route path="/chats/:chatId" element={<ChatPage />} />
+
           <Route path="/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks/at-work" element={<TasksPageAtWork />} />

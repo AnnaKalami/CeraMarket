@@ -1,15 +1,14 @@
 /* eslint-disable arrow-body-style */
-import React, { useState } from 'react';
+import React  from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import load from '../../assets/Spinner-1s-200px.svg'
 import { type RootState } from '../../redux/store';
 import './styles/tasks.scss';
-import FormAddTask from './FormTaskAdd';
 import TaskItemAtWork from './TaskItemAtWork';
 
 const TasksPageAtWork = (): JSX.Element => {
-  const [addPage, setAddPage] = useState(false)
+  // const [addPage, setAddPage] = useState(false)
   
   let tasks = useSelector((store: RootState) => store.tasks.tasks);
   console.log(tasks);

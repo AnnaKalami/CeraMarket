@@ -34,13 +34,13 @@ export type TaskImage = {
   }
   export type TaskId = Task['id'];
   
-  export type TaskWithOutId = Omit<Task, 'id'|'TaskGallery'| 'user_id'| 'TaskAnswers'| 'atWork'>;
+  export type TaskWithOutId = Omit<Task, 'id'|'TaskGallery'| 'user_id'| 'TaskAnswers'| 'atWork'| 'TaskAtWork'>;
   export type AnswerWithOutId = Omit<Answer, 'id'|'TaskGallery'| 'user_id'| 'createdAt'>;
 
   
   export type TasksState = {
     tasks: Task[];
     error: string | undefined;
-    // loading: boolean;
+    loading: boolean;
   };
   

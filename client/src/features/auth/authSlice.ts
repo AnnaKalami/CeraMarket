@@ -13,6 +13,7 @@ import {
 } from '../../App/api';
 import type { ItemId } from '../item/types';
 
+
 const initialState: AuthState = {
   auth: undefined,
   error: undefined,
@@ -117,7 +118,13 @@ const authSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(like.fulfilled, (state, action) => {
+
         state.auth?.Likes.push(action.payload);
+
+         //if (state.auth && Array.isArray(state.auth.Likes)) {
+        //  (state.auth.Likes as Like[]).push(action.payload);
+    //  }
+
       })
       .addCase(like.rejected, (state, action) => {
         state.error = action.error.message;

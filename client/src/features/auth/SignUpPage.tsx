@@ -11,7 +11,11 @@ import {
   validatePasswordsMatch,
 } from './authSlice';
 import './styles/auth.scss';
+
 import { type RootState, useAppDispatch } from '../../redux/store';
+
+//import { loadUsers } from '../users/UsersSlise';
+
 
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
@@ -72,8 +76,10 @@ function SignUpPage(): JSX.Element {
   return (
     <div className="reg-container">
       <h1>RegPage</h1>
+
       {/* <div className="errorForm">{error && <h6>{error}</h6>}</div> */}
       <form className="sign-up-form" onSubmit={handleSubmit}>
+
         <input
           name="name"
           value={name}

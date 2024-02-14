@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import './styles/navbar.scss';
 
 import { NavLink, Outlet} from 'react-router-dom';
