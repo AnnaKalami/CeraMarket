@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { AuthState,  UserSignIn, LikeId, UserId } from './types';
+import type { AuthState,  UserSignIn, LikeId, UserId, Like } from './types';
 import {
   fetchCheckUser,
   fetchSignIn,
@@ -119,11 +119,11 @@ const authSlice = createSlice({
       })
       .addCase(like.fulfilled, (state, action) => {
 
-        state.auth?.Likes.push(action.payload);
+        // state.auth?.Likes.push(action.payload);
 
-         // if (state.auth && Array.isArray(state.auth.Likes)) {
-        //  (state.auth.Likes as Like[]).push(action.payload);
-    //  }
+         if (state.auth && Array.isArray(state.auth.Likes)) {
+         (state.auth.Likes as Like[]).push(action.payload);
+     }
 
       })
       .addCase(like.rejected, (state, action) => {
@@ -131,7 +131,7 @@ const authSlice = createSlice({
       })
       .addCase(disLike.fulfilled, (state, action) => {
         if (state.auth?.Likes) {
-          state.auth.Likes = state.auth?.Likes.filter((like) => like.id !== +action.payload);
+          state.auth.Likes = state.auth?.Likes.filter((likee) => likee.id !== +action.payload);
         }
       })
       .addCase(disLike.rejected, (state, action) => {

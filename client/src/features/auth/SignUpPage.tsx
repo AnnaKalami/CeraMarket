@@ -14,7 +14,7 @@ import './styles/auth.scss';
 
 import { type RootState, useAppDispatch } from '../../redux/store';
 
-//import { loadUsers } from '../users/UsersSlise';
+// import { loadUsers } from '../users/UsersSlise';
 
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');

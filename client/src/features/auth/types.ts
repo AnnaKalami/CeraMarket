@@ -5,7 +5,7 @@ export type User = {
   password: string;
   img: string;
   isMaster: boolean;
-  Likes: Like[] | [];
+  Likes: Like[];
   isAdmin: boolean;
 };
 

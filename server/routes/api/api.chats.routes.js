@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
       //   // return{... el, receiver: user}
       //   // chats[i].receiver_id = user.name
       // } )
-      console.log(chats);
+      // console.log(chats);
       res.json({ chats });
     } catch ({ message }) {
       res.json({ type: 'chats load router error', message });
@@ -34,8 +34,8 @@ router.get('/', async (req, res) => {
     try {
       const chat = await Chat.create({
         sender_id: senderId, receiver_id: receiverId
-    });
-      console.log(chat, 'NEWCHAT');
+    }); // console.log(chat, 'NEWCHAT');
+     
       res.json(chat);
     } catch ({ message }) {
       res.json({ type: 'createChat router error', message});
