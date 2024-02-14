@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import type { Task } from './types';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { useSelector } from 'react-redux';
-import { removeTask } from './TasksSlise';
+import { confirmFinishedTask, removeTask } from './TasksSlise';
 
 const TaskTask = ({ task }: { task: Task }): JSX.Element => {
   
@@ -13,7 +13,7 @@ const TaskTask = ({ task }: { task: Task }): JSX.Element => {
   
   
   return (
-    <div className="task-page__task">
+    <div  className={task.confirmFinished ? "task-page__task blur-from-comlited-task" : "task-page__task"}>
       <h2 className="task-page__task--name">{task.description}</h2>
       <h3 className="task-page__task--description">Цена: {task.price}</h3>
       {task.TaskGallery.TaskImages.length>0 &&(
@@ -21,13 +21,29 @@ const TaskTask = ({ task }: { task: Task }): JSX.Element => {
       )}
       <Link to={`/tasks/${task.id}`}>Подробнее</Link>
       {user &&(user.id===task.user_id || user.isAdmin)&& (
-          <button
-          className="task-page__btn--remove"
-          onClick={() => dispatch(removeTask(task.id))}
-          type="button"
-        >
-          Удалить
-        </button>
+          <>
+          {!task.atWork&&(
+            <button
+            className="task-page__btn--remove"
+            onClick={() => dispatch(removeTask(task.id))}
+            type="button"
+          >
+            Удалить
+          </button>
+          )}
+          {task.finished&& !task.confirmFinished&&(
+            <button
+            className="task-page__btn--remove"
+            onClick={() => dispatch(confirmFinishedTask(task.id))}
+            type="button"
+          >
+            Подтвердить выполнение
+          </button>
+          )}
+          {task.confirmFinished&& (
+            <div>Выполнение подтверждено</div>
+          )}
+          </>
         )
       }
       
