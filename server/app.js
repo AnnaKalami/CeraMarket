@@ -3,7 +3,7 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const http = require("http");
-const saveMessage = require('../server/chatsHelper')
+const saveMessage = require("../server/chatsHelper");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
@@ -19,29 +19,24 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')));7
-app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, "public")));
+7;
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  // socket.join(`${message.chat_id}`);
-  // socket.emit('message', 'Добро пожаловать!');
+  const idTmpRoom = socket.sids ? socket.sids.join("") : "999";
+  socket.join(idTmpRoom);
   socket.on("message", async (msg, userId, chatId) => {
-
-    console.log(msg);
     try {
       const savedMessage = await saveMessage(msg, userId, chatId);
-      console.log(savedMessage, 'SAVED MESSAGE app.js');
-  //   // io.to(`${message.chat_id}`).emit('message', msg)
-      // socket.emit('message', msg);
-      socket.emit('message', savedMessage);
-  } catch (error) {
-      console.error('Ошибка при обработке сообщения:', error);
-  }
+      io.to(idTmpRoom).emit("message", msg);
+    } catch (error) {
+      console.error("Ошибка при обработке сообщения:", error);
+    }
   });
 });
 
