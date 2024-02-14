@@ -79,9 +79,7 @@ function App(): JSX.Element {
           <Route path="/profile/items" element={<ProfileItemListPage />} />
           <Route path="/profile/likes" element={<LikesPage />} />
           <Route path="/chats" element={<ChatListPage />} />
-
           <Route path="/chats/:chatId" element={<ChatPage />} />
-
           <Route path="/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks" element={<TasksListPage />} />
           <Route path="/profile/tasks/at-work" element={<TasksPageAtWork />} />

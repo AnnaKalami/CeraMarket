@@ -1,7 +1,6 @@
 const { Chat, ChatMessage } = require('./db/models');
 
 async function saveMessage(message, userId, chatId) {
-console.log(chatId, 'CHAAAAAAAAAAAAAAAAT');
 
 try {       
 

@@ -1,5 +1,5 @@
+const path = require('path')
 const router = require("express").Router();
-
 
 // const apiQuestionsRouter = require('./api/api.questions.routes')
 const apiAuthRouter = require("./api/api.auth.routes");
@@ -20,10 +20,10 @@ router.use("/api/likes", apiLikesRouter);
 router.use("/api/tasks", apiTasksRouter);
 router.use("/api/answers", apiTasksAnswerRouter);
 router.use("/api/chats", apiChatsRouter);
-
-
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/dist/index.html'))
+});
 
 // router.use('api/scores', apiScoresRouter)
-
 
 module.exports = router;

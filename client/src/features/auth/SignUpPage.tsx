@@ -105,6 +105,7 @@ function SignUpPage(): JSX.Element {
           onChange={handleEmailChange}
           type="text"
           placeholder="email"
+          required
         />
 
         <input

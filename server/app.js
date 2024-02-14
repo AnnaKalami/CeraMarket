@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "public")));
-7;
+
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(verifyAccessToken);
@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту! ${process.env.NODE_ENV}`);

@@ -45,7 +45,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
             }}
             className="nav__item"
             >
-              <NavLink className="nav__item nav__link" to="/">
+              <NavLink className="nav__item nav__link" to="">
                 LogOut
               </NavLink>
             </li>
@@ -76,7 +76,7 @@ function NavBar({menu, setMenu }: {menu:boolean, setMenu:( arg: boolean )=> void
       </ul>
     
       <Outlet />
-      <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left', position: 'fixed',  bottom: 0 }}>Footer</h1>
+      <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left',  bottom: 0 }}>Footer</h1>
     </>
   );
 }

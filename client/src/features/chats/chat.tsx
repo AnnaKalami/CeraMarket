@@ -14,13 +14,15 @@ function ChatPage(): JSX.Element {
   const [message, setMessage] = useState('');
   const messagesRef = useRef<HTMLUListElement>(null);
 
-
   useEffect(() => {
     socket.connect();
 
     socket.on('message', (msg: string) => {
+      console.log(msg);
+
       if (messagesRef.current) {
         const item = document.createElement('li');
+        item.setAttribute('class', 'currentUserMessage');
         item.textContent = msg;
         messagesRef.current.appendChild(item);
       }
@@ -28,11 +30,9 @@ function ChatPage(): JSX.Element {
 
     return () => {
       socket.disconnect();
-      console.log("Close connection");
+      console.log('Close connection');
     };
   }, []);
-
- 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +43,6 @@ function ChatPage(): JSX.Element {
   };
 
   return (
-
     <div className="chatdiv">
       <ul id="messages" ref={messagesRef}>
         {currentMessages.map((message2) => (
