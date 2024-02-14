@@ -32,7 +32,7 @@ io.on("connection", (socket) => {
   socket.join(idTmpRoom);
   socket.on("message", async (msg, userId, chatId) => {
     try {
-      const savedMessage = await saveMessage(msg, userId, chatId);
+      await saveMessage(msg, userId, chatId);
       io.to(idTmpRoom).emit("message", msg);
     } catch (error) {
       console.error("Ошибка при обработке сообщения:", error);
