@@ -8,7 +8,7 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
-import { type CurrentChat } from '../chats/types';
+import { Chat, type CurrentChat } from '../chats/types';
 
 
 function ItemItemPage(): JSX.Element {
@@ -43,9 +43,10 @@ function ItemItemPage(): JSX.Element {
         navigate(`/chats/${currentChat.id}`);
       } else {
       
-        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((chat)=>{
-           navigate(`/chats/${chat.payload.id}`)
-
+        dispatch(createChat({ senderId: user.id, receiverId: currentUser.id })).then((value)=>{
+          const data = value.payload as Chat
+           navigate(`/chats/${data.id}`)
+          
         }).catch(console.log);
   
       }

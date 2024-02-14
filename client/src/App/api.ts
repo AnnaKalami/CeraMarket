@@ -107,7 +107,7 @@ export const fetchLike = async ({userId, itemId}:{userId: UserId, itemId:ItemId}
     body: JSON.stringify({ userId, itemId }),
   });
   const data: { like: Like } = (await res.json()) as { like: Like };
-  return data.like as Like;
+  return data.like;
 };
 
 export const fetchDisLike = async ({likeId}:{likeId:LikeId}): Promise<LikeId> => {
