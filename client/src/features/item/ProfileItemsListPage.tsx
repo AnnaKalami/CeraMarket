@@ -12,6 +12,8 @@ const ProfileItemListPage = (): JSX.Element => {
   const [addPage, setAddPage] = useState(false)
   const user = useSelector((store: RootState) => store.auth.auth);
   const items = useSelector((store: RootState) => store.items.items);
+  console.log(items,'items',111111111111111);
+  
   const itemFilter = [...items].filter((item)=> item.user_id===user?.id)
   
   const loading = useSelector((store: RootState) => store.items.loading);

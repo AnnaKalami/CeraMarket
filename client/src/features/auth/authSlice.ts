@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { AuthState, Like, UserSignIn, UserSignUp, likeId, userId } from './types';
+import type { AuthState, UserSignIn, LikeId, UserId } from './types';
 import {
   fetchCheckUser,
   fetchSignIn,
@@ -61,9 +61,9 @@ export const signUp = createAsyncThunk('auth/signUp', (formData: FormData) =>
 export const logOut = createAsyncThunk('auth/logOut', () => fetchLogOut());
 export const like = createAsyncThunk(
   'auth/like',
-  ({ userId, itemId }: { userId: userId; itemId: ItemId }) => fetchLike({ userId, itemId }),
+  ({ userId, itemId }: { userId: UserId; itemId: ItemId }) => fetchLike({ userId, itemId }),
 );
-export const disLike = createAsyncThunk('auth/disLike', ({ likeId }: { likeId: likeId }) =>
+export const disLike = createAsyncThunk('auth/disLike', ({ likeId }: { likeId: LikeId }) =>
   fetchDisLike({ likeId }),
 );
 
@@ -79,7 +79,6 @@ const authSlice = createSlice({
     },
     setPasswordMatchError(state, action: PayloadAction<string | undefined>) {
       const rpassword = action.payload || '';
-      // console.log(state.password, rpassword);
       const passwordError = validatePasswordsMatch(state.password, rpassword);
       state.passwordError = passwordError;
     },
@@ -118,6 +117,10 @@ const authSlice = createSlice({
       })
       .addCase(like.fulfilled, (state, action) => {
         state.auth?.Likes.push(action.payload);
+
+        // if (state.auth && Array.isArray(state.auth.Likes)) {
+        //  (state.auth.Likes as Like[]).push(action.payload);
+        //  }
       })
       .addCase(like.rejected, (state, action) => {
         state.error = action.error.message;

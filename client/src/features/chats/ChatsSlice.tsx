@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { type ChatsState } from "./types";
-import {fetchLoadChats} from "../../App/api";
+import {fetchLoadChats, fetchCreateChat} from "../../App/api";
 
 
 const initialState: ChatsState = {
@@ -10,6 +10,9 @@ const initialState: ChatsState = {
     };
 
 export const loadChats = createAsyncThunk('chats/load', ()=> fetchLoadChats())
+export const createChat = createAsyncThunk('chat/create', ({senderId,receiverId}:{senderId:number,receiverId:number})=> fetchCreateChat({senderId, receiverId}))
+
+
 
 // export const deleteUser = createAsyncThunk('users/delete', (id:userId)=> fetchDeleteUser(id))
 const chatsSlice = createSlice({
@@ -24,6 +27,12 @@ const chatsSlice = createSlice({
         .addCase(loadChats.rejected, (state, action) => {
             state.error = action.error.message;
         })  
+        .addCase(createChat.fulfilled, (state,action) => {
+            state.chats.push(action.payload)
+        }) 
+        .addCase(createChat.rejected, (state, action) => {
+            state.error = action.error.message;
+        }) 
     
         
         // .addCase(deleteUser.fulfilled, (state, action) => {
