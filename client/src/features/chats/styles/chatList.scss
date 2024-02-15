@@ -1,58 +1,72 @@
+
+.ul {
+  list-style-type: none;
+}
 .chat-list-container {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-  
-    .chat-list-header {
-      background-color: #4267B2; /* Цвет Facebook */
-      color: white;
-      padding: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  
-      h2 {
-        margin: 0;
-      }
-  
-      button {
-        background-color: #4267B2; /* Цвет Facebook */
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 999px;
-        cursor: pointer;
-      }
+  border: 1px solid #090909;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-left: 10%;
+  margin-right: 10%;
+
+  .chatListDiv {
+    width: 700px;
+    height: 50px;
+    font-size: 30px;
+    text-align: center;
+    list-style-type: none;
+    border-radius: 10px;
+    background-color: rgb(208, 218, 222);
+  }
+
+  .chat-list-header {
+    background-color: #f6f6f6; /* Цвет Facebook */
+    color: rgb(11, 11, 11);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
     }
-  
-    .chat-list {
-      list-style-type: none;
-      padding: 0;
-  
-      .chat-item {
-        display: flex;
-        padding: 10px;
-        border-bottom: 1px solid #ccc;
-  
-        .chat-avatar {
-          width: 40px;
-          height: 40px;
-          background-color: #ccc;
-          border-radius: 50%;
-          margin-right: 10px;
+
+    button {
+      background-color: #1d1d1e; /* Цвет Facebook */
+      color: rgb(23, 22, 22);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+  }
+
+  .chat-list {
+    list-style-type: none;
+    padding: 0;
+
+    .chat-item {
+      display: flex;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+
+      .chat-avatar {
+        width: 55px;
+        height: 55px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .chat-details {
+        h3 {
+          margin: 0;
         }
-  
-        .chat-details {
-          h3 {
-            margin: 0;
-          }
-  
-          p {
-            margin: 5px 0 0;
-            color: #555;
-          }
+
+        p {
+          margin: 5px 0 0;
+          color: #171717;
         }
       }
     }
   }
-  
+}
