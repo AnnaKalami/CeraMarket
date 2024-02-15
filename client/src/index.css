@@ -7,7 +7,9 @@
   height: 90vh;
 
   color-scheme: light dark;
-  color: rgba(14, 14, 14, 0.87);
+
+  color: rgba(0, 0, 0, 0.87);
+
   background-color: #242424;
 
   font-synthesis: none;
@@ -59,11 +61,11 @@ h1 {
   text-decoration: none;
   text-transform: uppercase;
   color: #131111;
-  background-color: none;
+  background-color: transparent;
   transition: all 0.3s;
   border: none;
   box-shadow: none;
-  list-style-type: none; // Убираем маркеры списка
+  list-style-type: none; 
 
   &.active {
     color: #f3af03;
@@ -86,14 +88,9 @@ h1 {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+ 
 } */
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 /* @media (prefers-color-scheme: light) {
   :root {

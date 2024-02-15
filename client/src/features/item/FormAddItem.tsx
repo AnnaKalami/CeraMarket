@@ -10,6 +10,7 @@ interface FormAddItemProps {
 }
 
 const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
   const [images, setImages] = useState<FileList | null>(null); 
@@ -60,6 +61,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         if (user?.id) {
           e.preventDefault();
           const formData = new FormData();
+          formData.append('name', name);
           formData.append('description', description);
           formData.append('price', String(price));
           if (images) {
@@ -68,7 +70,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
             });
           }
           dispatch(addItem(formData)).catch(console.log)
-          
+          setName('')
           setDescription('');
           setPrice(0);
           setImages(null);
@@ -76,6 +78,15 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         }
       }}
     >
+      <label className="form-add__label">
+        Name
+        <input
+          className="form-add__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        />
+      </label>
       <label className="form-add__label">
         Description
         <input

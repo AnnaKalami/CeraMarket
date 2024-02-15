@@ -1,42 +1,4 @@
-.form-add-answer {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid white;
-  border-radius: 20px;
-  padding: 30px;
-  width: 600px;
-  
-  margin: 0 auto;
-  margin-top: 40px;
-  box-shadow: 10px 10px 20px 3px rgba($color: black, $alpha: 1);
-  
-  &__label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    font-size: larger;
-    font-style: italic;
-  }
-  &__input {
-    padding: 10px;
-  }
-  &__submit {
-    color: rgb(110, 109, 109);
-    text-transform: uppercase;
-    &:hover {
-      border: 1px solid rgb(92, 92, 92);
-      color: rgb(41, 41, 41);
-    }
-  }
-  &__close {
-    color: rgb(201, 162, 162);
-    text-transform: uppercase;
-    &:hover {
-      border: 1px solid rgb(136, 45, 45);
-      color: rgb(184, 94, 94);
-    }
-  }
-}
+
 .task-page {
   &__container {
     display: flex;
@@ -65,10 +27,7 @@
   }
 }
 
-button:hover {
-  cursor: pointer;
-  border-color: lawngreen;
-}
+
 
 .task-task-page {
   &__task {
@@ -85,4 +44,90 @@ button:hover {
       width: 600px;
     }
   }
+}
+
+.hero-item-page__item--description {
+  overflow-y: auto; 
+  word-wrap: break-word;
+  margin-left: 100px;
+  margin-right: 100px;
+  // text-align: left;
+}
+
+.item-item-page-img {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+
+
+
+.button-all-items-master{
+  font-size: 20px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 10px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #131111;
+  transition: all 0.3s;
+  border: none;
+  box-shadow: none;
+  list-style-type: none;
+  background-color: transparent;
+  text-decoration: underline 2px solid;
+      text-underline-offset: 1mm;
+      color: #b95909;
+}
+.button-all-items-master:hover {
+  cursor: pointer;
+    color: #944300;
+}
+
+
+.form-add-answer {
+  display: flex;
+  flex-direction: column;
+  border: 4px solid rgb(252, 229, 204);
+  border-radius: 10px;
+  padding: 20px;
+  width: 700px;
+  margin: 0 auto;
+
+}
+.form-add-label-answer{
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  width: 500px;
+  
+  margin: 0 auto;
+  
+  
+  margin-bottom: 20px;
+  font-size: larger;
+  font-style: italic;
+}
+.form-add-submit{
+  font-size: 20px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 10px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #131111;
+  transition: all 0.3s;
+  border: none;
+  box-shadow: none;
+  list-style-type: none;
+  background-color: transparent;
+  text-decoration: underline 2px solid;
+      text-underline-offset: 1mm;
+      color: #b95909;
+}
+.form-add-submit:hover{
+  cursor: pointer;
+    color: #f1b584;
 }

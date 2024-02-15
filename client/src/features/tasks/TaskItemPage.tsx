@@ -24,10 +24,10 @@ const ChatPage = (): JSX.Element => {
   return currentTask ? (
     <>
     <div className="hero-item-page__item">
-      <h2 className="hero-item-page__item--name">{currentTask.description}</h2>
-      <h3 className="hero-item-page__item--description">{currentTask.price}</h3>
+      <h2 className="hero-item-page__item--description">{currentTask.description}</h2>
+      <h3 className="hero-item-page__item--price">{currentTask.price}</h3>
       {currentTask.TaskGallery.TaskImages.map((image)=> {
-        return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
+        return <img key={image.id} className="item-item-page-img" src={image.path} alt={image.path} />
       })}
       {currentTask.TaskAnswers.map((answer) => {
           const userAnswer = [...users].find((user) => user.id === answer.user_id);

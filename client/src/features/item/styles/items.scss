@@ -29,17 +29,95 @@
   top: -60px;
   z-index: 1;
 }
-.item-page__item--content {
-  position: relative;
-  margin-top: -140px;
-  padding: 10px 15px;
-  text-align: center;
-  visibility: hidden;
-  opacity: 0;
+
+
+
+
+.item-item-page {
+  &__item {
+    border: 1px solid white;
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    border-radius: 40px;
+    box-shadow: 10px 10px 20px 3px rgba($color: black, $alpha: 1);
+    &--img {
+      width: 600px;
+    }
+  }
 }
-.item-page__item:hover .item-page__item--content {
-  visibility: visible;
-  opacity: 1;
-  margin-top: -40px;
-  transition-delay: 0.3s;
+/*Саша настилил*/
+.hero-item-page__item--description {
+  overflow-y: auto; 
+  word-wrap: break-word;
+  margin-left: 100px;
+  margin-right: 100px;
+  // text-align: left;
 }
+
+.item-item-page-img {
+  width: 600px;
+  height: 600px;
+  object-fit: cover;
+  margin-top: 10px;
+}
+
+
+
+
+.button-all-items-master{
+  font-size: 20px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 10px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #131111;
+  transition: all 0.3s;
+  border: none;
+  box-shadow: none;
+  list-style-type: none;
+  background-color: transparent;
+  text-decoration: underline 2px solid;
+      text-underline-offset: 1mm;
+      color: #b95909;
+}
+.button-all-items-master:hover {
+  cursor: pointer;
+    color: #944300;
+}
+// .button-all-items-master {
+//   border-radius: 8px;
+//   border: 1px solid transparent;
+//   padding: 0.6em 1.2em;
+//   font-size: 1em;
+//   font-weight: 500;
+//   font-family: inherit;
+//   cursor: pointer;
+//   transition: border-color 0.25s;
+//   background: linear-gradient(to bottom right, #ffffff , #c29c7b );
+//   // background-size: 400% 400%;
+//   // animation: gradient 10s ease infinite;
+// }
+
+// .button-all-items-master:hover {
+//   cursor: pointer;
+//   border-color: #c77518;
+// }
+// .button-all-items-master:active {
+//   background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946 );
+// }
+// @keyframes gradient {
+//   0% {
+//     background-position: 0% 50%;
+//   }
+//   50% {
+//     background-position: 100% 50%;
+//   }
+//   100% {
+//     background-position: 0% 50%;
+//   }
+// }
