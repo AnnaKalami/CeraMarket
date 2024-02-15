@@ -1,81 +1,199 @@
 .nav__container {
-  
   display: flex;
-  justify-content: space-between; /* Размещаем элементы по краям контейнера */
-  align-items: center; /* Выравниваем элементы по вертикали */
+  justify-content: space-between;
+  align-items: center;
   list-style: none;
-  padding: 30px 20px;
+  padding: 20px 20px;
   margin: 0;
-  border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.1);
-  background-color: grey;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: rgb(255, 255, 255);
+
+  .hello {
+    color: #131212;
+    font-size: 20px;
+    font-weight: bold;
+  }
+    .logo {
+      padding: 0;
+    }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    list-style: none; // Убираем маркеры списка
+  }
+
+  .nav__link {
+    font-size: 20px;
+    padding: 10px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #131111;
+    transition: all 0.3s;
+    border: none;
+    box-shadow: none;
+    margin-left: 10px; // Отступ между навлинками
+    list-style-type: none; // Убираем маркеры списка
+
+    &.active {
+      color: #f3af03;
+      text-decoration: underline 2px solid;
+      text-underline-offset: 1mm;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color:  #f3af03;
+    }
+
+    &:first-child {
+      margin-left: 0; // Убираем отступ слева у первого элемента
+    }
+
+    // &::before {
+    //   content: '|'; // Вертикальная линия в качестве маркера
+    //   position: absolute;
+    //   left: 0;
+    // }
+  }
+
+  .arrow-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    width: 5px;
+    height: 50px;
+    padding-right: 25px;
+
+    span {
+      margin-right: 5px;
+      color: black;
+    }
+
+    &:hover {
+      color: #fafafa;
+    }
+
+    &:active {
+      color: #e9eee9;
+    }
+  }
+
+  .nav__item--right {
+    display: flex;
+    align-items: center;
+    margin-left: auto; // Перемещаем аватар и кнопку вправо
+  }
+
+  .vertical{
+    color: #131111;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px; // Отступ между аватаром и навлинками
+  }
+  .userDiv {
+    display: flex;
+    flex-direction: row;
+    }
+
+  
+
 }
 
-.hello {
-  color: rgb(19, 18, 18);
-  font-size: 20px;
-  font-weight: bolder;
-}
 
 
-.nav__link {
-  padding: 10px 25px;
-  border-radius: 10px;
-  border: 1px solid rgb(19, 18, 18);
-  text-decoration: none;
-  text-transform: uppercase;
-  color: rgb(19, 17, 17);
-  transition: all 0.3s;
-  margin: 3px;
-}
 
-.nav__link.active {
-  border-color: rgb(242, 237, 232);
-  color: rgb(244, 241, 237);
-  box-shadow: 3px 3px 5px 3px rgba($color: rgb(218, 215, 214), $alpha: 1);
-}
 
-.nav__link:hover {
-  cursor: pointer;
-  color: rgb(241, 234, 234);
-  border-color: rgb(238, 232, 232);
-  box-shadow: 3px 3px 5px 3px rgba($color: rgb(181, 176, 175), $alpha: 1);
-}
 
-.arrow-button {
-  background-color: transparent; /* Прозрачный фон */
-  // background-color: #357a38;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  width: 5px;
-  height: 50px;
-}
 
-.arrow-button span {
-  margin-right: 5px;
-  color: black; /* Добавляем цвет символа */
-}
 
-.nav__item--right {
-  flex-shrink: 0; /* Запрет на уменьшение размера */
-}
+// .nav__container {
+  
+//   display: flex;
+//   justify-content: space-between; /* Размещаем элементы по краям контейнера */
+//   align-items: center; /* Выравниваем элементы по вертикали */
+//   list-style: none;
+//   padding: 30px 20px;
+//   margin: 0;
+//   border-bottom: 1px solid rgba($color: #ffffff, $alpha: 0.1);
+//   background-color: grey;
+// }
 
-.arrow-button:hover {
-  color: #fafafa; /* Изменение цвета символа при наведении */
-}
+// .hello {
+//   color: rgb(19, 18, 18);
+//   font-size: 20px;
+//   font-weight: bolder;
+// }
 
-.arrow-button:active {
-  color: #e9eee9; /* Изменение цвета символа при активации (нажатии) */
-}
 
-.avatar {
-  width: 50px; 
-  height: 50px; 
-  border-radius: 50%; 
-  object-fit: cover; 
-}
+// .nav__link {
+//   padding: 10px 25px;
+//   border-radius: 10px;
+//   border: 1px solid rgb(19, 18, 18);
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   color: rgb(19, 17, 17);
+//   transition: all 0.3s;
+//   margin: 3px;
+// }
 
-.userDiv {
-display: flex;
-}
+// .nav__link.active {
+//   border-color: rgb(242, 237, 232);
+//   color: rgb(244, 241, 237);
+//   box-shadow: 3px 3px 5px 3px rgba($color: rgb(218, 215, 214), $alpha: 1);
+// }
+
+// .nav__link:hover {
+//   cursor: pointer;
+//   color: rgb(241, 234, 234);
+//   border-color: rgb(238, 232, 232);
+//   box-shadow: 3px 3px 5px 3px rgba($color: rgb(181, 176, 175), $alpha: 1);
+// }
+
+// .arrow-button {
+//   background-color: transparent; /* Прозрачный фон */
+//   // background-color: #357a38;
+//   border: none;
+//   cursor: pointer;
+//   font-size: 20px;
+//   width: 5px;
+//   height: 50px;
+// }
+
+// .arrow-button span {
+//   margin-right: 5px;
+//   color: black; /* Добавляем цвет символа */
+// }
+
+// .nav__item--right {
+//   flex-shrink: 0; /* Запрет на уменьшение размера */
+// }
+
+// .arrow-button:hover {
+//   color: #fafafa; /* Изменение цвета символа при наведении */
+// }
+
+// .arrow-button:active {
+//   color: #e9eee9; /* Изменение цвета символа при активации (нажатии) */
+// }
+
+// .avatar {
+//   width: 50px; 
+//   height: 50px; 
+//   border-radius: 50%; 
+//   object-fit: cover; 
+// }
+
+// .userDiv {
+// display: flex;
+// }
 
