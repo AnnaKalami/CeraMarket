@@ -1,38 +1,42 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import socket from './socket';
 import './styles/chat.scss';
-import type { RootState } from '../../redux/store';
+import { useAppDispatch, type RootState } from '../../redux/store';
+import type { Message } from './types';
+import { addMessage } from './MessagesSlice';
 
 function ChatPage(): JSX.Element {
+
+
   const { chatId } = useParams() as { chatId: string };
-  const userId = useSelector((store: RootState) => store.auth.auth?.id);
+  const user = useSelector((store: RootState) => store.auth.auth);
   const AllMessages = useSelector((store: RootState) => store.messages.messages);
   const currentMessages = AllMessages.filter((el) => el.chat_id === +chatId);
   const [message, setMessage] = useState('');
   const messagesRef = useRef<HTMLUListElement>(null);
-
+  const dispatch = useAppDispatch()
+  const userId =  user?.id
+   
 
   useEffect(() => {
+    
     socket.connect();
 
-    socket.on('message', (msg: string) => {
-      if (messagesRef.current) {
-        const item = document.createElement('li');
-        item.textContent = msg;
-        messagesRef.current.appendChild(item);
-      }
+    socket.on('message', (newMsg: Message) => {
+    
+    dispatch(addMessage(newMsg))
+    
     });
 
     return () => {
       socket.disconnect();
-      console.log("Close connection");
+      console.log('Close connection');
     };
   }, []);
-
- 
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,7 +47,6 @@ function ChatPage(): JSX.Element {
   };
 
   return (
-
     <div className="chatdiv">
       <ul id="messages" ref={messagesRef}>
         {currentMessages.map((message2) => (

@@ -26,6 +26,8 @@ function ItemItemPage(): JSX.Element {
 
   if (currentItem) {
     [currentUser] = [...users].filter((user2) => currentItem.user_id === user2.id);
+    console.log(currentUser);
+    
   }
 
   function chatThisMaster() {
