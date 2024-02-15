@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import {
@@ -16,8 +16,6 @@ import './styles/auth.scss';
 
 import { type RootState, useAppDispatch } from '../../redux/store';
 
-// import { loadUsers } from '../users/UsersSlise';
-
 function SignUpPage(): JSX.Element {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,19 +23,17 @@ function SignUpPage(): JSX.Element {
   const [rpassword, setRpassword] = useState('');
   const [img, setImg] = useState<FileList | null>(null);
   const [isMaster, setIsMaster] = useState(false);
-
   const error = useSelector((store: RootState) => store.auth.error);
   const user = useSelector((store: RootState) => store.auth.auth);
-  const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearError());
     if (user) {
       navigate('/');
     }
-  }, [navigate, user]);
+  }, [user]);
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPassword = e.target.value;
@@ -98,6 +94,7 @@ function SignUpPage(): JSX.Element {
           }}
           type="text"
           placeholder="name"
+          required
         />
         <input
           name="email"
@@ -105,26 +102,25 @@ function SignUpPage(): JSX.Element {
           onChange={handleEmailChange}
           type="text"
           placeholder="email"
+          required
         />
-
         <input
           name="password"
           value={password}
           onChange={handlePasswordChange}
           type="password"
           placeholder="password"
+          required
+          minLength={8}
         />
-        {passwordError && (
-          <span className="errorPassword" style={{ color: 'red' }}>
-            {passwordError}
-          </span>
-        )}
         <input
           name="rpassword"
           value={rpassword}
           onChange={handleConfirmPasswordChange}
           type="password"
           placeholder="repeat password"
+          required
+          minLength={8}
         />
         <input
           className="img-input"
@@ -147,9 +143,9 @@ function SignUpPage(): JSX.Element {
         <button type="submit">Зарегаться</button>
         <div className="authRedirect">
           У меня есть аккаунт
-          <Link className="nav__link" to="/sign-in">
+          <NavLink className="nav__link" to="/sign-in">
             Войти
-          </Link>
+          </NavLink>
         </div>
       </form>
     </div>

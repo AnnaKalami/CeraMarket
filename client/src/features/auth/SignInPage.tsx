@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../redux/store';
 import type { RootState } from '../../redux/store';
@@ -15,7 +15,7 @@ function SignInPage(): JSX.Element {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearError());
     if (user) {
       navigate('/');
     }
@@ -51,7 +51,6 @@ function SignInPage(): JSX.Element {
           <NavLink className="nav__link" to="/sign-up">
             Регистрация
           </NavLink>
-          {/* <a href="/sign-up">Регистрация</a> */}
         </div>
       </form>
     </div>
