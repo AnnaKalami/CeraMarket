@@ -1,8 +1,9 @@
 import React from 'react';
 import './styles/menu.scss';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../redux/store';
+import 'animate.css';
 
 function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => void }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -12,7 +13,7 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
 
 
   return (
-    <div className="menu">
+    <div className={`menu animate__animated ${menu ? 'animate__fadeInRight' : 'animate__backOutRight'}`}>
       <div className="menu_content">
         <div className="menu_header">
           <button

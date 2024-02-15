@@ -5,7 +5,8 @@ import MainSwiper from './MainSwiper';
 import 'swiper/css'
 import 'swiper/css/autoplay'
 import ItemItem from '../item/ItemItem';
-const MainPage = (): JSX.Element => {
+
+function MainPage (): JSX.Element  {
   const [priceSort, setPriceSort] = useState(0)
   const [tag,setTag] = useState('')
   
@@ -37,6 +38,7 @@ const  clearFilters = ()=> {
   return (
     <>
     <div className='container-images'>
+      
       <MainSwiper allImages={allImages}/>
     </div>
     {[0,1,2,3,4].includes(priceSort)&&(
@@ -44,19 +46,19 @@ const  clearFilters = ()=> {
       }}/>
     )}
     {[0,2,3,4,5].includes(priceSort)&&(  
-      <button onClick={()=> setPriceSort(1)}>По цене ↓</button>
+      <button className='buttonSort' onClick={()=> setPriceSort(1)}>По цене ↓</button>
     )}
     {[1].includes(priceSort)&&(
-      <button onClick={()=> setPriceSort(2)}>По цене ↑</button>
+      <button className='buttonSort' onClick={()=> setPriceSort(2)}>По цене ↑</button>
     )}
     {[0,1,2,4,5].includes(priceSort)&&(
-      <button onClick={()=> setPriceSort(3)}>По алфавиту Я-А</button>
+      <button className='buttonSort' onClick={()=> setPriceSort(3)}>По алфавиту Я-А</button>
     )}
     {[3].includes(priceSort)&&(
-      <button onClick={()=> setPriceSort(4)}>По алфавиту А-Я</button>
+      <button className='buttonSort' onClick={()=> setPriceSort(4)}>По алфавиту А-Я</button>
     )}
     
-      <button onClick={()=> clearFilters()}>Сбросить фильтры</button>
+      <button className='buttonSort' onClick={()=> clearFilters()}>Сбросить фильтры</button>
     
     <div className="item-page__container">
     {items.map((item) => (
