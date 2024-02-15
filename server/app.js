@@ -19,13 +19,27 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
 
+// app.use(
+//   express.static(
+//     process.env.NODE_ENV === 'production'
+//     ? path.join(__dirname, "public")
+//     : path.join(__dirname, "../client/dist")
+//   )
+// )
+
+
 app.use(express.static(path.join(__dirname, "public")));
-7;
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);
+
+app.get('*', (req, res) => {
+  const filePath = path.join(__dirname, './dist/index.html');
+  res.sendFile(filePath)
+});
+
 
 io.on("connection", (socket) => {
   const idTmpRoom = socket.sids ? socket.sids.join("") : "999";
