@@ -7,6 +7,7 @@ module.exports = {
       'Items',
       [
         { 
+          name:'Кружка',
           description: 'Описание 1',
           price: 5100,
           user_id: 2,
@@ -14,6 +15,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         { 
+          name:'Не кружка',
           description: 'Описание 2',
           price: 500,
           user_id: 2,
@@ -21,6 +23,7 @@ module.exports = {
           updatedAt: new Date(),
         },
         { 
+          name:'Вентилятор',
           description: 'Описание 3',
           price: 50220,
           user_id: 2,

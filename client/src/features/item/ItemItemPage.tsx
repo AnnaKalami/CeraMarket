@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import './styles/items.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ function ItemItemPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   let currentUser: User = {} as User;
+
 
   if (currentItem) {
     [currentUser] = [...users].filter((user2) => currentItem.user_id === user2.id);
@@ -57,11 +58,11 @@ function ItemItemPage(): JSX.Element {
       {user && user.id === currentItem.user_id && (
         <>
           {!addPage ? (
-            <button onClick={() => setAddPage(true)} type="button">
-              Изменить штуку
+            <button onClick={() => setAddPage(true)} type="button"   className='button-all-items-master'>
+              Форма изменения изделия
             </button>
           ) : (
-            <button onClick={() => setAddPage(false)} type="button">
+            <button onClick={() => setAddPage(false)} type="button"   className='button-all-items-master'>
               Закрыть форму
             </button>
           )}
@@ -71,14 +72,16 @@ function ItemItemPage(): JSX.Element {
       {addPage && <FormUpdateItem setAddPage={setAddPage} />}
 
       <div className="hero-item-page__item">
-        <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
-        <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
+        <h1 className="hero-item-page__item--name">{currentItem.name}</h1>
+        <h2 className="hero-item-page__item--description">{currentItem.description}</h2>
+        <h2 className="hero-item-page__item--price">Стоимость: {currentItem.price}</h2>
+        <div>
         <h4>
-          Эту хрень сделал {currentUser?.name}
-
+          Автор: {currentUser?.name}
+          </h4>
           <button
               type="button"
-              className="button"
+              className="button-all-items-master"
               onClick={()=>navigate(`/items/from/${currentUser.id}`)}
             >
               Посмотреть все работы {currentUser?.name}
@@ -87,18 +90,19 @@ function ItemItemPage(): JSX.Element {
           {user && (
             <button
               type="button"
-              className="button"
+              className="button-all-items-master"
               onClick={chatThisMaster}
             >
-              Написать чёрту
+              Написать {currentUser?.name}
             </button>
           )}
-        </h4>
+        </div>
+        
         {currentItem.ItemGallery.ItemImages.map((image) => {
           return (
             <img
               key={image.id}
-              className="hero-item-page__item--img"
+              className="item-item-page-img"
               src={image.path}
               alt={image.path}
             />
@@ -106,25 +110,6 @@ function ItemItemPage(): JSX.Element {
         })}
       </div>
     </>
-
-  // <div className="hero-item-page__item">
-  //     <h2 className="hero-item-page__item--name">{currentItem.description}</h2>
-  //     <h3 className="hero-item-page__item--description">{currentItem.price}</h3>
-  //     <button className='button' onClick={()=> {
-  //       // if (currentArr>0) {
-  //       //   Navigat(/chats/${currentArr.id})
-  //       // } else {
-  //       //   (fetch)
-  //       // }
-  //     }}>Написать чёрту</button>
-      
-  //     {currentItem.ItemGallery.ItemImages.map((image)=> {
-  //       return <img key={image.id} className="hero-item-page__item--img" src={image.path} alt={image.path} />
-  //     })}
-  //   </div>
-     
-  //     </> 
-
   ) : (
     <h1>Такого товара еще нет</h1>
   );

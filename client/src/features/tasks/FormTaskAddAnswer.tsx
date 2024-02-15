@@ -26,8 +26,8 @@ const FormTaskAddAnswer = ():JSX.Element => {
         }
       }}
     >
-      <label className="form-add__label">
-        Text
+      <label className="form-add-label-answer">
+        Оставьте предложение
         <input
           className="form-add__input"
           value={text}
@@ -35,10 +35,10 @@ const FormTaskAddAnswer = ():JSX.Element => {
           type="text"
         />
       </label>
-      <label className="form-add__label">
-        Price
+      <label className="form-add-label-answer">
+        Укажите цену
         <input
-          className="form-add__input"
+          className="form-add__input-answer"
           value={price}
           onChange={(e) => { const inputValue = +e.target.value;
             if (inputValue >= 0) {
@@ -47,8 +47,8 @@ const FormTaskAddAnswer = ():JSX.Element => {
           type="number"
         />
       </label>
-      <button className="form-add__submit" type="submit">
-        Добавить Штуку Дрюку
+      <button className="form-add-submit" type="submit">
+        Отправить
       </button>
       
     </form>

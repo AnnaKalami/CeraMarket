@@ -30,13 +30,13 @@ router.get('/', async (req, res) => {
 
   router.post('/', upload.any('img'), async (req, res) => {
     try {
-      const {description, price } = req.body;
+      const {description, price,name } = req.body;
       console.log(req.files);
       // const newFileUrl = `/img/${req.files.originalname}`;
       //тут создание галлереии и картинки
       // console.log(res.locals.user.isMaster);
       if(res.locals.user.isMaster) {
-        const item = await Item.create({description,price,user_id:res.locals.user.id,})
+        const item = await Item.create({name,description,price,user_id:res.locals.user.id,})
         
       const createGallery = await ItemGallery.create({item_id:item.id})
 
@@ -62,10 +62,10 @@ router.get('/', async (req, res) => {
       // const {itemId}= req.params
       // console.log(req.body);
       // console.log(req.files);
-      const {description, price, itemId, imgIds } = req.body;
+      const {name,description, price, itemId, imgIds } = req.body;
       //тут создание галлереии и картинки
       const [result] = await Item.update(
-        {description, price},{where:{user_id:res.locals.user.id, id:itemId}});
+        {description, price,name},{where:{user_id:res.locals.user.id, id:itemId}});
         if (result>0){
           const currentGallery = await ItemGallery.findOne({where: {item_id:itemId}})
 

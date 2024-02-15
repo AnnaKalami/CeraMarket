@@ -10,6 +10,7 @@ interface FormUpdateItemProps {
 
 const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
   const [price, setPrice] = useState(0);
+  const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState<FileList | null>(null); 
   const [selectedImages, setSelectedImages] = useState<number[]>([]);//
@@ -36,6 +37,7 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
     if (currentItem) {
       setDescription(currentItem.description);
       setPrice(currentItem.price);
+      setName(currentItem.name);
     }
   }, [itemId, items]);
 
@@ -51,6 +53,7 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
     if (user?.id && itemId) {
       const formData = new FormData();
       formData.append('description', description);
+      formData.append('name', name);
       formData.append('price', String(price));
       formData.append('itemId', String([itemId]));
       selectedImages.forEach((imageId) => {
@@ -69,6 +72,15 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
 
   return (
     <form className="form-add" onSubmit={handleSubmit}>
+      <label className="form-add__label">
+        Name
+        <input
+          className="form-add__input"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+        />
+      </label>
       <label className="form-add__label">
         Description
         <input
