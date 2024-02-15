@@ -1,0 +1,48 @@
+.authRedirect {
+    margin: 30px;
+  }
+  .reg-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sign-in-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sign-up-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .img-input {
+    width: 188px;
+  }
+  .auth-title {
+    color: black;
+  }
+  .authRedirect {
+    color: black;
+  }
+  .auth-btn-submit {
+    width: 288px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+  }
+  .auth-input {
+    background: white;
+    color: black;
+    margin: 10px 0px 10px 0px;
+    width: 280px;
+    height: 40px;
+  }
+  .nav__link {
+    color: black;
+    font-weight: bold;
+  }
+  

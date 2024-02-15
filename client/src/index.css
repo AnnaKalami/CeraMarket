@@ -1,5 +1,4 @@
 :root {
-  
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -17,13 +16,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
   height: 90%;
+
 }
 
 .App {
   background-color: #faf6ed;
-  
-  
+
 }
 
 a {
@@ -56,7 +56,6 @@ h1 {
 
 } */
 
-
 .buttonSort {
   font-size: 11px;
   padding: 10px 15px;
@@ -68,7 +67,9 @@ h1 {
   transition: all 0.3s;
   border: none;
   box-shadow: none;
+
   list-style-type: none; 
+
 
   &.active {
     color: #f3af03;
@@ -78,7 +79,7 @@ h1 {
 
   &:hover {
     cursor: pointer;
-    color:  #f3af03;
+    color: #f3af03;
   }
 }
 /* button {
