@@ -1,9 +1,9 @@
-
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 import { useSelector } from 'react-redux';
 import {
+  clearError,
   setEmailError,
   setPasswordErrorLength,
   setPasswordMatchError,
@@ -28,12 +28,12 @@ function SignUpPage(): JSX.Element {
 
   const error = useSelector((store: RootState) => store.auth.error);
   const user = useSelector((store: RootState) => store.auth.auth);
-
   const passwordError = useSelector((store: RootState) => store.auth.passwordError);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(clearError())
     if (user) {
       navigate('/');
     }
@@ -127,6 +127,7 @@ function SignUpPage(): JSX.Element {
           placeholder="repeat password"
         />
         <input
+          className="img-input"
           name="img"
           onChange={(e) => {
             handleFileChange(e);
@@ -134,7 +135,6 @@ function SignUpPage(): JSX.Element {
           type="file"
         />
         <div className="checkbox-master">
-          {' '}
           <input
             name="taskStatus"
             id="taskStatus"
@@ -147,9 +147,9 @@ function SignUpPage(): JSX.Element {
         <button type="submit">Зарегаться</button>
         <div className="authRedirect">
           У меня есть аккаунт
-          <NavLink className="nav__link" to="/sign-in">
+          <Link className="nav__link" to="/sign-in">
             Войти
-          </NavLink>
+          </Link>
         </div>
       </form>
     </div>

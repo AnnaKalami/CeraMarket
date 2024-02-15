@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../redux/store';
 import type { RootState } from '../../redux/store';
-import { setEmailErrorAuth, setPasswordErrorAuth, signIn } from './authSlice';
+import { clearError, signIn } from './authSlice';
 import './styles/auth.scss';
 
 function SignInPage(): JSX.Element {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const user = useSelector((store: RootState) => store.auth.auth);
-  const errorNew = useSelector((store: RootState) => store.auth.error);
-  const passwordError = useSelector((store: RootState) => store.auth.passwordError);
-  const emailError = useSelector((store: RootState) => store.auth.emailError);
+  const error = useSelector((store: RootState) => store.auth.error);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
+    dispatch(clearError())
     if (user) {
       navigate('/');
     }
@@ -30,7 +29,7 @@ function SignInPage(): JSX.Element {
   return (
     <div className="sign-in-container">
       <h1>AuthPage</h1>
-      {errorNew && <div>{errorNew}</div>}
+      {error && <div>{error}</div>}
       <form className="sign-in-form" onSubmit={handleSubmit}>
         <input
           value={email}
@@ -52,6 +51,7 @@ function SignInPage(): JSX.Element {
           <NavLink className="nav__link" to="/sign-up">
             Регистрация
           </NavLink>
+          {/* <a href="/sign-up">Регистрация</a> */}
         </div>
       </form>
     </div>
