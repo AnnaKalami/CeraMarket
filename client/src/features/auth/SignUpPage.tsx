@@ -80,74 +80,97 @@ function SignUpPage(): JSX.Element {
   };
 
   return (
-    <div className="reg-container">
-      <h1>RegPage</h1>
-
-      <div className="errorForm">{error && <h6>{error}</h6>}</div>
-
-      <form className="sign-up-form" onSubmit={handleSubmit}>
-        <input
-          name="name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          type="text"
-          placeholder="name"
-          required
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={handleEmailChange}
-          type="text"
-          placeholder="email"
-          required
-        />
-        <input
-          name="password"
-          value={password}
-          onChange={handlePasswordChange}
-          type="password"
-          placeholder="password"
-          required
-          minLength={8}
-        />
-        <input
-          name="rpassword"
-          value={rpassword}
-          onChange={handleConfirmPasswordChange}
-          type="password"
-          placeholder="repeat password"
-          required
-          minLength={8}
-        />
-        <input
-          className="img-input"
-          name="img"
-          onChange={(e) => {
-            handleFileChange(e);
-          }}
-          type="file"
-        />
-        <div className="checkbox-master">
-          <input
-            name="taskStatus"
-            id="taskStatus"
-            type="checkbox"
-            value={String(isMaster)}
-            onChange={() => setIsMaster(true)}
-          />
-          Master
-        </div>
-        <button type="submit">Зарегаться</button>
-        <div className="authRedirect">
-          У меня есть аккаунт
-          <NavLink className="nav__link" to="/sign-in">
-            Войти
-          </NavLink>
-        </div>
-      </form>
+    <div className="container">
+      <div className="form_area">
+        <p className="title">SIGN UP</p>
+        {error && <div className="auth-error">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="form_group">
+            <p className="sub_title">Name</p>
+            <input
+              className="form_style"
+              name="name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+              type="text"
+              placeholder="name"
+              required
+            />
+          </div>
+          <div className="form_group">
+            <p className="sub_title">Email</p>
+            <input
+              className="form_style"
+              name="email"
+              value={email}
+              onChange={handleEmailChange}
+              type="text"
+              placeholder="email"
+              required
+            />
+          </div>
+          <div className="form_group">
+            <p className="sub_title">Password</p>
+            <input
+              className="form_style"
+              name="password"
+              value={password}
+              onChange={handlePasswordChange}
+              type="password"
+              placeholder="password"
+              required
+              minLength={8}
+            />
+          </div>
+          <div className="form_group">
+            <p className="sub_title">Repeat password</p>
+            <input
+              className="form_style"
+              name="rpassword"
+              value={rpassword}
+              onChange={handleConfirmPasswordChange}
+              type="password"
+              placeholder="repeat password"
+              required
+              minLength={8}
+            />
+          </div>
+          <div className="form_group">
+            <input
+              className="form_style"
+              name="img"
+              onChange={(e) => {
+                handleFileChange(e);
+              }}
+              type="file"
+            />
+          </div>
+          <div className="checkbox-master">
+            <input
+              name="taskStatus"
+              id="taskStatus"
+              type="checkbox"
+              className="form_style"
+              value={String(isMaster)}
+              onChange={() => setIsMaster(true)}
+            />
+            <p> Master</p>
+          </div>
+          <div>
+            <button type="submit" className="auth-btn">
+              SIGN UP
+            </button>
+            <p>
+              У меня есть аккаунт
+              <NavLink className="nav-link" to="/sign-in">
+                Login Here!
+              </NavLink>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

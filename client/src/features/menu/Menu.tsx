@@ -7,13 +7,13 @@ import 'animate.css';
 
 function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => void }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const header = 'Крутая менюшка';
 
-
-
   return (
-    <div className={`menu animate__animated ${menu ? 'animate__fadeInRight' : 'animate__backOutRight'}`}>
+    <div
+      className={`menu animate__animated ${menu ? 'animate__fadeInRight' : 'animate__backOutRight'}`}
+    >
       <div className="menu_content">
         <div className="menu_header">
           <button
@@ -28,51 +28,98 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
           {header}
         </div>
         <ul>
-        
           <>
-          {user?.isMaster&&(
-            <>
-            <li>
-              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/items`); setMenu(!menu)}}>Мои творения(хз перепишите как хотите) </a>
-            </li>
-            <li>
-              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/tasks/at-work`); setMenu(!menu)}}>Мои активные заказы </a>
-            </li>
-            </>
-          )}
-          {user&&(
-            <>
-            <li>
-             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/tasks`); setMenu(!menu)}}>Все задачи </a>
-
-           </li>
-
-            {!user.isAdmin &&(
+            {user?.isMaster && (
               <>
-               <li>
-             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/likes`); setMenu(!menu)}}>Избранное </a>
-
-           </li>
-             
-             <li>
-             <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/profile/tasks`); setMenu(!menu)}}>Мои задачи </a>
-
-           </li>
-           </>
+                <li>
+                  <a
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      navigate(`/profile/items`);
+                      setMenu(!menu);
+                    }}
+                  >
+                    Мои творения(хз перепишите как хотите){' '}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      navigate(`/profile/tasks/at-work`);
+                      setMenu(!menu);
+                    }}
+                  >
+                    Мои активные заказы{' '}
+                  </a>
+                </li>
+              </>
             )}
-             {user.isAdmin&&(
-              <li>
-              <a style={{ cursor: 'pointer' }} onClick={()=> {navigate(`/users`); setMenu(!menu)}}>Все пользователи </a>
- 
-            </li>
-             )}
-           </>
-          )}
-          
+            {user && (
+              <>
+                <li>
+                  <a
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      navigate(`/tasks`);
+                      setMenu(!menu);
+                    }}
+                  >
+                    Все задачи{' '}
+                  </a>
+                </li>
+
+                {!user.isAdmin && (
+                  <>
+                    <li>
+                      <a
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          navigate(`/profile/likes`);
+                          setMenu(!menu);
+                        }}
+                      >
+                        Избранное{' '}
+                      </a>
+                    </li>
+
+                    <li>
+                      <a
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          navigate(`/profile/tasks`);
+                          setMenu(!menu);
+                        }}
+                      >
+                        Мои задачи{' '}
+                      </a>
+                    </li>
+                  </>
+                )}
+                {user.isAdmin && (
+                  <li>
+                    <a
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        navigate(`/users`);
+                        setMenu(!menu);
+                      }}
+                    >
+                      Все пользователи{' '}
+                    </a>
+                  </li>
+                )}
+              </>
+            )}
           </>
         </ul>
       </div>
-      <div className="blur" onClick={()=> {setMenu(!menu)}}/>
+      <div
+        className="blur"
+        onClick={() => {
+          setMenu(!menu);
+        }}
+      />
     </div>
   );
 }

@@ -27,32 +27,46 @@ function SignInPage(): JSX.Element {
   };
 
   return (
-    <div className="sign-in-container">
-      <h1>AuthPage</h1>
-      {error && <div>{error}</div>}
-      <form className="sign-in-form" onSubmit={handleSubmit}>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-          placeholder="email"
-          required
-        />
-        <input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          placeholder="password"
-          required
-        />
-        <button type="submit">login</button>
-        <div className="authRedirect">
-          Нет аккаунта?
-          <NavLink className="nav__link" to="/sign-up">
-            Регистрация
-          </NavLink>
-        </div>
-      </form>
+    <div className="container">
+      <div className="form_area">
+        <p className="title">WELCOME</p>
+        {error && <div className="auth-error">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="form_group">
+            <p className="sub_title">Email</p>
+            <input
+              className="form_style"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+              placeholder="email"
+              required
+            />
+          </div>
+          <div className="form_group">
+            <p className="sub_title">Password</p>
+            <input
+              className="form_style"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="password"
+              required
+            />
+          </div>
+          <div>
+            <button className="auth-btn" type="submit">
+              в IT!
+            </button>
+            <p>
+              Have an Account?
+              <NavLink className="auth-nav-link" to="/sign-up">
+                Login Here!
+              </NavLink>
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
