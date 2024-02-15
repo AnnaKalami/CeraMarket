@@ -22,18 +22,18 @@ const ProfileItemListPage = (): JSX.Element => {
   const content = (
     <>
     {!addPage?(
-      <button onClick={() => setAddPage(true)} type="button">
+      <button  className='add-button' onClick={() => setAddPage(true)} type="button">
       Добавить Товар
     </button>
     ):(
-      <button onClick={() => setAddPage(false)} type="button">
+      <button className='add-button' onClick={() => setAddPage(false)} type="button">
         Закрыть форму
       </button>
     )}
       {addPage&&(
         <FormAddItem  setAddPage={setAddPage}/>
       )}
-      <h1 className="item-page__title">ItemsListPage</h1>
+      <h1 className="item-page__title">Мои изделия</h1>
       <div className="item-page__container">
         {itemFilter.map((item) => (
           <ItemItem key={item.id} item={item} />

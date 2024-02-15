@@ -12,10 +12,10 @@ interface FormAddItemProps {
 const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState(0);
-  const [images, setImages] = useState<FileList | null>(null); 
+  const [images, setImages] = useState<FileList | null>(null);
   const user = useSelector((store: RootState) => store.auth.auth);
   const dispatch = useAppDispatch();
-  
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -37,8 +37,8 @@ const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
               formData.append('images', image);
             });
           }
-          dispatch(addTask(formData)).catch(console.log)
-          
+          dispatch(addTask(formData)).catch(console.log);
+
           setDescription('');
           setPrice(0);
           setImages(null);
@@ -47,7 +47,7 @@ const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
       }}
     >
       <label className="form-add__label">
-        Description
+        Опишите задачу
         <input
           className="form-add__input"
           value={description}
@@ -56,19 +56,21 @@ const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Price
+        Укажите цену
         <input
           className="form-add__input"
           value={price}
-          onChange={(e) => { const inputValue = +e.target.value;
+          onChange={(e) => {
+            const inputValue = +e.target.value;
             if (inputValue >= 0) {
               setPrice(inputValue);
-            }}}
+            }
+          }}
           type="number"
         />
       </label>
       <label className="form-add__label">
-        Images
+        Добавьте фото
         <input
           className="form-add__input"
           onChange={(e) => handleFileChange(e)}
@@ -76,11 +78,11 @@ const FormAddTask: React.FC<FormAddItemProps> = ({ setAddPage }) => {
           multiple
         />
       </label>
-      <button className="form-add__submit" type="submit">
-        Добавить Задание Свинание
+      <button className="form-add__submit add-button" type="submit">
+        Создать задачу
       </button>
-      <button className="form-add__close" onClick={()=> setAddPage(false)}>
-        Закрыть окно(будет крестик но это не точно)
+      <button className="form-add__close add-button" onClick={() => setAddPage(false)}>
+        Отменить
       </button>
     </form>
   );

@@ -1,4 +1,3 @@
-
 .task-page {
   &__container {
     display: flex;
@@ -27,8 +26,6 @@
   }
 }
 
-
-
 .task-task-page {
   &__task {
     border: 1px solid white;
@@ -47,7 +44,7 @@
 }
 
 .hero-item-page__item--description {
-  overflow-y: auto; 
+  overflow-y: auto;
   word-wrap: break-word;
   margin-left: 100px;
   margin-right: 100px;
@@ -61,10 +58,7 @@
   margin-top: 10px;
 }
 
-
-
-
-.button-all-items-master{
+.button-all-items-master {
   font-size: 20px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   padding: 10px 25px;
@@ -78,14 +72,13 @@
   list-style-type: none;
   background-color: transparent;
   text-decoration: underline 2px solid;
-      text-underline-offset: 1mm;
-      color: #b95909;
+  text-underline-offset: 1mm;
+  color: #b95909;
 }
 .button-all-items-master:hover {
   cursor: pointer;
-    color: #944300;
+  color: #944300;
 }
-
 
 .form-add-answer {
   display: flex;
@@ -95,22 +88,20 @@
   padding: 20px;
   width: 700px;
   margin: 0 auto;
-
 }
-.form-add-label-answer{
+.form-add-label-answer {
   display: flex;
   flex-direction: column;
   padding: 30px;
   width: 500px;
-  
+
   margin: 0 auto;
-  
-  
+
   margin-bottom: 20px;
   font-size: larger;
   font-style: italic;
 }
-.form-add-submit{
+.form-add-submit {
   font-size: 20px;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   padding: 10px 25px;
@@ -124,10 +115,166 @@
   list-style-type: none;
   background-color: transparent;
   text-decoration: underline 2px solid;
-      text-underline-offset: 1mm;
-      color: #b95909;
+  text-underline-offset: 1mm;
+  color: #b95909;
 }
-.form-add-submit:hover{
+.form-add-submit:hover {
   cursor: pointer;
-    color: #f1b584;
+  color: #f1b584;
+}
+
+.add-button {
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+  // background-size: 400% 400%;
+  // animation: gradient 10s ease infinite;
+}
+.add-button:hover {
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+}
+.add-button:active {
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+.add-button_more {
+  font-size: 20px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 10px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #131111;
+  transition: all 0.3s;
+  border: none;
+  box-shadow: none;
+  list-style-type: none;
+  background-color: transparent;
+  text-decoration: underline 2px solid;
+  text-underline-offset: 1mm;
+  color: #d69a55;
+}
+.add-button__delete {
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+}
+
+.all-answers {
+  background-color: #b1a499;
+  margin: 0 20%;
+  border-radius: 4px;
+  padding-bottom: 6px;
+}
+.form-add-master-submit {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #976d37);
+}
+.task-page_btn-adWork {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #976d37);
+}
+.task-page__btn-workDone {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #976d37);
+}
+
+.task-page__btn-workDestroy {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #975537);
+}
+
+.task-page__btn-cancel {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #d36633);
+}
+
+.add-button-onMain {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #a89f9a);
+}
+
+.add-button__confirm {
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #f3c259);
 }
