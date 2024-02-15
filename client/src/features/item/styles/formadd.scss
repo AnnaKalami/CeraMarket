@@ -1,0 +1,123 @@
+.form-add {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 30px;
+  width: 600px;
+
+  margin: 0 auto;
+  margin-top: 40px;
+  box-shadow: 10px 10px 20px 3px rgba($color: black, $alpha: 1);
+  z-index: 100;
+  &__label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-size: larger;
+    font-style: italic;
+  }
+  &__input {
+    padding: 10px;
+    
+  }
+  &__input-file {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    // background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+  }
+  &__submit {
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+    &:hover {
+      border: 1px solid rgb(92, 92, 92);
+      color: rgb(41, 41, 41);
+    }
+  }
+  &__close {
+    color: rgb(192, 53, 53);
+    text-transform: uppercase;
+    &:hover {
+      border: 1px solid rgb(136, 45, 45);
+      color: rgb(184, 94, 94);
+    }
+  }
+  position: absolute;
+  background-color: white;
+}
+.add-button {
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+  // background-size: 400% 400%;
+  // animation: gradient 10s ease infinite;
+}
+.add-button:hover {
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+}
+.add-button:active {
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.add-button-submit {
+  margin-top: 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: linear-gradient(to bottom right, #f1eeee, #f1984ad0);
+  // background-size: 400% 400%;
+  // animation: gradient 10s ease infinite;
+}
+.add-button:hover {
+  cursor: pointer;
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #e99347);
+}
+.add-button:active {
+  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+}
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

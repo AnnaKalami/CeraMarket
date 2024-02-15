@@ -38,7 +38,9 @@ router.get('/', async (req, res) => {
       const {description, price} = req.body;
       //тут создание галлереии и картинки
       const task = await Task.create({description,price,user_id:res.locals.user.id, atWork:false, finished:false,confirmFinished:false});
+      
       const createGallery = await TaskGallery.create({task_id:task.id})
+      
       await Promise.all(req.files.map(async (img) => {
         await TaskImage.create({ path: `/img/${img.filename}`, taskGallery_id: createGallery.id });
       }));

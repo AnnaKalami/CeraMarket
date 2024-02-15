@@ -19,21 +19,35 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
 
+// app.use(
+//   express.static(
+//     process.env.NODE_ENV === 'production'
+//     ? path.join(__dirname, "public")
+//     : path.join(__dirname, "../client/dist")
+//   )
+// )
+
+
 app.use(express.static(path.join(__dirname, "public")));
-7;
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);
 
+app.get('*', (req, res) => {
+  const filePath = path.join(__dirname, './dist/index.html');
+  res.sendFile(filePath)
+});
+
+
 io.on("connection", (socket) => {
   const idTmpRoom = socket.sids ? socket.sids.join("") : "999";
   socket.join(idTmpRoom);
   socket.on("message", async (msg, userId, chatId) => {
     try {
-      await saveMessage(msg, userId, chatId);
-      io.to(idTmpRoom).emit("message", msg);
+      const newMsg = await saveMessage(msg, userId, chatId);
+      io.to(idTmpRoom).emit("message", newMsg);
     } catch (error) {
       console.error("Ошибка при обработке сообщения:", error);
     }

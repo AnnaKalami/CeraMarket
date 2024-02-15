@@ -8,7 +8,9 @@ import 'animate.css';
 function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => void }): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
   const navigate = useNavigate();
-  const header = 'Крутая менюшка';
+
+  const header = 'МЕНЮ';
+
 
   return (
     <div
@@ -39,7 +41,9 @@ function Menu({ menu, setMenu }: { menu: boolean; setMenu: (arg: boolean) => voi
                       setMenu(!menu);
                     }}
                   >
-                    Мои творения(хз перепишите как хотите){' '}
+
+                    Мои изделия
+
                   </a>
                 </li>
                 <li>

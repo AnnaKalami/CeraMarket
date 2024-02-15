@@ -25,6 +25,7 @@ import ChatListPage from '../features/chats/chatList';
 import { loadChats } from '../features/chats/ChatsSlice';
 import { loadMessages } from '../features/chats/MessagesSlice';
 import ItemsFromOneMasterListPage from '../features/item/ItemsFromOneMasterListPage';
+import Page404 from '../features/404/Page404';
 
 function App(): JSX.Element {
   const user = useSelector((store: RootState) => store.auth.auth);
@@ -89,7 +90,7 @@ function App(): JSX.Element {
           <Route path="/items/from/:masterId" element={<ItemsFromOneMasterListPage />} />
           <Route path="/items/:itemId" element={<ItemItemPage />} />
           <Route path="/users" element={<UsersListPage />} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<Page404/>} />
         </Route>
       </Routes>
     </div>
