@@ -5,14 +5,14 @@ console.log(chatId, 'CHAAAAAAAAAAAAAAAAT');
 
 try {       
 
-    await ChatMessage.create({
+    const newMessage = await ChatMessage.create({
         user_id: userId,
         chat_id: chatId,
         message: message
        
     });
 
-        return message;
+        return newMessage;
 } catch (error) {
         
         console.error('Ошибка при сохранении сообщения в базу данных:', error);

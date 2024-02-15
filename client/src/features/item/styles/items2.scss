@@ -1,0 +1,119 @@
+.form-add {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 30px;
+    width: 600px;
+  
+    margin: 0 auto;
+    margin-top: 40px;
+    box-shadow: 10px 10px 20px 3px rgba($color: black, $alpha: 1);
+  
+    &__label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      font-size: larger;
+      font-style: italic;
+    }
+    &__input {
+      padding: 10px;
+    }
+    &__submit {
+      color: rgb(110, 109, 109);
+      text-transform: uppercase;
+      &:hover {
+        border: 1px solid rgb(92, 92, 92);
+        color: rgb(41, 41, 41);
+      }
+    }
+    &__close {
+      color: rgb(201, 162, 162);
+      text-transform: uppercase;
+      &:hover {
+        border: 1px solid rgb(136, 45, 45);
+        color: rgb(184, 94, 94);
+      }
+    }
+    position: absolute;
+    background-color: white;
+  }
+  .item-page {
+    &__container {
+      position: relative;
+      max-width: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 30px;
+    }
+    &__item {
+      position: relative;
+      background: purple;
+      margin: 30px 10px;
+      padding: 20px 15px;
+      max-width: 300px;
+      height: 215px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid white;
+      border-radius: 20px;
+      transition: 0.3s ease-in-out;
+      &--img {
+        position: relative;
+        max-width: 100%;
+        width: 260px;
+        height: 260px;
+        top: -60px;
+        border-radius: 4px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+      }
+      &--content {
+        position: relative;
+        margin-top: -140px;
+        padding: 10px 15px;
+        text-align: center;
+        visibility: hidden;
+        opacity: 0;
+        transition: 0.3s ease-in-out;
+      }
+    }
+    &__item:hover {
+      height: 500px;
+      &--content {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+  
+  button:hover {
+    cursor: pointer;
+    border-color: lawngreen;
+  }
+  
+  .item-item-page {
+    &__item {
+      position: relative;
+      border: 1px solid white;
+      margin: 0 auto;
+      width: 1000px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 100px;
+      border-radius: 40px;
+      box-shadow: 10px 10px 20px 3px rgba($color: black, $alpha: 1);
+      &--img {
+        position: relative;
+        width: 600px;
+      }
+    }
+  }
+  
