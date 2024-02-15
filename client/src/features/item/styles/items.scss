@@ -22,8 +22,12 @@
   display: flex;
   flex-direction: column;
   transition: 0.3s ease-in-out;
-  border: solid 2px;
-  border-color: rgb(231, 212, 176);
+  // border: solid 2px;
+  // border-color: rgb(155, 154, 152);
+  background-color: rgb(230, 225, 210);
+  // border-bottom-left-radius: 10px;
+  // border-bottom-right-radius: 10px;
+  border-radius: 7px;
 }
 .item-page__item:hover {
   height: 420px;

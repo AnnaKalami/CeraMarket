@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { type RootState, useAppDispatch } from '../../redux/store';
 import FormTaskAddAnswer from './FormTaskAddAnswer';
 import { addMasterInTask } from './TasksSlise';
+import Page404 from '../404/Page404';
 
 const ChatPage = (): JSX.Element => {
   const tasks = useSelector((store: RootState) => store.tasks.tasks);
@@ -59,7 +60,7 @@ const ChatPage = (): JSX.Element => {
       {user?.isMaster && currentTask.user_id !== user.id && !masterAnswer && <FormTaskAddAnswer />}
     </>
   ) : (
-    <h1>Такой таски нету ОЛО!!!!</h1>
+    <Page404/>
   );
 };
 

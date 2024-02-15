@@ -9,6 +9,7 @@ import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
 import { Chat, type CurrentChat } from '../chats/types';
+import Page404 from '../404/Page404';
 
 function ItemItemPage(): JSX.Element {
   const { itemId } = useParams();
@@ -113,7 +114,7 @@ function ItemItemPage(): JSX.Element {
       </div>
     </>
   ) : (
-    <h1>Такого товара еще нет</h1>
+    <Page404/>
   );
 }
 
