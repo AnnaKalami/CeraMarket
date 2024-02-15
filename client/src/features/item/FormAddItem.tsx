@@ -4,7 +4,7 @@ import React, { CSSProperties, useState } from 'react';
 import { RootState, useAppDispatch } from '../../redux/store';
 import { addItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
-
+import './styles/formadd.scss'
 interface FormAddItemProps {
   setAddPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -79,7 +79,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
       }}
     >
       <label className="form-add__label">
-        Name
+        Название
         <input
           className="form-add__input"
           value={name}
@@ -88,7 +88,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Description
+        Описание
         <input
           className="form-add__input"
           value={description}
@@ -97,7 +97,7 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Price
+        Цена
         <input
           className="form-add__input"
           value={price}
@@ -111,19 +111,19 @@ const FormAddItem: React.FC<FormAddItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Images
+        Добавьте фото
         <input
-          className="form-add__input"
+          className="form-add__input-file"
           onChange={(e) => handleFileChange(e)}
           type="file"
           multiple
         />
       </label>
-      <button className="form-add__submit" type="submit">
-        Добавить Штуку Дрюку
+      <button className="form-add__submit add-button-submit" type="submit">
+        Подтвердить
       </button>
-      <button className="form-add__close" onClick={() => setAddPage(false)}>
-        Закрыть окно(можно потом крестик нарисовать)
+      <button className="form-add__close add-button-submit" onClick={() => setAddPage(false)}>
+        Отменить
       </button>
     </form>
   );
