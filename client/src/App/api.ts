@@ -1,12 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 
-
 import type { Like, LikeId, User, UserId, UserSignIn } from '../features/auth/types';
-import type { ItemId, Item } from "../features/item/types";
+import type { ItemId, Item } from '../features/item/types';
 import type { AnswerWithOutId, Task, TaskId } from '../features/tasks/types';
 
-import {type Chat, type Message} from '../features/chats/types'
-
+import { type Chat, type Message } from '../features/chats/types';
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
   const res = await fetch('/api/items');
@@ -14,7 +12,7 @@ export const fetchLoadItems = async (): Promise<Item[]> => {
   return data.items;
 };
 
-export const fetchAddItem = async (formData:FormData): Promise<Item> => {
+export const fetchAddItem = async (formData: FormData): Promise<Item> => {
   const res = await fetch('/api/items', {
     method: 'POST',
     // headers: {
@@ -26,15 +24,15 @@ export const fetchAddItem = async (formData:FormData): Promise<Item> => {
   return data.item;
 };
 
-export const fetchUpdateItem = async (formData:FormData): Promise<Item> => {
-  const itemId = formData.get('itemId')
+export const fetchUpdateItem = async (formData: FormData): Promise<Item> => {
+  const itemId = formData.get('itemId');
   const res = await fetch(`/api/items/${itemId}`, {
     method: 'PUT',
     body: formData,
   });
   const data: { item: Item } = (await res.json()) as { item: Item };
   console.log(data);
-  
+
   return data.item;
 };
 
@@ -69,6 +67,9 @@ export const fetchSignIn = async (user: UserSignIn): Promise<User> => {
     message: string;
     user: User;
   };
+  if (data.message !== 'success') {
+    throw new Error(data.message);
+  }
   return data.user;
 };
 
@@ -97,9 +98,13 @@ export const fetchLogOut = async (): Promise<void> => {
   }
 };
 
-
-export const fetchLike = async ({userId, itemId}:{userId: UserId, itemId:ItemId}): Promise<Like> => {
-
+export const fetchLike = async ({
+  userId,
+  itemId,
+}: {
+  userId: UserId;
+  itemId: ItemId;
+}): Promise<Like> => {
   const res = await fetch('/api/likes', {
     method: 'POST',
     headers: {
@@ -111,8 +116,7 @@ export const fetchLike = async ({userId, itemId}:{userId: UserId, itemId:ItemId}
   return data.like;
 };
 
-export const fetchDisLike = async ({likeId}:{likeId:LikeId}): Promise<LikeId> => {
-
+export const fetchDisLike = async ({ likeId }: { likeId: LikeId }): Promise<LikeId> => {
   const res = await fetch(`/api/likes/${likeId}`, {
     method: 'DELETE',
   });
@@ -190,8 +194,13 @@ export const fetchDeleteUser = async (id: UserId): Promise<UserId> => {
   return data.userId;
 };
 
-export const fetchAddMasterInTask = async ({userId,taskId}:{userId:UserId,taskId:TaskId}): Promise<Task> => {
-
+export const fetchAddMasterInTask = async ({
+  userId,
+  taskId,
+}: {
+  userId: UserId;
+  taskId: TaskId;
+}): Promise<Task> => {
   const res = await fetch('/api/tasks/atWork', {
     method: 'POST',
     headers: {
@@ -240,7 +249,7 @@ export const fetchConfirmFinishedTask = async (taskId: TaskId): Promise<Task> =>
 export const fetchLoadChats = async (): Promise<Chat[]> => {
   const res = await fetch('/api/chats');
 
-  const data: { chats: Chat[] } = (await res.json()) as { chats: Chat[] };  
+  const data: { chats: Chat[] } = (await res.json()) as { chats: Chat[] };
 
   return data.chats;
 };
@@ -248,24 +257,28 @@ export const fetchLoadChats = async (): Promise<Chat[]> => {
 export const fetchLoadMessages = async (): Promise<Message[]> => {
   const res = await fetch('/api/chats/messages');
 
-  
-  const data: { messages: Message[] } = (await res.json()) as { messages: Message[] };  
+  const data: { messages: Message[] } = (await res.json()) as { messages: Message[] };
   return data.messages;
-}
+};
 
-export const fetchCreateChat = async ({senderId, receiverId}:{senderId: number, receiverId:number}): Promise<Chat> => {
+export const fetchCreateChat = async ({
+  senderId,
+  receiverId,
+}: {
+  senderId: number;
+  receiverId: number;
+}): Promise<Chat> => {
   const res = await fetch('/api/chats/createChat', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json' 
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      senderId, receiverId
-    })
+      senderId,
+      receiverId,
+    }),
   });
-  
-  const data: Chat  = (await res.json()) as Chat ;  
-  return data;
-  
-}
 
+  const data: Chat = (await res.json()) as Chat;
+  return data;
+};
