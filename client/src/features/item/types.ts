@@ -26,6 +26,6 @@ export type ItemImage = {
   export type ItemsState = {
     items: Item[];
     error: string | undefined;
-    loading: boolean;
+    // loading: boolean;
   };
   

@@ -9,7 +9,7 @@ import SignInPage from '../features/auth/SignInPage';
 import SignUpPage from '../features/auth/SignUpPage';
 
 import { checkUser } from '../features/auth/authSlice';
-import { loadItems, stopLoading } from '../features/item/ItemsSlice';
+import { loadItems } from '../features/item/ItemsSlice';
 import Menu from '../features/menu/Menu';
 import ProfileItemListPage from '../features/item/ProfileItemsListPage';
 import LikesPage from '../features/profile/LikesPage';
@@ -45,8 +45,9 @@ function App(): JSX.Element {
     dispatch(loadChats()).catch(console.log);
     dispatch(loadMessages()).catch(console.log);
 
-    setTimeout(() => dispatch(stopLoading()), 2000);
+    
 
+  }, []);
     //раскоменти чтобы включить курсор
 
     // interface CursorElement extends HTMLElement {
@@ -62,6 +63,16 @@ function App(): JSX.Element {
     //     cursor.style.top = cursor2.style.top = e.clientY + 'px';
     //   }
     // });
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      dispatch(loadItems()).catch(console.log);
+      dispatch(loadUsers()).catch(console.log);
+      dispatch(loadTasks()).catch(console.log);
+      dispatch(loadChats()).catch(console.log);
+      // setTimeout(() => dispatch(stopLoading()), 2000);
+    }, 3000);
+    return () => clearInterval(intervalId);
   }, []);
 
 

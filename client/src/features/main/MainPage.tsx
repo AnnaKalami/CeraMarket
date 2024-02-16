@@ -42,6 +42,7 @@ function MainPage(): JSX.Element {
       <div className="container-images">
         <MainSwiper allImages={allImages} />
       </div>
+     <div>
       {[0, 1, 2, 3, 4].includes(priceSort) && (
         <input
           value={tag}
@@ -50,7 +51,7 @@ function MainPage(): JSX.Element {
           }}
         />
       )}
-      {[0, 2, 3, 4, 5].includes(priceSort) && (
+     {[0, 2, 3, 4, 5].includes(priceSort) && (
         <button className="buttonSort" onClick={() => setPriceSort(1)}>
           По цене ↓
         </button>
@@ -74,6 +75,8 @@ function MainPage(): JSX.Element {
       <button className="buttonSort" onClick={() => clearFilters()}>
         Сбросить фильтры
       </button>
+
+     </div>
 
       <div className="item-page__container">
         {items.map((item) => (

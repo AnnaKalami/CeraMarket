@@ -29,7 +29,7 @@ function SignInPage(): JSX.Element {
   return (
     <div className="container">
       <div className="form_area">
-        <p className="title">WELCOME</p>
+        <p className="title">Добро пожаловать!</p>
         {error && <div className="auth-error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form_group">
@@ -44,7 +44,7 @@ function SignInPage(): JSX.Element {
             />
           </div>
           <div className="form_group">
-            <p className="sub_title">Password</p>
+            <p className="sub_title">Пароль</p>
             <input
               className="form_style"
               value={password}
@@ -59,9 +59,9 @@ function SignInPage(): JSX.Element {
               в IT!
             </button>
             <p>
-              Have an Account?
+              Нет аккаунта?
               <NavLink className="auth-nav-link" to="/sign-up">
-                Login Here!
+                Регистрация
               </NavLink>
             </p>
           </div>

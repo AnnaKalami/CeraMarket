@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import load from '../../assets/Spinner-1s-200px.svg';
+// import load from '../../assets/Spinner-1s-200px.svg';
 import { type RootState } from '../../redux/store';
 import './styles/tasks.scss';
 import FormAddTask from './FormTaskAdd';
@@ -14,7 +14,7 @@ const TasksListPage = (): JSX.Element => {
   let tasks = useSelector((store: RootState) => store.tasks.tasks);
 
   const user = useSelector((store: RootState) => store.auth.auth);
-  const loading = useSelector((store: RootState) => store.tasks.loading);
+  // const loading = useSelector((store: RootState) => store.tasks.loading);
   const navigate = useNavigate();
   const location = useLocation();
   const isProfileTasks = location.pathname === '/profile/tasks';
@@ -50,7 +50,7 @@ const TasksListPage = (): JSX.Element => {
     </>
   );
 
-  return <>{loading ? <img src={load} /> : content}</>;
+  return <>{ content}</>;
 };
 
 export default TasksListPage;

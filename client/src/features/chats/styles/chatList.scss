@@ -1,13 +1,14 @@
-
 .ul {
   list-style-type: none;
 }
 .chat-list-container {
   border: 1px solid #090909;
+  min-width: 814px;
   border-radius: 8px;
   overflow: hidden;
   margin-left: 10%;
   margin-right: 10%;
+  flex-grow: 1;
 
   .chatListDiv {
     width: 700px;

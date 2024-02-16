@@ -82,11 +82,11 @@ function SignUpPage(): JSX.Element {
   return (
     <div className="container">
       <div className="form_area">
-        <p className="title">SIGN UP</p>
+        <p className="title">Регистрация</p>
         {error && <div className="auth-error">{error}</div>}
         <form onSubmit={handleSubmit}>
           <div className="form_group">
-            <p className="sub_title">Name</p>
+            <p className="sub_title">Ваше имя</p>
             <input
               className="form_style"
               name="name"
@@ -112,7 +112,7 @@ function SignUpPage(): JSX.Element {
             />
           </div>
           <div className="form_group">
-            <p className="sub_title">Password</p>
+            <p className="sub_title">Пароль</p>
             <input
               className="form_style"
               name="password"
@@ -125,7 +125,7 @@ function SignUpPage(): JSX.Element {
             />
           </div>
           <div className="form_group">
-            <p className="sub_title">Repeat password</p>
+            <p className="sub_title">Повторите пароль</p>
             <input
               className="form_style"
               name="rpassword"
@@ -152,22 +152,22 @@ function SignUpPage(): JSX.Element {
               name="taskStatus"
               id="taskStatus"
               type="checkbox"
-              className="form_style"
+              className="form_style-master"
               value={String(isMaster)}
               onChange={() => setIsMaster(true)}
             />
-            <p> Master</p>
+            <p> Я мастер</p>
           </div>
           <div>
             <button type="submit" className="auth-btn">
-              SIGN UP
+              в IT!
             </button>
-            <p>
-              У меня есть аккаунт
-              <NavLink className="nav-link" to="/sign-in">
-                Login Here!
+            <div className="footer-sign-up">
+              <p className="p-account">У меня есть аккаунт</p>
+              <NavLink className="auth-nav-link-2" to="/sign-in">
+                Войти!
               </NavLink>
-            </p>
+            </div>
           </div>
         </form>
       </div>

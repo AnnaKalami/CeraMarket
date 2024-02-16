@@ -6,7 +6,7 @@ import { fetchAddItem, fetchLoadItems, fetchRemoveItem, fetchUpdateItem } from '
 const initialState: ItemsState = {
     items: [],
     error: undefined,
-    loading: true,
+    // loading: true,
   };
 
   export const loadItems = createAsyncThunk('items/load', ()=> fetchLoadItems())
@@ -18,9 +18,9 @@ const itemsSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
-        stopLoading: (state) => {
-            state.loading = false;
-          },
+        // stopLoading: (state) => {
+        //     state.loading = false;
+        //   },
     },
     extraReducers: (builder)=> {
         builder
@@ -28,9 +28,9 @@ const itemsSlice = createSlice({
           
           state.items = action.payload
         })
-        .addCase(loadItems.pending, (state) => {
-            state.loading = true;
-          })
+        // .addCase(loadItems.pending, (state) => {
+        //     state.loading = true;
+        //   })
         .addCase(loadItems.rejected, (state, action) => {
             state.error = action.error.message;
         })
@@ -55,5 +55,5 @@ const itemsSlice = createSlice({
     }
 })
 
-export const { stopLoading } = itemsSlice.actions;
+// export const { stopLoading } = itemsSlice.actions;
 export default itemsSlice.reducer;
