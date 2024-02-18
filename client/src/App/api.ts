@@ -7,6 +7,8 @@ import type { AnswerWithOutId, Task, TaskId } from '../features/tasks/types';
 import { type Chat, type Message } from '../features/chats/types';
 
 export const fetchLoadItems = async (): Promise<Item[]> => {
+  console.log('СЕРВЕР АЙТЕМЫ');
+  
   const res = await fetch('/api/items');
   const data: { items: Item[] } = (await res.json()) as { items: Item[] };
   return data.items;
