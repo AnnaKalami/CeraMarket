@@ -8,7 +8,7 @@ import { type RootState, useAppDispatch } from '../../redux/store';
 import FormUpdateItem from './FormUpdateItem';
 import { createChat } from '../chats/ChatsSlice';
 import { type User} from '../auth/types';
-import { Chat, type CurrentChat } from '../chats/types';
+import type { Chat, CurrentChat } from '../chats/types';
 import Page404 from '../404/Page404';
 
 function ItemItemPage(): JSX.Element {
@@ -28,11 +28,11 @@ function ItemItemPage(): JSX.Element {
 
   if (currentItem) {
     [currentUser] = [...users].filter((user2) => currentItem.user_id === user2.id);
-    console.log(currentUser);
+   
     
   }
 
-  function chatThisMaster() {
+  function chatThisMaster(): void  {
    
     if (user) {
       const currentChat: CurrentChat = chats.find(
@@ -59,8 +59,7 @@ function ItemItemPage(): JSX.Element {
   return currentItem ? (
     <>
       {user && user.id === currentItem.user_id && (
-        <>
-          {!addPage ? (
+        !addPage ? (
             <button onClick={() => setAddPage(true)} type="button"   className='button-all-items-master'>
               Форма изменения изделия
             </button>
@@ -68,8 +67,7 @@ function ItemItemPage(): JSX.Element {
             <button onClick={() => setAddPage(false)} type="button"   className='button-all-items-master'>
               Закрыть форму
             </button>
-          )}
-        </>
+          )
       )}
 
       {addPage && <FormUpdateItem setAddPage={setAddPage} />}
@@ -101,16 +99,15 @@ function ItemItemPage(): JSX.Element {
           )}
         </div>
         
-        {currentItem.ItemGallery.ItemImages.map((image) => {
-          return (
+        {currentItem.ItemGallery.ItemImages.map((image) => 
+         
             <img
               key={image.id}
               className="item-item-page-img"
               src={image.path}
               alt={image.path}
             />
-          );
-        })}
+        )}
       </div>
     </>
   ) : (

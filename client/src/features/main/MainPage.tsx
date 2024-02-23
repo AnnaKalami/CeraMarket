@@ -9,7 +9,6 @@ import ItemItem from '../item/ItemItem';
 function MainPage(): JSX.Element {
   const [priceSort, setPriceSort] = useState(0);
   const [tag, setTag] = useState('');
-  console.log(tag);
 
   const allItems = useSelector((store: RootState) => store.items.items);
   const allImages = [...allItems].map((item) => item.ItemGallery.ItemImages).flat();
@@ -42,6 +41,7 @@ function MainPage(): JSX.Element {
       <div className="container-images">
         <MainSwiper allImages={allImages} />
       </div>
+     <div>
       {[0, 1, 2, 3, 4].includes(priceSort) && (
         <input
           value={tag}
@@ -50,30 +50,32 @@ function MainPage(): JSX.Element {
           }}
         />
       )}
-      {[0, 2, 3, 4, 5].includes(priceSort) && (
-        <button className="buttonSort" onClick={() => setPriceSort(1)}>
+     {[0, 2, 3, 4, 5].includes(priceSort) && (
+        <button type='button' className="buttonSort" onClick={() => setPriceSort(1)}>
           По цене ↓
         </button>
       )}
       {[1].includes(priceSort) && (
-        <button className="buttonSort" onClick={() => setPriceSort(2)}>
+        <button type='button' className="buttonSort" onClick={() => setPriceSort(2)}>
           По цене ↑
         </button>
       )}
       {[0, 1, 2, 4, 5].includes(priceSort) && (
-        <button className="buttonSort" onClick={() => setPriceSort(3)}>
+        <button type='button' className="buttonSort" onClick={() => setPriceSort(3)}>
           По алфавиту Я-А
         </button>
       )}
       {[3].includes(priceSort) && (
-        <button className="buttonSort" onClick={() => setPriceSort(4)}>
+        <button type='button' className="buttonSort" onClick={() => setPriceSort(4)}>
           По алфавиту А-Я
         </button>
       )}
 
-      <button className="buttonSort" onClick={() => clearFilters()}>
+      <button type='button' className="buttonSort" onClick={() => clearFilters()}>
         Сбросить фильтры
       </button>
+
+     </div>
 
       <div className="item-page__container">
         {items.map((item) => (

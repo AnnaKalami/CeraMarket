@@ -9,7 +9,7 @@
 
   color: rgba(0, 0, 0, 0.87);
 
-  background-color: #242424;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -18,19 +18,18 @@
   -webkit-text-size-adjust: 100%;
 
   height: 90%;
-
 }
 
 .App {
   background-color: #faf6ed;
-
 }
+
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #754400;
   text-decoration: inherit;
-  
+  list-style-type: none; 
 }
 a:hover {
   color: #d79e2b;
@@ -43,8 +42,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: rgba(239, 227, 210, 0.963);
-  background-image: url('/прллпваплвпв.jpg');
-  background-size:contain;
+  background-image: url('/фон.jpg');
+  background-size: contain;
   background-position: center;
 }
 
@@ -68,8 +67,7 @@ h1 {
   border: none;
   box-shadow: none;
 
-  list-style-type: none; 
-
+  list-style-type: none;
 
   &.active {
     color: #f3af03;
@@ -95,7 +93,6 @@ h1 {
  
 } */
 
-
 /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -116,14 +113,21 @@ h1 {
 }
 
 .platform {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ 
+  font-weight:500;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* font-family:Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
   font-size: 30px;
   color: #f7f2f2;
   position: absolute;
   top: 80%;
-  right: 10%;
+  right: 5%;
   height: 10%;
   /* Настройте стили вашего дива "platform" по вашему усмотрению */
   background-color: rgba(0, 0, 0, 0); /* Например, полупрозрачный черный фон */
   z-index: 999; /* Убедитесь, что z-index вашего "platform" больше, чем у Swiper, чтобы он был поверх него */
 }
+/* 
+.likeContainer{
+min-height: 00px;
+} */

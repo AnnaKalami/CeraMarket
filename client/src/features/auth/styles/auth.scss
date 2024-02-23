@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  flex-grow: 1;
 }
 
 .form_area {
@@ -11,12 +12,13 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: #eddcd9;
+  background-color: #c7b79f5e;
   height: auto;
   width: auto;
+  min-width: 500px;
   border: 2px solid #264143;
-  border-radius: 20px;
-  box-shadow: 3px 4px 0px 1px #e99f4c;
+  border-radius: 10px;
+  //box-shadow: 3px 4px 0px 1px #e99f4c;
 }
 
 .title {
@@ -41,7 +43,16 @@
 .form_style {
   outline: none;
   border: 2px solid #264143;
-  box-shadow: 3px 4px 0px 1px #e99f4c;
+  box-shadow: 3px 4px 0px 1px #d1954169;
+  width: 290px;
+  padding: 12px 10px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.form_style-master  {
+  outline: none;
+  border: 2px solid #264143;
   width: 290px;
   padding: 12px 10px;
   border-radius: 4px;
@@ -59,10 +70,24 @@
   margin: 25px 0px;
   width: 290px;
   font-size: 15px;
-  background: #de5499;
+  background: #ed822b;
   border-radius: 10px;
   font-weight: 800;
-  box-shadow: 3px 3px 0px 0px #e99f4c;
+// box-shadow: 3px 3px 0px 0px #e99f4c;
+}
+.footer-sign-up{
+  display: flex;
+  justify-content: center;
+}
+.auth-nav-link-2{
+  margin-top: 16px;
+  padding-left: 10px;
+  font-weight: 800;
+  color: #264143;
+}
+
+.p-account {
+// margin-left: 10px;
 }
 
 .btn:hover {

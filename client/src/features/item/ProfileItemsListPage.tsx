@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import load from '../../assets/Spinner-1s-200px.svg'
+// import load from '../../assets/Spinner-1s-200px.svg'
 import ItemItem from './ItemItem';
 import FormAddItem from './FormAddItem';
 import { type RootState } from '../../redux/store';
@@ -16,7 +16,7 @@ const ProfileItemListPage = (): JSX.Element => {
   
   const itemFilter = [...items].filter((item)=> item.user_id===user?.id)
   
-  const loading = useSelector((store: RootState) => store.items.loading);
+  // const loading = useSelector((store: RootState) => store.items.loading);
   const navigate = useNavigate();
 
   const content = (
@@ -39,13 +39,13 @@ const ProfileItemListPage = (): JSX.Element => {
           <ItemItem key={item.id} item={item} />
         ))}
       </div>
-      <button onClick={() => navigate('/')} type="button">
+      <button className='add-button-onMain' onClick={() => navigate('/')} type="button">
         На главную
       </button>
     </>
   );
 
-  return <>{loading ? <img src={load} /> : content}</>;
+  return <>{ content}</>;
 };
 
 export default ProfileItemListPage;

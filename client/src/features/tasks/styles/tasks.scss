@@ -123,26 +123,28 @@
   color: #f1b584;
 }
 
-.add-button {
+.add-task-button {
   margin-top: 20px;
-  border-radius: 8px;
+  width: 300px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
+  align-self: center;
   font-size: 1em;
   font-weight: 500;
+  border-radius: 10px;
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-  background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+  background: linear-gradient(to bottom right, #f3f1f1, #f1a73f);
   // background-size: 400% 400%;
   // animation: gradient 10s ease infinite;
 }
-.add-button:hover {
+.add-task-button:hover {
   cursor: pointer;
-  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+  background: linear-gradient(to bottom right, #fff5f0 20%, #f2b253, #f49906);
 }
-.add-button:active {
-  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+.add-task-button:active {
+  background: linear-gradient(to bottom right, #fff5f0 20%, #f2b253, #f49906);
 }
 @keyframes gradient {
   0% {
@@ -254,6 +256,8 @@
 }
 
 .add-button-onMain {
+  width: 200px;
+  align-self: center;
   margin-top: 10px;
   border-radius: 8px;
   border: 1px solid transparent;
@@ -263,7 +267,7 @@
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-  background: linear-gradient(to bottom right, #ffffff, #a89f9a);
+  background: linear-gradient(to bottom right, #f4f1ec, #e7830096);
 }
 
 .add-button__confirm {

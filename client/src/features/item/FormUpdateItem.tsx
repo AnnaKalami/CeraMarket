@@ -3,7 +3,7 @@ import { RootState, useAppDispatch } from '../../redux/store';
 import { updateItem } from './ItemsSlice';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-
+import './styles/formadd.scss';
 interface FormUpdateItemProps {
   setAddPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -12,10 +12,10 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
   const [price, setPrice] = useState(0);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [images, setImages] = useState<FileList | null>(null); 
-  const [selectedImages, setSelectedImages] = useState<number[]>([]);//
+  const [images, setImages] = useState<FileList | null>(null);
+  const [selectedImages, setSelectedImages] = useState<number[]>([]); //
   console.log(selectedImages);
-  
+
   const handleImageClick = (imageId: number) => {
     setSelectedImages((prevSelectedImages) => {
       if (prevSelectedImages.includes(imageId)) {
@@ -61,19 +61,19 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
       });
       if (images) {
         Array.from(images).forEach((image) => {
-          formData.append('img', image); 
+          formData.append('img', image);
         });
       }
-      
-      dispatch(updateItem(formData)).catch(console.log)
-      setAddPage(false)
+
+      dispatch(updateItem(formData)).catch(console.log);
+      setAddPage(false);
     }
   };
 
   return (
     <form className="form-add" onSubmit={handleSubmit}>
       <label className="form-add__label">
-        Name
+        Название
         <input
           className="form-add__input"
           value={name}
@@ -82,7 +82,7 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Description
+        Описание
         <input
           className="form-add__input"
           value={description}
@@ -91,7 +91,7 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
         />
       </label>
       <label className="form-add__label">
-        Price
+        Цена
         <input
           className="form-add__input"
           value={price}
@@ -104,31 +104,38 @@ const FormUpdateItem: React.FC<FormUpdateItemProps> = ({ setAddPage }) => {
           type="number"
         />
       </label>
-      
+
       <label className="form-add__label">
-        Images
+        Изменить фото
         <div>
-        {currentItem&&(
-          currentItem.ItemGallery.ItemImages.map((image)=>
-          <button
-          key={image.id}
-          style={{ background: `url(${image.path})`, backgroundRepeat: "no-repeat", backgroundSize: 'cover', height: "50px", width: '50px' }}
-          className={selectedImages.includes(image.id) ? "selected-image" : ""}
-          onClick={(e) => { 
-            e.preventDefault();
-            handleImageClick(image.id);
-          }}
-        />
-          )
-        )}
+          {currentItem &&
+            currentItem.ItemGallery.ItemImages.map((image) => (
+              <button
+              
+                key={image.id}
+                style={{
+                  background: `url(${image.path})`,
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'cover',
+                  height: '50px',
+                  width: '50px',
+                  cursor:'pointer'
+                }}
+                className={selectedImages.includes(image.id) ? 'selected-image' : ''}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleImageClick(image.id);
+                }}
+              />
+            ))}
         </div>
-        <input className="form-add__input" onChange={handleFileChange} type="file" multiple />
+        <input className="form-add__input " onChange={handleFileChange} type="file" multiple />
       </label>
-      <button className="form-add__submit" type="submit">
-        Изменить Штуку Дрюку
+      <button className="form-add__submit add-button-submit" type="submit">
+        ПОдтвердить
       </button>
-      <button className="form-add__close" onClick={() => setAddPage(false)}>
-        Закрыть окно(можно потом крестик нарисовать)
+      <button className="form-add__close add-button-submit" onClick={() => setAddPage(false)}>
+        Отменить
       </button>
     </form>
   );

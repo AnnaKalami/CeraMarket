@@ -3,18 +3,16 @@ const app = express();
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const http = require("http");
-const saveMessage = require("../server/chatsHelper");
+const saveMessage = require("./chatsHelper");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173",
-  },
-});
+// const io = new Server(server);
+const cors = require('cors');
 
 const indexRouter = require("./routes/index.routes");
 const { verifyAccessToken } = require("./middleware/verifyJWT");
 
+app.use(cors()) 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
@@ -27,19 +25,26 @@ app.use(express.json());
 //   )
 // )
 
-
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "../client/dist")));
+// app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);
 
-app.get('*', (req, res) => {
-  const filePath = path.join(__dirname, './dist/index.html');
-  res.sendFile(filePath)
-});
 
+
+// app.get("*", (req, res) => {
+//   const filePath = path.join(__dirname, "./dist/index.html");
+//   res.sendFile(filePath);
+// });
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // или "*" чтобы разрешить запросы от любого источника
+    methods: ["GET", "POST"]
+  }
+});
 
 io.on("connection", (socket) => {
   const idTmpRoom = socket.sids ? socket.sids.join("") : "999";
@@ -54,7 +59,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 80;
 
 server.listen(PORT, () => {
   console.log(`Сервер работает на ${PORT} порту! ${process.env.NODE_ENV}`);

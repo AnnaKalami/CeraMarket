@@ -27,12 +27,12 @@ function NavBar({
 
   return (
     <>
-      <div className="blur" />
+      {/* <div className="blur" /> */}
       <div className="nav__container">
         
         <img className="logo" src='../../../46.png' alt="logo" />
         {/* <img className="logo" src='../../../235.png' alt="logo" /> */}
-        {user && <div className="hello">Hello, {user.name}!</div>}
+        {/* {user && <div className="hello">Hello, {user.name}!</div>} */}
         <div className="nav__item--right">
           <ul className="nav__links">
             <li className="nav__item">
@@ -90,7 +90,7 @@ function NavBar({
       </div>
 
       <Outlet />
-      <h1 style={{ fontSize: '20px', color: 'black', textAlign: 'left', bottom: 0 }}>Footer</h1>
+     
     </>
   );
 }
