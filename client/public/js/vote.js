@@ -1,4 +1,4 @@
-const webSocketClient = new WebSocket('ws://localhost:3000');
+const webSocketClient = new WebSocket('ws://localhost:4000');
 
 const buttonVote = document.querySelector("#voteBtn")
 const voteContainer = document.querySelector(".vote")

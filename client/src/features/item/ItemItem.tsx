@@ -28,7 +28,7 @@ function ItemItem({ item }: { item: Item }): JSX.Element {
         <h2 className="item-page__item--title">{item.name}</h2>
         <div className="item-page__item--content">
           <h2 className="item-page__item--description">{item.price}₽</h2>
-          <h2 className="item-page__item--name">{item.description}</h2>
+          {/* <h2 className="item-page__item--name">{item.description}</h2> */}
           <Link to={`/items/${item.id}`} style={{ color: 'rgb(41, 41, 41)' }}>
             Подробнее
           </Link>

@@ -1,11 +1,13 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const generateTokens = require('../utils/authUtils');
 const configJWT = require('./configJWT');
 
+
 function verifyRefreshToken(req, res, next) {
   try {
     const { refresh } = req.cookies;
-    const { user } = jwt.verify(refresh, 'R');
+    const { user } = jwt.verify(refresh, process.env.TOKEN_R);
     const { accessToken, refreshToken } = generateTokens({
       user: { id: user.id, img: user.img, name: user.name , isAdmin:user.isAdmin, isMaster:user.isMaster},
     });
@@ -28,7 +30,7 @@ function verifyRefreshToken(req, res, next) {
 function verifyAccessToken(req, res, next) {
   try {
     const { access } = req.cookies;
-    const { user } = jwt.verify(access, 'A');
+    const { user } = jwt.verify(access, process.env.TOKEN_A);
     res.locals.user = user;
     next();
   } catch (error) {

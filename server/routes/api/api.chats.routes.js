@@ -20,8 +20,9 @@ router.get('/', async (req, res) => {
   });
 
   router.get('/messages', async (req, res) => {
+    let chatMessages = {}
     try {
-      const chatMessages = await ChatMessage.findAll();
+       chatMessages = await ChatMessage.findAll();
       // console.log(chatMessages);
       res.json({ messages: chatMessages });
     } catch ({ message }) {
