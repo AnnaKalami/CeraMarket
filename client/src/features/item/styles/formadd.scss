@@ -22,7 +22,6 @@
   }
   &__input {
     padding: 10px;
-    
   }
   &__input-file {
     padding: 10px;
@@ -66,16 +65,16 @@
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-  background: linear-gradient(to bottom right, #ffffff, #c29c7b);
+  background: linear-gradient(to bottom right, #ffffff, #e99d33);
   // background-size: 400% 400%;
   // animation: gradient 10s ease infinite;
 }
 .add-button:hover {
   cursor: pointer;
-  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+  background: linear-gradient(to bottom right, #fff5f0 20%, #e69752, #e78128);
 }
 .add-button:active {
-  background: linear-gradient(to bottom right, #fff5f0 20%, #b68c68, #b47946);
+  background: linear-gradient(to bottom right, #fff5f0 20%, #dc9150, #db6e0f);
 }
 @keyframes gradient {
   0% {

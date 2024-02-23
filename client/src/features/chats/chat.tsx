@@ -49,8 +49,7 @@ function ChatPage(): JSX.Element {
   };
 
   return (
-    <>
-      {currentUser.length && user ? (
+    currentUser.length && user ? (
         <div className="chatdiv">
           <ul id="messages" ref={messagesRef}>
             {currentMessages.map((message2) => (
@@ -64,20 +63,20 @@ function ChatPage(): JSX.Element {
               </li>
             ))}
           </ul>
-          <form id="form" onSubmit={handleSubmit}>
-            <input
+          <form id="form" className='chatMsgForm' onSubmit={handleSubmit}>
+            <textarea
               id="input"
               autoComplete="off"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              placeholder="Напишите что-нибудь"
             />
-            <button type="submit">Send</button>
+            <button type="submit" className='sendMessageBTN'>Send</button>
           </form>
         </div>
       ) : (
         <Page404 />
-      )}
-    </>
+      )
   );
 }
 export default ChatPage;

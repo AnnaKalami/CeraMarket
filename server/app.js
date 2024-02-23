@@ -6,11 +6,13 @@ const http = require("http");
 const saveMessage = require("./chatsHelper");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server);
+// const io = new Server(server);
+const cors = require('cors');
 
 const indexRouter = require("./routes/index.routes");
 const { verifyAccessToken } = require("./middleware/verifyJWT");
 
+app.use(cors()) 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: "true" }));
 app.use(express.json());
@@ -24,15 +26,24 @@ app.use(express.json());
 // )
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "dist")));
+// app.use(express.static(path.join(__dirname, "dist")));
 
 app.use(verifyAccessToken);
 
 app.use("/", indexRouter);
 
-app.get("*", (req, res) => {
-  const filePath = path.join(__dirname, "./dist/index.html");
-  res.sendFile(filePath);
+
+
+// app.get("*", (req, res) => {
+//   const filePath = path.join(__dirname, "./dist/index.html");
+//   res.sendFile(filePath);
+// });
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // или "*" чтобы разрешить запросы от любого источника
+    methods: ["GET", "POST"]
+  }
 });
 
 io.on("connection", (socket) => {

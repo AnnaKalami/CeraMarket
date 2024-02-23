@@ -29,11 +29,11 @@ const TasksListPage = (): JSX.Element => {
   const content = (
     <>
       {!addPage ? (
-        <button className="add-button" onClick={() => setAddPage(true)} type="button">
+        <button className="add-task-button" onClick={() => setAddPage(true)} type="button">
           Добавить Задачу
         </button>
       ) : (
-        <button className="add-button" onClick={() => setAddPage(false)} type="button">
+        <button className="add-task-button" onClick={() => setAddPage(false)} type="button">
           Закрыть форму
         </button>
       )}

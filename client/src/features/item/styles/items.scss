@@ -80,3 +80,25 @@
   cursor: pointer;
   color: tomato;
 }
+
+.button-all-items-master {
+  font-size: 20px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  padding: 10px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  // text-transform: uppercase;
+  color: #131111;
+  transition: all 0.3s;
+  border: none;
+  box-shadow: none;
+  list-style-type: none;
+  background-color: transparent;
+  text-decoration: underline 2px solid;
+  text-underline-offset: 1mm;
+  color: #b95909;
+}
+.button-all-items-master:hover {
+  cursor: pointer;
+  color: #944300;
+}
