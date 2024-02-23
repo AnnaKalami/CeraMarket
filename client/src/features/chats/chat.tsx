@@ -53,6 +53,7 @@ function ChatPage(): JSX.Element {
         <div className="chatdiv">
           <ul id="messages" ref={messagesRef}>
             {currentMessages.map((message2) => (
+              
               <li
                 key={message2.id}
                 className={
